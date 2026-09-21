@@ -1,0 +1,246 @@
+{% extends "shop/base.html" %}
+
+{% load static %}
+
+{% block title %}
+Inscription
+{% endblock %}
+
+{% block content %}
+
+<section class="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-[#F8F8F8] py-20 px-4">
+
+    <!-- Décoration -->
+
+    <div class="absolute top-0 left-0 w-72 h-72 bg-[#D4AF37]/10 rounded-full blur-3xl"></div>
+
+    <div class="absolute bottom-0 right-0 w-96 h-96 bg-black/5 rounded-full blur-3xl"></div>
+
+    <!-- Carte -->
+
+    <div class="relative w-full max-w-lg bg-white rounded-[40px] shadow-2xl border border-gray-100 overflow-hidden">
+
+        <!-- Bandeau supérieur -->
+
+        <div class="h-2 bg-[#D4AF37]"></div>
+
+        <div class="px-10 py-12">
+
+            <!-- Logo -->
+
+            <div class="flex justify-center">
+
+                <div class="w-32 h-32 rounded-full bg-white border-4 border-[#D4AF37]/20 shadow-xl flex items-center justify-center overflow-hidden">
+
+                    <img src="{% static 'images/logo.png' %}"
+                         alt="Logo"
+                         class="w-24 h-24 object-contain">
+
+                </div>
+
+            </div>
+
+            <!-- Header -->
+
+            <div class="text-center mt-8">
+
+                <span class="inline-block text-xs uppercase tracking-[5px] font-bold text-[#D4AF37]">
+
+                    Join Our Community
+
+                </span>
+
+                <h1 class="mt-4 text-4xl font-black text-gray-900">
+
+                    Créer un compte
+
+                </h1>
+
+                <p class="mt-4 text-gray-500 leading-7">
+
+                    Rejoignez notre boutique et profitez d'une expérience
+                    d'achat simple, rapide et sécurisée.
+
+                </p>
+
+            </div>
+
+            <!-- Formulaire -->
+
+            <form method="POST" class="mt-10 space-y-7">
+
+                {% csrf_token %}
+
+                <!-- ========================================= -->
+<!-- NOM D'UTILISATEUR -->
+<!-- ========================================= -->
+
+<div>
+
+    <label
+        for="username"
+        class="block text-sm font-bold text-gray-800 mb-3">
+
+        Nom d'utilisateur
+
+    </label>
+
+    <div class="relative">
+
+        <span class="absolute left-5 top-1/2 -translate-y-1/2 text-[#D4AF37]">
+
+            <i class="fas fa-user"></i>
+
+        </span>
+
+        <input
+            type="text"
+            id="username"
+            name="username"
+            required
+            placeholder="Choisissez un nom d'utilisateur"
+
+            class="w-full h-16 pl-14 pr-5 rounded-2xl border border-gray-200 bg-[#FAFAFA] text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-[#D4AF37] focus:ring-4 focus:ring-[#D4AF37]/10 transition-all duration-300">
+
+    </div>
+
+</div>
+
+<!-- ========================================= -->
+<!-- ADRESSE EMAIL -->
+<!-- ========================================= -->
+
+<div>
+
+    <label
+        for="email"
+        class="block text-sm font-bold text-gray-800 mb-3">
+
+        Adresse email
+
+    </label>
+
+    <div class="relative">
+
+        <span class="absolute left-5 top-1/2 -translate-y-1/2 text-[#D4AF37]">
+
+            <i class="fas fa-envelope"></i>
+
+        </span>
+
+        <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            placeholder="Entrez votre adresse email"
+
+            class="w-full h-16 pl-14 pr-5 rounded-2xl border border-gray-200 bg-[#FAFAFA] text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-[#D4AF37] focus:ring-4 focus:ring-[#D4AF37]/10 transition-all duration-300">
+
+    </div>
+
+</div>
+
+<!-- ========================================= -->
+<!-- MOT DE PASSE -->
+<!-- ========================================= -->
+
+<div>
+
+    <label
+        for="password"
+        class="block text-sm font-bold text-gray-800 mb-3">
+
+        Mot de passe
+
+    </label>
+
+    <div class="relative">
+
+        <span class="absolute left-5 top-1/2 -translate-y-1/2 text-[#D4AF37]">
+
+            <i class="fas fa-lock"></i>
+
+        </span>
+
+        <input
+            type="password"
+            id="password"
+            name="password"
+            required
+            placeholder="Créez un mot de passe"
+
+            class="w-full h-16 pl-14 pr-5 rounded-2xl border border-gray-200 bg-[#FAFAFA] text-gray-900 placeholder:text-gray-400 focus:outline-none focus:border-[#D4AF37] focus:ring-4 focus:ring-[#D4AF37]/10 transition-all duration-300">
+
+    </div>
+
+</div>
+
+<!-- ========================================= -->
+<!-- BOUTON INSCRIPTION -->
+<!-- ========================================= -->
+
+<button
+    type="submit"
+
+    class="group w-full h-16 rounded-2xl bg-[#D4AF37] hover:bg-[#c89d1c] text-black font-black text-lg tracking-wide transition-all duration-300 hover:shadow-2xl flex items-center justify-center gap-4">
+
+    <i class="fas fa-user-plus transition-transform duration-300 group-hover:-translate-x-1"></i>
+
+    CRÉER MON COMPTE
+
+    <i class="fas fa-arrow-right transition-transform duration-300 group-hover:translate-x-1"></i>
+
+</button>
+
+</form>
+
+<!-- ========================================= -->
+<!-- SÉPARATEUR -->
+<!-- ========================================= -->
+
+<div class="flex items-center my-10">
+
+    <div class="flex-1 h-px bg-gray-200"></div>
+
+    <span class="px-4 text-xs uppercase tracking-[3px] text-gray-400">
+
+        ou
+
+    </span>
+
+    <div class="flex-1 h-px bg-gray-200"></div>
+
+</div>
+
+<!-- ========================================= -->
+<!-- CONNEXION -->
+<!-- ========================================= -->
+
+<div class="text-center">
+
+    <p class="text-gray-500">
+
+        Vous avez déjà un compte ?
+
+    </p>
+
+    <a href="{% url 'login' %}"
+
+       class="inline-flex items-center justify-center gap-3 mt-6 h-14 px-8 rounded-2xl border-2 border-[#D4AF37] text-[#D4AF37] hover:bg-[#D4AF37] hover:text-black font-bold transition-all duration-300">
+
+        <i class="fas fa-right-to-bracket"></i>
+
+        Se connecter
+
+    </a>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,1429 @@
+{% extends 'shop/base.html' %}
+
+{% load static %}
+
+{% block title %}
+Accueil | LE COIN DES ACCESSOIRES
+{% endblock %}
+
+{% block content %}
+
+<!-- ========================================= -->
+<!-- HERO SECTION -->
+<!-- ========================================= -->
+
+<section class="relative overflow-hidden bg-black min-h-[92vh] flex items-center">
+
+    <!-- IMAGE DE FOND -->
+
+    <div class="absolute inset-0">
+
+        <img src="{% static 'images/hero-bg.jpg' %}"
+             alt="Hero"
+             class="w-full h-full object-cover">
+
+    </div>
+
+    <!-- OVERLAY -->
+
+    <div class="absolute inset-0 bg-gradient-to-r from-black via-black/90 to-black/50">
+
+    </div>
+
+    <!-- CONTENU -->
+
+    <div class="relative max-w-7xl mx-auto px-6 py-24 w-full">
+
+        <div class="grid lg:grid-cols-2 gap-16 items-center">
+
+            <!-- TEXTE -->
+
+            <div>
+
+                <!-- BADGE -->
+
+                <span class="inline-flex items-center px-5 py-2 rounded-full border border-[#D4AF37] text-[#D4AF37] text-sm uppercase tracking-[3px]">
+
+                    Collection 2026
+
+                </span>
+
+                <!-- TITRE -->
+
+                <h1 class="title text-white text-6xl lg:text-8xl leading-none mt-8">
+
+                    L'ÉLÉGANCE
+
+                    <br>
+
+                    <span class="gold">
+
+                        COMMENCE
+
+                    </span>
+
+                    <br>
+
+                    ICI
+
+                </h1>
+
+                <!-- DESCRIPTION -->
+
+                <p class="text-gray-300 text-lg leading-8 mt-8 max-w-xl">
+
+                    Découvrez une sélection exclusive de montres,
+                    lunettes, casquettes, chaînes, sacs et accessoires
+                    conçus pour affirmer votre style au quotidien.
+
+                </p>
+
+                <!-- BOUTONS -->
+
+                <div class="flex flex-wrap gap-5 mt-10">
+
+                    <a href="{% url 'index' %}"
+
+                       class="bg-[#D4AF37] text-black px-8 py-4 rounded-lg font-semibold hover:scale-105 transition duration-300">
+
+                        Découvrir la boutique
+
+                    </a>
+
+
+
+                </div>
+
+                <!-- STATISTIQUES -->
+
+                <div class="grid grid-cols-3 gap-8 mt-16">
+
+                    <div>
+
+                        <h2 class="text-4xl font-bold gold">
+
+                            500+
+
+                        </h2>
+
+                        <p class="text-gray-400 mt-2">
+
+                            Produits
+
+                        </p>
+
+                    </div>
+
+                    <div>
+
+                        <h2 class="text-4xl font-bold gold">
+
+                            98%
+
+                        </h2>
+
+                        <p class="text-gray-400 mt-2">
+
+                            Clients satisfaits
+
+                        </p>
+
+                    </div>
+
+                    <div>
+
+                        <h2 class="text-4xl font-bold gold">
+
+                            ★★★★★
+
+                        </h2>
+
+                        <p class="text-gray-400 mt-2">
+
+                            Avis positifs
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- ESPACE IMAGE PRODUITS -->
+
+            <div class="relative hidden lg:flex justify-center">
+
+                <div class="relative flex justify-center items-center h-full">
+
+    <!-- Halo -->
+                <div class="absolute w-[700px] h-[700px] rounded-full bg-[#D4AF37]/20 blur-3xl"></div>
+
+    <!-- Image -->
+                    <img
+    src="{% static 'images/hero-products.png' %}"
+    alt=""
+    class="relative z-10
+           w-[850px]
+           max-w-none
+           object-contain
+           scale-125
+           translate-x-10
+           drop-shadow-[0_0_60px_rgba(212,175,55,0.35)]">
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ========================================= -->
+<!-- SERVICES -->
+<!-- ========================================= -->
+
+<section class="bg-white py-12 border-b border-gray-200">
+
+    <div class="max-w-7xl mx-auto px-6">
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+
+            <!-- Livraison -->
+
+            <div class="group flex items-center gap-5 p-6 rounded-2xl hover:shadow-xl transition duration-300 hover:-translate-y-2">
+
+                <div class="w-16 h-16 rounded-full bg-[#D4AF37]/10 flex items-center justify-center group-hover:bg-[#D4AF37] transition">
+
+                    <i class="fas fa-truck text-2xl text-[#D4AF37] group-hover:text-black"></i>
+
+                </div>
+
+                <div>
+
+                    <h3 class="font-bold text-lg text-gray-900">
+
+                        Livraison Rapide
+
+                    </h3>
+
+                    <p class="text-gray-500 text-sm mt-1">
+
+                        Expédition partout en Côte d'Ivoire.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- Paiement -->
+
+            <div class="group flex items-center gap-5 p-6 rounded-2xl hover:shadow-xl transition duration-300 hover:-translate-y-2">
+
+                <div class="w-16 h-16 rounded-full bg-[#D4AF37]/10 flex items-center justify-center group-hover:bg-[#D4AF37] transition">
+
+                    <i class="fas fa-credit-card text-2xl text-[#D4AF37] group-hover:text-black"></i>
+
+                </div>
+
+                <div>
+
+                    <h3 class="font-bold text-lg text-gray-900">
+
+                        Paiement Sécurisé
+
+                    </h3>
+
+                    <p class="text-gray-500 text-sm mt-1">
+
+                        Mobile Money, Carte bancaire et plus.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- Garantie -->
+
+            <div class="group flex items-center gap-5 p-6 rounded-2xl hover:shadow-xl transition duration-300 hover:-translate-y-2">
+
+                <div class="w-16 h-16 rounded-full bg-[#D4AF37]/10 flex items-center justify-center group-hover:bg-[#D4AF37] transition">
+
+                    <i class="fas fa-shield-alt text-2xl text-[#D4AF37] group-hover:text-black"></i>
+
+                </div>
+
+                <div>
+
+                    <h3 class="font-bold text-lg text-gray-900">
+
+                        Qualité Garantie
+
+                    </h3>
+
+                    <p class="text-gray-500 text-sm mt-1">
+
+                        Des accessoires sélectionnés avec soin.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- Support -->
+
+            <div class="group flex items-center gap-5 p-6 rounded-2xl hover:shadow-xl transition duration-300 hover:-translate-y-2">
+
+                <div class="w-16 h-16 rounded-full bg-[#D4AF37]/10 flex items-center justify-center group-hover:bg-[#D4AF37] transition">
+
+                    <i class="fas fa-headset text-2xl text-[#D4AF37] group-hover:text-black"></i>
+
+                </div>
+
+                <div>
+
+                    <h3 class="font-bold text-lg text-gray-900">
+
+                        Assistance 7j/7
+
+                    </h3>
+
+                    <p class="text-gray-500 text-sm mt-1">
+
+                        Une équipe disponible pour vous accompagner.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ========================================= -->
+<!-- CATEGORIES -->
+<!-- ========================================= -->
+
+<section id="categories" class="py-24 bg-[#f8f8f8]">
+
+    <div class="max-w-7xl mx-auto px-6">
+
+        <!-- TITRE -->
+
+        <div class="text-center mb-16">
+
+            <span class="gold uppercase tracking-[4px] font-semibold">
+
+                Nos Collections
+
+            </span>
+
+            <h2 class="title text-5xl text-gray-900 mt-4">
+
+                Choisissez votre style
+
+            </h2>
+
+            <p class="text-gray-500 mt-5 max-w-2xl mx-auto">
+
+                Explorez nos différentes catégories d'accessoires soigneusement
+                sélectionnés pour compléter votre élégance.
+
+            </p>
+
+        </div>
+
+        <!-- GRILLE -->
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            <!-- MONTRES -->
+
+            <a href="#"
+               class="group relative h-[420px] rounded-3xl overflow-hidden shadow-xl">
+
+                <img src="{% static 'images/categories/Casquette.jpeg' %}"
+                     class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+
+                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
+
+                <div class="absolute bottom-8 left-8">
+
+                    <h3 class="title text-white text-4xl">
+
+                        Casquette mea Culpa
+
+                    </h3>
+
+                    <p class="text-gray-300 mt-2">
+
+                        Élégance & Prestige
+
+                    </p>
+
+                </div>
+
+            </a>
+
+            <!-- LUNETTES -->
+
+            <a href="#"
+               class="group relative h-[420px] rounded-3xl overflow-hidden shadow-xl">
+
+                <img src="{% static 'images/categories/glasses.jpeg' %}"
+                     class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+
+                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
+
+                <div class="absolute bottom-8 left-8">
+
+                    <h3 class="title text-white text-4xl">
+
+                        Lunette chrome heart
+
+                    </h3>
+
+                    <p class="text-gray-300 mt-2">
+
+                        Protection & Style
+
+                    </p>
+
+                </div>
+
+            </a>
+
+            <!-- CASQUETTES -->
+
+            <a href="#"
+               class="group relative h-[420px] rounded-3xl overflow-hidden shadow-xl">
+
+                <img src="{% static 'images/categories/Durag.jpeg' %}"
+                     class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+
+                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
+
+                <div class="absolute bottom-8 left-8">
+
+                    <h3 class="title text-white text-4xl">
+
+                        Durag Velour
+
+                    </h3>
+
+                    <p class="text-gray-300 mt-2">
+
+                        Tendance Urbaine
+
+                    </p>
+
+                </div>
+
+            </a>
+
+            <!-- SACS -->
+
+            <a href="#"
+               class="group relative h-[420px] rounded-3xl overflow-hidden shadow-xl">
+
+                <img src="{% static 'images/categories/eastpack.jpeg' %}"
+                     class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+
+                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
+
+                <div class="absolute bottom-8 left-8">
+
+                    <h3 class="title text-white text-4xl">
+
+                        Sacs
+
+                    </h3>
+
+                    <p class="text-gray-300 mt-2">
+
+                        Chic & Pratique
+
+                    </p>
+
+                </div>
+
+            </a>
+
+            <!-- CHAINES -->
+
+            <a href="#"
+               class="group relative h-[420px] rounded-3xl overflow-hidden shadow-xl">
+
+                <img src="{% static 'images/categories/chain.jpeg' %}"
+                     class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+
+                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
+
+                <div class="absolute bottom-8 left-8">
+
+                    <h3 class="title text-white text-4xl">
+
+                        Chaînes
+
+                    </h3>
+
+                    <p class="text-gray-300 mt-2">
+
+                        Luxe & Raffinement
+
+                    </p>
+
+                </div>
+
+            </a>
+
+            <!-- BRACELETS -->
+
+            <a href="#"
+               class="group relative h-[420px] rounded-3xl overflow-hidden shadow-xl">
+
+                <img src="{% static 'images/categories/bonnet.jpeg' %}"
+                     class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+
+                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
+
+                <div class="absolute bottom-8 left-8">
+
+                    <h3 class="title text-white text-4xl">
+
+                        Bonnet
+                    </h3>
+
+                    <p class="text-gray-300 mt-2">
+
+                        Détails qui font la différence
+
+                    </p>
+
+                </div>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ========================================= -->
+<!-- PRODUITS POPULAIRES -->
+<!-- ========================================= -->
+
+<section id="produits" class="py-24 bg-white">
+
+    <div class="max-w-7xl mx-auto px-6">
+
+        <!-- TITRE -->
+
+        <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-16">
+
+            <div>
+
+                <span class="gold uppercase tracking-[4px] font-semibold">
+
+                    Notre sélection
+
+                </span>
+
+                <h2 class="title text-5xl text-gray-900 mt-3">
+
+                    Produits Populaires
+
+                </h2>
+
+                <p class="text-gray-500 mt-4 max-w-2xl">
+
+                    Découvrez les accessoires préférés de nos clients.
+
+                </p>
+
+            </div>
+
+            <a href="{% url 'index' %}"
+
+               class="mt-6 lg:mt-0 border border-[#D4AF37] text-[#D4AF37] px-6 py-3 rounded-lg hover:bg-[#D4AF37] hover:text-black transition">
+
+                Voir toute la boutique
+
+            </a>
+
+        </div>
+
+        <!-- PRODUITS -->
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+
+            {% for product in products %}
+
+            <div class="group bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition duration-500">
+
+                <!-- IMAGE -->
+
+                <div class="relative overflow-hidden">
+
+                    {% if product.image %}
+
+                    <img src="{{ product.image.url }}"
+                         alt="{{ product.name }}"
+                         class="w-full h-80 object-cover group-hover:scale-110 transition duration-700">
+
+                    {% else %}
+
+                    <img src="{% static 'images/no-image.png' %}"
+                         class="w-full h-80 object-cover">
+
+                    {% endif %}
+
+                    <!-- BADGE -->
+
+                    {% if product.is_featured %}
+
+                    <span class="absolute top-5 left-5 bg-[#D4AF37] text-black px-4 py-1 rounded-full text-xs font-bold">
+
+                        POPULAIRE
+
+                    </span>
+
+                    {% endif %}
+
+                    <!-- ACTIONS -->
+
+                    <div class="absolute right-5 top-5 flex flex-col gap-3 opacity-0 group-hover:opacity-100 transition">
+
+                        <button class="w-11 h-11 rounded-full bg-white shadow hover:bg-[#D4AF37] hover:text-black transition">
+
+                            <i class="far fa-heart"></i>
+
+                        </button>
+
+                        <a href="{{ product.get_absolute_url }}"
+
+                           class="w-11 h-11 rounded-full bg-white shadow flex items-center justify-center hover:bg-[#D4AF37] hover:text-black transition">
+
+                            <i class="fas fa-eye"></i>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <!-- INFOS -->
+
+                <div class="p-6">
+
+                    <!-- CATEGORIE -->
+
+                    <p class="text-sm uppercase tracking-widest text-[#D4AF37]">
+
+                        {{ product.category.name }}
+
+                    </p>
+
+                    <!-- NOM -->
+
+                    <h3 class="font-bold text-xl mt-2">
+
+                        {{ product.name }}
+
+                    </h3>
+
+                    <!-- NOTE -->
+
+                    <div class="flex items-center gap-1 mt-4 text-yellow-400">
+
+                        <i class="fas fa-star"></i>
+
+                        <i class="fas fa-star"></i>
+
+                        <i class="fas fa-star"></i>
+
+                        <i class="fas fa-star"></i>
+
+                        <i class="fas fa-star-half-alt"></i>
+
+                        <span class="text-gray-500 text-sm ml-2">
+
+                            (4.8)
+
+                        </span>
+
+                    </div>
+
+                    <!-- PRIX -->
+
+                    <div class="flex items-center justify-between mt-6">
+
+                        <div>
+
+                            {% if product.old_price %}
+
+                            <p class="text-gray-400 line-through text-sm">
+
+                                {{ product.old_price }} FCFA
+
+                            </p>
+
+                            {% endif %}
+
+                            <h4 class="text-2xl font-bold gold">
+
+                                {{ product.price }} FCFA
+
+                            </h4>
+
+                        </div>
+
+                        <!-- AJOUT PANIER -->
+
+                        <button
+
+                            hx-post="{% url 'add_to_cart' product.id %}"
+
+                            hx-trigger="click"
+
+                            hx-swap="none"
+
+                            class="bg-black text-white w-14 h-14 rounded-full hover:bg-[#D4AF37] hover:text-black transition">
+
+                            <i class="fas fa-shopping-bag"></i>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            {% empty %}
+
+            <div class="col-span-4 text-center py-20">
+
+                <h3 class="text-2xl font-semibold text-gray-700">
+
+                    Aucun produit disponible.
+
+                </h3>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ========================================= -->
+<!-- BANNIÈRE PROMOTIONNELLE -->
+<!-- ========================================= -->
+
+<section class="py-24 bg-black overflow-hidden">
+
+    <div class="max-w-7xl mx-auto px-6">
+
+        <div class="relative rounded-3xl overflow-hidden">
+
+            <!-- Image de fond -->
+
+            <img src="{% static 'images/banner/banner.jpg' %}"
+                 alt="Promotion"
+                 class="absolute inset-0 w-full h-full object-cover">
+
+            <!-- Overlay -->
+
+            <div class="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-black/40"></div>
+
+            <!-- Contenu -->
+
+            <div class="relative z-10 grid lg:grid-cols-2 gap-12 items-center px-8 md:px-16 py-20">
+
+                <!-- Texte -->
+
+                <div>
+
+                    <span class="inline-block px-5 py-2 rounded-full bg-[#D4AF37] text-black font-semibold uppercase tracking-widest">
+
+                        Offre Exclusive
+
+                    </span>
+
+                    <h2 class="title text-white text-5xl lg:text-6xl mt-8 leading-tight">
+
+                        Jusqu'à
+
+                        <span class="gold">
+
+                            30% de réduction
+
+                        </span>
+
+                        sur notre collection Premium
+
+                    </h2>
+
+                    <p class="text-gray-300 text-lg mt-8 leading-8 max-w-xl">
+
+                        Profitez de nos meilleures offres sur une sélection
+                        d'accessoires élégants : montres, lunettes, sacs,
+                        casquettes et bien plus encore.
+
+                    </p>
+
+                    <div class="flex flex-wrap gap-5 mt-10">
+
+                        <a href="{% url 'login' %}"
+                           class="bg-[#D4AF37] text-black px-8 py-4 rounded-xl font-semibold hover:scale-105 transition">
+
+                            Acheter maintenant
+
+                        </a>
+
+                        <a href="{% url 'index' %}"
+                           class="border border-white text-white px-8 py-4 rounded-xl hover:bg-white hover:text-black transition">
+
+                            Voir les produits
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <!-- Bloc Promotion -->
+
+                <div class="flex justify-center">
+
+                    <div class="bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl p-10 text-center w-80">
+
+                        <p class="uppercase tracking-[4px] text-[#D4AF37] font-semibold">
+
+                            Offre Limitée
+
+                        </p>
+
+                        <h2 class="title text-7xl text-white mt-5">
+
+                            -30%
+
+                        </h2>
+
+                        <p class="text-gray-300 mt-4">
+
+                            Sur une sélection d'articles Premium.
+
+                        </p>
+
+                        <div class="mt-8">
+
+                            <a href="#produits"
+                               class="inline-block bg-[#D4AF37] text-black px-8 py-4 rounded-xl font-semibold hover:bg-yellow-400 transition">
+
+                                J'en profite
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<!-- ========================================= -->
+<!-- NOUVEAUTÉS -->
+<!-- ========================================= -->
+
+<section class="py-24 bg-[#f8f8f8]">
+
+    <div class="max-w-7xl mx-auto px-6">
+
+        <!-- TITRE -->
+
+        <div class="text-center mb-16">
+
+            <span class="gold uppercase tracking-[4px] font-semibold">
+
+                Nouvelle Collection
+
+            </span>
+
+            <h2 class="title text-5xl text-gray-900 mt-4">
+
+                Les Dernières Nouveautés
+
+            </h2>
+
+            <p class="text-gray-500 mt-5 max-w-2xl mx-auto">
+
+                Découvrez les derniers accessoires ajoutés à notre boutique.
+
+            </p>
+
+        </div>
+
+        <div class="grid lg:grid-cols-12 gap-8">
+
+            <!-- PRODUIT PRINCIPAL -->
+
+            <div class="lg:col-span-5">
+
+                {% with featured=products|first %}
+
+                {% if featured %}
+
+                <div class="relative h-full rounded-3xl overflow-hidden shadow-2xl group">
+
+                    <img src="{{ featured.image.url }}"
+                         alt="{{ featured.title }}"
+                         class="w-full h-[650px] object-cover group-hover:scale-110 transition duration-700">
+
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
+
+                    <div class="absolute bottom-10 left-10 right-10">
+
+                        <span class="bg-[#D4AF37] text-black px-4 py-2 rounded-full text-sm font-semibold">
+
+                            Nouveau
+
+                        </span>
+
+                        <h2 class="title text-white text-5xl mt-5">
+
+                            {{ featured.title }}
+
+                        </h2>
+
+                        <p class="text-gray-300 mt-4 line-clamp-3">
+
+                            {{ featured.description|truncatewords:20 }}
+
+                        </p>
+
+                        <div class="flex items-center justify-between mt-8">
+
+                            <span class="text-4xl font-bold gold">
+
+                                {{ featured.price }} FCFA
+
+                            </span>
+
+                            <a href="{% url 'login' %}">
+                            <button  class="bg-[#D4AF37] text-black px-7 py-4 rounded-xl font-semibold hover:scale-105 transition">
+                                
+                                Acheter
+
+                            </button>
+                             </a>
+
+                            
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                {% endif %}
+
+                {% endwith %}
+
+            </div>
+
+            <!-- LISTE -->
+
+            <div class="lg:col-span-7">
+
+                <div class="grid sm:grid-cols-2 gap-6">
+
+                    {% for product in products|slice:"1:5" %}
+
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-300 group">
+
+                        <div class="flex">
+
+                            <div class="w-40 h-40 overflow-hidden">
+
+                                <img src="{{ product.image.url }}"
+                                     alt="{{ product.title }}"
+                                     class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+
+                            </div>
+
+                            <div class="flex-1 p-5 flex flex-col justify-between">
+
+                                <div>
+
+                                    <p class="text-xs uppercase tracking-widest text-[#D4AF37]">
+
+                                        {{ product.Category.name }}
+
+                                    </p>
+
+                                    <h3 class="font-bold text-xl mt-2">
+
+                                        {{ product.title }}
+
+                                    </h3>
+
+                                    <p class="text-gray-500 text-sm mt-2">
+
+                                        {{ product.description|truncatewords:10 }}
+
+                                    </p>
+
+                                </div>
+
+                                <div class="flex items-center justify-between mt-4">
+
+                                    <span class="font-bold text-2xl gold">
+
+                                        {{ product.price }} FCFA
+
+                                    </span>
+
+                                    <button class="w-12 h-12 rounded-full bg-black text-white hover:bg-[#D4AF37] hover:text-black transition">
+
+                                        <i class="fas fa-shopping-bag"></i>
+
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    {% empty %}
+
+                    <div class="col-span-2 text-center py-20">
+
+                        <h3 class="text-xl text-gray-500">
+
+                            Aucun produit disponible.
+
+                        </h3>
+
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ========================================= -->
+<!-- AVIS CLIENTS -->
+<!-- ========================================= -->
+
+<section class="py-24 bg-black overflow-hidden">
+
+    <div class="max-w-7xl mx-auto px-6">
+
+        <!-- TITRE -->
+
+        <div class="text-center mb-16">
+
+            <span class="gold uppercase tracking-[4px] font-semibold">
+
+                Témoignages
+
+            </span>
+
+            <h2 class="title text-5xl text-white mt-4">
+
+                Ce que disent nos clients
+
+            </h2>
+
+            <p class="text-gray-400 mt-5 max-w-2xl mx-auto">
+
+                La satisfaction de nos clients est notre plus grande priorité.
+                Découvrez leurs expériences avec LE COIN DES ACCESSOIRES.
+
+            </p>
+
+        </div>
+
+        <!-- STATISTIQUES -->
+
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
+
+            <div class="text-center">
+
+                <h3 class="text-5xl font-bold gold">
+
+                    98%
+
+                </h3>
+
+                <p class="text-gray-400 mt-3">
+
+                    Clients satisfaits
+
+                </p>
+
+            </div>
+
+            <div class="text-center">
+
+                <h3 class="text-5xl font-bold gold">
+
+                    500+
+
+                </h3>
+
+                <p class="text-gray-400 mt-3">
+
+                    Produits vendus
+
+                </p>
+
+            </div>
+
+            <div class="text-center">
+
+                <h3 class="text-5xl font-bold gold">
+
+                    5/5
+
+                </h3>
+
+                <p class="text-gray-400 mt-3">
+
+                    Note moyenne
+
+                </p>
+
+            </div>
+
+            <div class="text-center">
+
+                <h3 class="text-5xl font-bold gold">
+
+                    24/7
+
+                </h3>
+
+                <p class="text-gray-400 mt-3">
+
+                    Support client
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <!-- AVIS -->
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            <!-- Avis 1 -->
+
+            <div class="bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur-sm hover:border-[#D4AF37] transition">
+
+                <div class="flex items-center gap-4">
+
+                    <img src="{% static 'images/testimonials/client1.jpg' %}"
+                         class="w-16 h-16 rounded-full object-cover"
+                         alt="Client">
+
+                    <div>
+
+                        <h4 class="text-white font-bold">
+
+                            Jean K.
+
+                        </h4>
+
+                        <p class="text-gray-400 text-sm">
+
+                            Abidjan
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="flex gap-1 text-yellow-400 mt-6">
+
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+
+                </div>
+
+                <p class="text-gray-300 leading-8 mt-6">
+
+                    Excellente qualité. La montre est encore plus belle que sur les photos et la livraison a été très rapide.
+
+                </p>
+
+            </div>
+
+            <!-- Avis 2 -->
+
+            <div class="bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur-sm hover:border-[#D4AF37] transition">
+
+                <div class="flex items-center gap-4">
+
+                    <img src="{% static 'images/testimonials/client2.jpg' %}"
+                         class="w-16 h-16 rounded-full object-cover"
+                         alt="Client">
+
+                    <div>
+
+                        <h4 class="text-white font-bold">
+
+                            Mariam A.
+
+                        </h4>
+
+                        <p class="text-gray-400 text-sm">
+
+                            Bouaké
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="flex gap-1 text-yellow-400 mt-6">
+
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+
+                </div>
+
+                <p class="text-gray-300 leading-8 mt-6">
+
+                    Les lunettes sont magnifiques. Je recommande cette boutique sans hésiter.
+
+                </p>
+
+            </div>
+
+            <!-- Avis 3 -->
+
+            <div class="bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur-sm hover:border-[#D4AF37] transition">
+
+                <div class="flex items-center gap-4">
+
+                    <img src="{% static 'images/testimonials/client3.jpg' %}"
+                         class="w-16 h-16 rounded-full object-cover"
+                         alt="Client">
+
+                    <div>
+
+                        <h4 class="text-white font-bold">
+
+                            Serge M.
+
+                        </h4>
+
+                        <p class="text-gray-400 text-sm">
+
+                            Yamoussoukro
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="flex gap-1 text-yellow-400 mt-6">
+
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+
+                </div>
+
+                <p class="text-gray-300 leading-8 mt-6">
+
+                    Très bon service client et accessoires de qualité. Je reviendrai pour mes prochains achats.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ========================================= -->
+<!-- NEWSLETTER -->
+<!-- ========================================= -->
+
+<section class="relative py-24 overflow-hidden">
+
+    <!-- Fond -->
+
+    <div class="absolute inset-0">
+
+        <img src="{% static 'images/newsletter/newsletter-bg.jpg' %}"
+             alt="Newsletter"
+             class="w-full h-full object-cover">
+
+    </div>
+
+    <!-- Overlay -->
+
+    <div class="absolute inset-0 bg-black/80"></div>
+
+    <!-- Contenu -->
+
+    <div class="relative max-w-4xl mx-auto px-6 text-center">
+
+        <span class="inline-block bg-[#D4AF37] text-black px-5 py-2 rounded-full uppercase tracking-[3px] font-semibold">
+
+            Newsletter
+
+        </span>
+
+        <h2 class="title text-5xl md:text-6xl text-white mt-8">
+
+            Restez informé
+
+        </h2>
+
+        <p class="text-gray-300 mt-6 text-lg leading-8 max-w-2xl mx-auto">
+
+            Soyez le premier à découvrir nos nouvelles collections,
+            nos offres exclusives et nos promotions spéciales.
+
+        </p>
+
+        <!-- FORMULAIRE -->
+
+        <form class="mt-12 max-w-2xl mx-auto">
+
+            {% csrf_token %}
+
+            <div class="flex flex-col md:flex-row gap-4">
+
+                <input
+                    type="email"
+                    placeholder="Votre adresse e-mail"
+                    class="flex-1 h-16 rounded-xl px-6 bg-white text-black outline-none text-lg">
+
+                <button
+                    type="submit"
+                    class="h-16 px-10 bg-[#D4AF37] text-black rounded-xl font-bold hover:bg-yellow-400 transition duration-300">
+
+                    S'abonner
+
+                </button>
+
+            </div>
+
+        </form>
+
+        <!-- Avantages -->
+
+        <div class="grid md:grid-cols-3 gap-8 mt-16">
+
+            <div>
+
+                <i class="fas fa-tags text-[#D4AF37] text-4xl mb-4"></i>
+
+                <h3 class="text-white font-bold text-xl">
+
+                    Offres exclusives
+
+                </h3>
+
+                <p class="text-gray-400 mt-3">
+
+                    Recevez nos meilleures promotions avant tout le monde.
+
+                </p>
+
+            </div>
+
+            <div>
+
+                <i class="fas fa-gift text-[#D4AF37] text-4xl mb-4"></i>
+
+                <h3 class="text-white font-bold text-xl">
+
+                    Cadeaux
+
+                </h3>
+
+                <p class="text-gray-400 mt-3">
+
+                    Participez à nos jeux concours réservés aux abonnés.
+
+                </p>
+
+            </div>
+
+            <div>
+
+                <i class="fas fa-bell text-[#D4AF37] text-4xl mb-4"></i>
+
+                <h3 class="text-white font-bold text-xl">
+
+                    Nouveautés
+
+                </h3>
+
+                <p class="text-gray-400 mt-3">
+
+                    Ne manquez jamais un nouveau produit.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

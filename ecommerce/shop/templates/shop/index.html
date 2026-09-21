@@ -1,0 +1,341 @@
+{% extends 'shop/base.html' %}
+
+{% load static %}
+
+{% block content %}
+<!-- ========================================= -->
+<!-- HERO BOUTIQUE -->
+<!-- ========================================= -->
+
+
+<section class="relative overflow-hidden rounded-3xl mb-12 min-h-[520px]">
+
+    <!-- Image de fond -->
+
+    <div class="absolute inset-0">
+
+        <img src="{% static 'images/hero-bg.jpg' %}"
+             alt="Boutique"
+             class="w-full h-full object-cover">
+
+    </div>
+
+    <!-- Overlay -->
+
+    <div class="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-black/40"></div>
+
+    <!-- Halo doré -->
+
+    <div class="absolute right-0 top-0 w-96 h-96 bg-[#D4AF37]/10 blur-[140px] rounded-full"></div>
+
+    <!-- Contenu -->
+
+    <div class="relative z-10 h-full">
+
+        <div class="max-w-7xl mx-auto px-6 lg:px-10 min-h-[520px] flex items-center">
+
+            <div class="grid lg:grid-cols-2 gap-10 items-center w-full">
+
+                <!-- ========================= -->
+                <!-- Texte -->
+                <!-- ========================= -->
+
+                <div>
+
+                    <span class="inline-flex items-center px-5 py-2 rounded-full border border-[#D4AF37] text-[#D4AF37] uppercase tracking-[4px] text-xs font-semibold">
+
+                        Collection Premium
+
+                    </span>
+
+                    <h1 class="title text-white text-5xl lg:text-7xl font-bold mt-8 leading-none">
+
+                        BOUTIQUE
+
+                    </h1>
+
+                    <p class="text-gray-200 text-lg lg:text-xl mt-8 max-w-xl leading-9">
+
+                        Découvrez notre sélection d'accessoires haut de gamme :
+                        montres, lunettes, casquettes, chaînes, bracelets, sacs
+                        et bien d'autres articles soigneusement sélectionnés.
+
+                    </p>
+
+                    <!-- Breadcrumb -->
+
+                    <div class="flex items-center gap-3 mt-10 text-sm">
+
+                        <a href="{% url 'acceuil' %}"
+                           class="text-white hover:text-[#D4AF37] transition">
+
+                            Accueil
+
+                        </a>
+
+                        <span class="text-gray-500">
+
+                            /
+
+                        </span>
+
+                        <span class="text-[#D4AF37] font-medium">
+
+                            Boutique
+
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <!-- ========================= -->
+                <!-- Image du modèle -->
+                <!-- ========================= -->
+
+                <div class="hidden lg:flex justify-end items-end relative h-full">
+
+                    <!-- Espace réservé -->
+
+                    <img src="{% static 'images/shop-model.png' %}"
+                         alt="Modèle"
+                         class="max-h-[520px] w-auto object-contain drop-shadow-[0_20px_40px_rgba(0,0,0,0.45)]">
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ========================================= -->
+<!-- RECHERCHE + CATEGORIES -->
+<!-- ========================================= -->
+
+<section class="mb-12">
+
+    <div class="bg-white rounded-3xl shadow-lg border border-gray-100 p-8">
+
+        <!-- Ligne supérieure -->
+
+        <div class="flex flex-col lg:flex-row gap-6 lg:items-center lg:justify-between">
+
+            <!-- Recherche -->
+
+            <div class="relative flex-1">
+
+                <i class="fas fa-search absolute left-6 top-1/2 -translate-y-1/2 text-gray-400"></i>
+
+                <input
+                    type="text"
+                    name="search"
+                    placeholder="Rechercher une montre, une casquette, une chaîne..."
+
+                    class="w-full h-16 rounded-2xl border border-gray-200 bg-gray-50 pl-16 pr-6 text-gray-700 focus:outline-none focus:border-[#D4AF37] focus:ring-4 focus:ring-[#D4AF37]/20 transition"
+
+                    hx-get="{% url 'index' %}"
+                    hx-trigger="keyup changed delay:500ms"
+                    hx-target="#product-grid"
+                    hx-indicator=".htmx-indicator">
+
+            </div>
+
+            <!-- Bouton -->
+
+            <button
+                class="h-16 px-10 rounded-2xl bg-[#D4AF37] text-black font-semibold hover:scale-105 transition">
+
+                Rechercher
+
+            </button>
+
+        </div>
+
+        <!-- Catégories -->
+
+        <div class="flex flex-wrap gap-4 mt-8">
+
+            <button class="px-6 py-3 rounded-full bg-[#D4AF37] text-black font-semibold shadow">
+
+                Tout
+
+            </button>
+
+            <button class="px-6 py-3 rounded-full border border-gray-200 hover:border-[#D4AF37] hover:text-[#D4AF37] transition">
+
+                Montres
+
+            </button>
+
+            <button class="px-6 py-3 rounded-full border border-gray-200 hover:border-[#D4AF37] hover:text-[#D4AF37] transition">
+
+                Lunettes
+
+            </button>
+
+            <button class="px-6 py-3 rounded-full border border-gray-200 hover:border-[#D4AF37] hover:text-[#D4AF37] transition">
+
+                Casquettes
+
+            </button>
+
+            <button class="px-6 py-3 rounded-full border border-gray-200 hover:border-[#D4AF37] hover:text-[#D4AF37] transition">
+
+                Chaînes
+
+            </button>
+
+            <button class="px-6 py-3 rounded-full border border-gray-200 hover:border-[#D4AF37] hover:text-[#D4AF37] transition">
+
+                Bracelets
+
+            </button>
+
+            <button class="px-6 py-3 rounded-full border border-gray-200 hover:border-[#D4AF37] hover:text-[#D4AF37] transition">
+
+                Sacs
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ========================================= -->
+<!-- PRODUITS -->
+<!-- ========================================= -->
+
+<section class="max-w-7xl mx-auto px-6 lg:px-10 mb-20">
+
+    <!-- En-tête -->
+
+    <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12">
+
+        <!-- Titre -->
+
+        <div>
+
+            <span class="uppercase tracking-[5px] text-[#D4AF37] font-semibold text-sm">
+
+                Notre Collection
+
+            </span>
+
+            <h2 class="title text-5xl lg:text-6xl font-black uppercase text-gray-900 mt-3 leading-none">
+
+                Nos Produits
+
+            </h2>
+
+            <div class="w-28 h-1 bg-[#D4AF37] rounded-full mt-5"></div>
+
+            <p class="text-gray-500 text-lg mt-5">
+
+                {{ products|length }} produit{{ products|pluralize }} disponible{{ products|pluralize }}
+
+            </p>
+
+        </div>
+
+        <!-- Tri -->
+
+        <div>
+
+            <select
+                class="h-14 min-w-[240px] px-6 rounded-2xl border border-gray-200 bg-white text-gray-700 shadow-sm focus:border-[#D4AF37] focus:ring-4 focus:ring-[#D4AF37]/20 outline-none transition">
+
+                <option>Nouveautés</option>
+                <option>Prix croissant</option>
+                <option>Prix décroissant</option>
+                <option>Les plus populaires</option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+    <!-- Produits -->
+
+    <div id="product-grid"
+         class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-8">
+
+        {% include 'shop/product_list.html' %}
+
+    </div>
+
+</section>
+
+<!-- ========================================= -->
+<!-- PAGINATION -->
+<!-- ========================================= -->
+
+{% if products.has_other_pages %}
+
+<section class="mt-16 flex justify-center">
+
+    <nav class="flex items-center gap-3">
+
+        <!-- Précédent -->
+
+        {% if products.has_previous %}
+
+        <a href="?page={{ products.previous_page_number }}"
+           class="w-12 h-12 rounded-2xl border border-gray-200 bg-white hover:bg-[#D4AF37] hover:text-black transition flex items-center justify-center">
+
+            <i class="fas fa-chevron-left"></i>
+
+        </a>
+
+        {% endif %}
+
+        <!-- Numéros -->
+
+        {% for num in products.paginator.page_range %}
+
+            {% if products.number == num %}
+
+                <span class="w-12 h-12 rounded-2xl bg-[#D4AF37] text-black font-bold flex items-center justify-center">
+
+                    {{ num }}
+
+                </span>
+
+            {% elif num > products.number|add:"-3" and num < products.number|add:"3" %}
+
+                <a href="?page={{ num }}"
+                   class="w-12 h-12 rounded-2xl border border-gray-200 bg-white hover:bg-[#D4AF37] hover:text-black transition flex items-center justify-center">
+
+                    {{ num }}
+
+                </a>
+
+            {% endif %}
+
+        {% endfor %}
+
+        <!-- Suivant -->
+
+        {% if products.has_next %}
+
+        <a href="?page={{ products.next_page_number }}"
+           class="w-12 h-12 rounded-2xl border border-gray-200 bg-white hover:bg-[#D4AF37] hover:text-black transition flex items-center justify-center">
+
+            <i class="fas fa-chevron-right"></i>
+
+        </a>
+
+        {% endif %}
+
+    </nav>
+
+</section>
+
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,657 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {% block title %}
+        LC SHOP
+        {% endblock %}
+    </title>
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- HTMX -->
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+
+            font-family:'Poppins',sans-serif;
+
+            background:#ffffff;
+
+        }
+
+        .title{
+
+            font-family:'Bebas Neue',sans-serif;
+
+            letter-spacing:1px;
+
+        }
+
+        .gold{
+
+            color:#D4AF37;
+
+        }
+
+        .bg-gold{
+
+            background:#D4AF37;
+
+        }
+
+        .htmx-indicator{
+
+            display:none;
+
+        }
+
+        .htmx-request .htmx-indicator{
+
+            display:block;
+
+        }
+
+    </style>
+
+    {% block extra_head %}
+    {% endblock %}
+
+</head>
+
+<body class="min-h-screen flex flex-col bg-white">
+    <!-- ================= NAVBAR ================= -->
+<nav class="sticky top-0 z-[99999] bg-black border-b border-gray-800">
+
+    <div class="max-w-7xl mx-auto px-6">
+
+        <div class="flex items-center justify-between h-24">
+
+            <!-- LOGO -->
+
+            <a href="{% url 'index' %}"
+               class="flex items-center gap-4">
+
+                <img src="{% static 'images/logo.png' %}"
+                     alt="Logo"
+                     class="w-16 h-16 object-contain">
+
+                <div>
+
+                    <h2 class="title text-3xl text-white leading-none">
+
+                        LE COIN DES
+
+                    </h2>
+
+                    <p class="uppercase tracking-[5px] text-sm gold font-semibold mt-1">
+
+                        ACCESSOIRES
+
+                    </p>
+
+                </div>
+
+            </a>
+
+
+
+            <!-- MENU -->
+
+            <div class="hidden lg:flex items-center gap-10">
+
+                <a href="{% url 'acceuil' %}"
+                   class="text-white hover:text-[#D4AF37] font-medium transition duration-300">
+
+                    Accueil
+
+                </a>
+
+                <a href="{% url 'index' %}"
+                   class="text-white hover:text-[#D4AF37] font-medium transition duration-300">
+
+                    Boutique
+
+                </a>
+
+                <a href="#"
+                   class="text-white hover:text-[#D4AF37] font-medium transition duration-300">
+
+                    À propos
+
+                </a>
+
+                <a href="#"
+                   class="text-white hover:text-[#D4AF37] font-medium transition duration-300">
+
+                    Contact
+
+                </a>
+
+            </div>
+
+
+
+            <!-- ACTIONS -->
+
+            <div class="hidden lg:flex items-center gap-6">
+                <!-- RECHERCHE -->
+
+<button class="text-white hover:text-[#D4AF37] text-lg transition">
+
+    <i class="fas fa-search"></i>
+
+</button>
+
+<!-- PANIER -->
+
+<a href="{% url 'cart_detail' %}"
+   class="relative text-white hover:text-[#D4AF37] transition">
+
+    <i class="fas fa-shopping-bag text-xl"></i>
+
+    <span id="cart-count"
+          class="absolute -top-2 -right-3 bg-[#D4AF37] text-black text-[10px] font-bold rounded-full w-5 h-5 flex items-center justify-center"
+
+          hx-get="{% url 'get_cart_count' %}"
+          hx-trigger="load, cartUpdated from:body"
+          hx-swap="innerHTML">
+
+        0
+
+    </span>
+
+</a>
+
+
+{% if request.user.is_authenticated %}
+
+<!-- UTILISATEUR -->
+
+<div class="relative group">
+
+    <button class="flex items-center gap-3">
+
+        <div class="w-11 h-11 rounded-full bg-[#D4AF37] text-black font-bold flex items-center justify-center">
+
+            {{ request.user.username|first|upper }}
+
+        </div>
+
+        <div>
+
+            <h3 class="text-white font-semibold">
+
+                {{ request.user.profile.full_name|default:request.user.username }}
+
+            </h3>
+
+        </div>
+
+        <i class="fas fa-chevron-down text-white text-xs"></i>
+
+    </button>
+
+    <!-- DROPDOWN -->
+
+    <div class="absolute right-0 top-16 w-64 bg-white rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 overflow-hidden">
+
+        <a href="{% url 'account' %}"
+           class="block px-6 py-4 hover:bg-gray-100">
+
+            Mon compte
+
+        </a>
+
+        <a href="{% url 'my_orders' %}"
+           class="block px-6 py-4 hover:bg-gray-100">
+
+            Mes commandes
+
+        </a>
+
+        <a href="#"
+           class="block px-6 py-4 hover:bg-gray-100">
+
+            Favoris
+
+        </a>
+
+        <a href="{% url 'logout' %}"
+           class="block px-6 py-4 text-red-500 hover:bg-red-50">
+
+            Déconnexion
+
+        </a>
+
+    </div>
+
+</div>
+
+{% else %}
+
+<a href="{% url 'login' %}"
+   class="text-white hover:text-[#D4AF37] transition font-medium">
+
+    Connexion
+
+</a>
+
+<a href="{% url 'register' %}"
+   class="bg-[#D4AF37] text-black px-5 py-3 rounded-md font-semibold hover:bg-yellow-500 transition">
+
+    Inscription
+
+</a>
+
+{% endif %}
+
+            </div>
+
+            <!-- BOUTON MENU MOBILE -->
+
+            <button id="mobileMenuBtn"
+                    class="lg:hidden text-white text-3xl">
+
+                <i class="fas fa-bars"></i>
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- MENU MOBILE -->
+
+    <div id="mobileMenu"
+         class="hidden lg:hidden bg-black border-t border-gray-800">
+
+        <div class="flex flex-col px-6 py-6 space-y-5">
+
+            <a href="{% url 'acceuil' %}"
+               class="text-white hover:text-[#D4AF37]">
+
+                Accueil
+
+            </a>
+
+            <a href="{% url 'index' %}"
+               class="text-white hover:text-[#D4AF37]">
+
+                Boutique
+
+            </a>
+
+            <a href="#"
+               class="text-white hover:text-[#D4AF37]">
+
+                À propos
+
+            </a>
+
+            <a href="#"
+               class="text-white hover:text-[#D4AF37]">
+
+                Contact
+
+            </a>
+
+            <a href="{% url 'cart_detail' %}"
+               class="text-white hover:text-[#D4AF37]">
+
+                Panier
+
+            </a>
+
+            {% if request.user.is_authenticated %}
+
+            <a href="{% url 'account' %}"
+               class="text-white hover:text-[#D4AF37]">
+
+                Mon compte
+
+            </a>
+
+            <a href="{% url 'my_orders' %}"
+               class="text-white hover:text-[#D4AF37]">
+
+                Mes commandes
+
+            </a>
+
+            <a href="{% url 'logout' %}"
+               class="text-red-400">
+
+                Déconnexion
+
+            </a>
+
+            {% else %}
+
+            <a href="{% url 'login' %}"
+               class="text-white hover:text-[#D4AF37]">
+
+                Connexion
+
+            </a>
+
+            <a href="{% url 'register' %}"
+               class="bg-[#D4AF37] text-black rounded-lg py-3 text-center font-semibold">
+
+                Inscription
+
+            </a>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</nav>
+
+<!-- ================= HTMX LOADER ================= -->
+
+<div class="htmx-indicator fixed top-0 left-0 w-full h-1 bg-[#D4AF37] z-50">
+</div>
+
+<!-- ================= CONTENU ================= -->
+
+<main class="flex-1">
+
+    {% block content %}
+
+    {% endblock %}
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="bg-black text-white mt-20">
+
+    <div class="max-w-7xl mx-auto px-6 py-16">
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+
+            <!-- LOGO -->
+
+            <div>
+
+                <img src="{% static 'images/logo.png' %}"
+                     class="w-20 mb-5"
+                     alt="Logo">
+
+                <h2 class="title text-3xl">
+
+                    LE COIN DES
+
+                </h2>
+
+                <p class="gold uppercase tracking-[4px]">
+
+                    ACCESSOIRES
+
+                </p>
+
+                <p class="text-gray-400 mt-5 text-sm leading-7">
+
+                    Votre boutique spécialisée dans les accessoires
+                    de qualité.
+
+                </p>
+
+            </div>
+
+            <!-- BOUTIQUE -->
+
+            <div>
+
+                <h3 class="text-xl font-bold mb-6 gold">
+
+                    Boutique
+
+                </h3>
+
+                <ul class="space-y-4 text-gray-400">
+
+                    <li>
+
+                        <a href="{% url 'acceuil' %}" class="hover:text-white">
+
+                            Accueil
+
+                        </a>
+
+                    </li>
+
+                    <li>
+
+                        <a href="{% url 'index' %}" class="hover:text-white">
+
+                            Boutique
+
+                        </a>
+
+                    </li>
+
+                    <li>
+
+                        <a href="#">
+
+                            Promotions
+
+                        </a>
+
+                    </li>
+
+                    <li>
+
+                        <a href="#">
+
+                            Nouveautés
+
+                        </a>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <!-- INFORMATIONS -->
+
+            <div>
+
+                <h3 class="text-xl font-bold mb-6 gold">
+
+                    Informations
+
+                </h3>
+
+                <ul class="space-y-4 text-gray-400">
+
+                    <li>
+
+                        <a href="#">
+
+                            À propos
+
+                        </a>
+
+                    </li>
+
+                    <li>
+
+                        <a href="#">
+
+                            Contact
+
+                        </a>
+
+                    </li>
+
+                    <li>
+
+                        <a href="#">
+
+                            Conditions
+
+                        </a>
+
+                    </li>
+
+                    <li>
+
+                        <a href="#">
+
+                            Politique de confidentialité
+
+                        </a>
+
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <!-- NEWSLETTER -->
+
+            <div>
+
+                <h3 class="text-xl font-bold mb-6 gold">
+
+                    Newsletter
+
+                </h3>
+
+                <p class="text-gray-400 text-sm mb-5">
+
+                    Recevez nos dernières offres.
+
+                </p>
+
+                <form>
+
+                    {% csrf_token %}
+
+                    <input type="email"
+                           placeholder="Votre email"
+                           class="w-full h-12 rounded-lg bg-[#181818] border border-gray-700 px-4 text-white mb-4">
+
+                    <button class="w-full h-12 bg-[#D4AF37] text-black font-semibold rounded-lg hover:bg-yellow-500 transition">
+
+                        S'abonner
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+        <div class="border-t border-gray-800 mt-14 pt-8 text-center text-gray-500 text-sm">
+
+            © 2026 LE COIN DES ACCESSOIRES - Tous droits réservés.
+
+        </div>
+
+    </div>
+
+</footer>
+
+{% block extra_js %}
+{% endblock %}
+
+<!-- ================= MENU MOBILE ================= -->
+
+<script>
+
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    mobileMenuBtn.addEventListener('click', () => {
+
+        mobileMenu.classList.toggle('hidden');
+
+    });
+
+</script>
+
+<!-- ================= CSRF HTMX ================= -->
+
+<script>
+
+    function getCookie(name) {
+
+        let cookieValue = null;
+
+        if (document.cookie && document.cookie !== '') {
+
+            const cookies = document.cookie.split(';');
+
+            for (let i = 0; i < cookies.length; i++) {
+
+                const cookie = cookies[i].trim();
+
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+
+                    cookieValue = decodeURIComponent(
+                        cookie.substring(name.length + 1)
+                    );
+
+                    break;
+
+                }
+
+            }
+
+        }
+
+        return cookieValue;
+
+    }
+
+    document.body.addEventListener('htmx:configRequest', function (event) {
+
+        event.detail.headers['X-CSRFToken'] = getCookie('csrftoken');
+
+    });
+
+</script>
+
+</body>
+
+</html>

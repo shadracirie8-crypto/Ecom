@@ -1,0 +1,293 @@
+{% extends "dashboard/base.html" %}
+
+{% block content %}
+
+<div class="space-y-8">
+
+    <!-- HEADER -->
+    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+
+        <div>
+
+            <h1 class="text-4xl font-black text-gray-900">
+
+                Commande #{{ order.id }}
+
+            </h1>
+
+            <p class="text-gray-400 mt-2">
+
+                Détails complets de la commande client.
+
+            </p>
+
+        </div>
+
+        <!-- STATUS -->
+        <div>
+
+            {% if order.status == 'RECU' %}
+
+            <span class="px-6 py-3 rounded-2xl bg-yellow-100 text-yellow-700 font-black uppercase">
+
+                Reçue
+
+            </span>
+
+            {% elif order.status == 'VALIDE' %}
+
+            <span class="px-6 py-3 rounded-2xl bg-blue-100 text-blue-700 font-black uppercase">
+
+                Validée
+
+            </span>
+
+            {% elif order.status == 'EN_COURS' %}
+
+            <span class="px-6 py-3 rounded-2xl bg-yellow-100 text-yellow-700 font-black uppercase">
+
+                En Livraison
+
+            </span>
+
+            {% elif order.status == 'LIVRE' %}
+
+            <span class="px-6 py-3 rounded-2xl bg-green-100 text-green-700 font-black uppercase">
+
+                Livrée
+
+            </span>
+
+            {% elif order.status == 'ANNULE' %}
+
+            <span class="px-6 py-3 rounded-2xl bg-red-100 text-red-700 font-black uppercase">
+
+                Annulée
+
+            </span>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+    <!-- GRID -->
+    <div class="grid grid-cols-1 xl:grid-cols-3 gap-8">
+
+        <!-- LEFT -->
+        <div class="xl:col-span-2 space-y-8">
+
+            <!-- CLIENT -->
+            <div class="bg-white rounded-[32px] border border-gray-100 shadow-sm p-8">
+
+                <h2 class="text-2xl font-black text-gray-900 mb-8">
+
+                    Informations Client
+
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                    <div>
+
+                        <p class="text-sm text-gray-400 mb-2">
+
+                            Nom complet
+
+                        </p>
+
+                        <h3 class="font-bold text-gray-900 text-lg">
+
+                            {{ order.full_name }}
+
+                        </h3>
+
+                    </div>
+
+                    <div>
+
+                        <p class="text-sm text-gray-400 mb-2">
+
+                            Téléphone
+
+                        </p>
+
+                        <h3 class="font-bold text-gray-900 text-lg">
+
+                            {{ order.phone }}
+
+                        </h3>
+
+                    </div>
+
+                    <div>
+
+                        <p class="text-sm text-gray-400 mb-2">
+
+                            Ville
+
+                        </p>
+
+                        <h3 class="font-bold text-gray-900 text-lg">
+
+                            {{ order.city }}
+
+                        </h3>
+
+                    </div>
+
+                    <div>
+
+                        <p class="text-sm text-gray-400 mb-2">
+
+                            Adresse de livraison
+
+                        </p>
+
+                        <h3 class="font-bold text-gray-900 text-lg">
+
+                            {{ order.address }}
+
+                        </h3>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- ARTICLES -->
+            <div class="bg-white rounded-[32px] border border-gray-100 shadow-sm overflow-hidden">
+
+                <div class="p-8 border-b border-gray-100">
+
+                    <h2 class="text-2xl font-black text-gray-900">
+
+                        Produits Commandés
+
+                    </h2>
+
+                </div>
+
+                <div class="divide-y divide-gray-100">
+
+                    {% for item in order.items.all %}
+
+                    <div class="p-6 flex items-center justify-between gap-6">
+
+                        <div class="flex items-center gap-5">
+
+                            {% if item.product.image %}
+                            <img src="{{ item.product.image.url }}"
+                                 class="w-20 h-20 rounded-2xl object-cover">
+                            {% endif %}
+
+                            <div>
+
+                                <h3 class="font-black text-gray-900 text-lg">
+
+                                    {{ item.product.title }}
+
+                                </h3>
+
+                                <p class="text-gray-400 mt-1">
+
+                                    Quantité : {{ item.quantity }}
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                        <div>
+
+                            <h3 class="text-2xl font-black text-indigo-600">
+
+                                {{ item.price }} FCFA
+
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- RIGHT -->
+        <div class="space-y-8">
+
+            <!-- TOTAL -->
+            <div class="bg-gradient-to-br from-yellow-600 to-indigo-700 rounded-[32px] p-8 text-white shadow-xl shadow-indigo-600/20">
+
+                <p class="uppercase tracking-widest text-sm opacity-70">
+
+                    Total Commande
+
+                </p>
+
+                <h2 class="text-5xl font-black mt-4">
+
+                    {{ order.total_price }} FCFA
+
+                </h2>
+
+            </div>
+
+            <!-- ACTIONS -->
+            <div class="bg-white rounded-[32px] border border-gray-100 shadow-sm p-8">
+
+                <h2 class="text-2xl font-black text-gray-900 mb-6">
+
+                    Actions
+
+                </h2>
+
+                <div class="space-y-4">
+
+                    <a href="{% url 'change_order_status' order.id 'VALIDE' %}"
+                       class="w-full h-14 rounded-2xl bg-blue-600 hover:bg-blue-700 text-white font-bold flex items-center justify-center transition-all duration-300">
+
+                        Valider Commande
+
+                    </a>
+
+                    <a href="{% url 'change_order_status' order.id 'EN_COURS' %}"
+                       class="w-full h-14 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold flex items-center justify-center transition-all duration-300">
+
+                        Mettre en Livraison
+
+                    </a>
+
+                    <a href="{% url 'change_order_status' order.id 'LIVRE' %}"
+                       class="w-full h-14 rounded-2xl bg-green-600 hover:bg-green-700 text-white font-bold flex items-center justify-center transition-all duration-300">
+
+                        Marquer Livrée
+
+                    </a>
+
+                    <a href="{% url 'change_order_status' order.id 'ANNULE' %}"
+                       class="w-full h-14 rounded-2xl bg-red-600 hover:bg-red-700 text-white font-bold flex items-center justify-center transition-all duration-300">
+
+                        Annuler Commande
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

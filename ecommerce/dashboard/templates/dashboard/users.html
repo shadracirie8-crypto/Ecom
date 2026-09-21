@@ -1,0 +1,132 @@
+{% extends "dashboard/base.html" %}
+
+{% block content %}
+
+<div class="space-y-8">
+
+    <!-- HEADER -->
+    <div class="flex items-center justify-between">
+
+        <div>
+
+            <h1 class="text-4xl font-black text-gray-900">
+                Utilisateurs
+            </h1>
+
+            <p class="text-gray-400 mt-2">
+                Gérez les utilisateurs de la boutique.
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- TABLE -->
+    <div class="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
+
+        <div class="overflow-x-auto">
+
+            <table class="w-full">
+
+                <thead class="bg-gray-50 border-b border-gray-100">
+
+                    <tr>
+
+                        <th class="px-6 py-5 text-left text-xs font-bold uppercase tracking-wider text-gray-500">
+                            ID
+                        </th>
+
+                        <th class="px-6 py-5 text-left text-xs font-bold uppercase tracking-wider text-gray-500">
+                            Username
+                        </th>
+
+                        <th class="px-6 py-5 text-left text-xs font-bold uppercase tracking-wider text-gray-500">
+                            Email
+                        </th>
+
+                        <th class="px-6 py-5 text-left text-xs font-bold uppercase tracking-wider text-gray-500">
+                            Date inscription
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody class="divide-y divide-gray-100">
+
+                    {% for user in users %}
+
+                    <tr class="hover:bg-gray-50 transition">
+
+                        <!-- ID -->
+                        <td class="px-6 py-5 font-semibold text-gray-900">
+                            #{{ user.id }}
+                        </td>
+
+                        <!-- USERNAME -->
+                        <td class="px-6 py-5">
+
+                            <div class="flex items-center gap-3">
+
+                                <div class="w-11 h-11 rounded-2xl bg-indigo-100 flex items-center justify-center text-indigo-700 font-bold">
+
+                                    {{ user.username|first|upper }}
+
+                                </div>
+
+                                <div>
+
+                                    <p class="font-bold text-gray-900">
+
+                                        {{ user.username }}
+
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+                        <!-- EMAIL -->
+                        <td class="px-6 py-5 text-gray-600">
+
+                            {{ user.email }}
+
+                        </td>
+
+                        <!-- DATE -->
+                        <td class="px-6 py-5 text-gray-500">
+
+                            {{ user.date_joined|date:"d M Y" }}
+
+                        </td>
+
+                    </tr>
+
+                    {% empty %}
+
+                    <tr>
+
+                        <td colspan="4"
+                            class="px-6 py-16 text-center text-gray-400">
+
+                            Aucun utilisateur trouvé.
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

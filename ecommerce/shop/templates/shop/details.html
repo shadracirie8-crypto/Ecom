@@ -1,0 +1,584 @@
+{% extends "shop/base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<!-- ========================================= -->
+<!-- DETAIL PRODUIT -->
+<!-- ========================================= -->
+
+<section class="max-w-7xl mx-auto px-6 lg:px-10 py-12">
+
+    <!-- Fil d'Ariane -->
+
+    <div class="flex items-center gap-3 text-sm text-gray-500 mb-8">
+
+        <a href="{% url 'acceuil' %}"
+           class="hover:text-[#D4AF37] transition">
+
+            Accueil
+
+        </a>
+
+        <span>/</span>
+
+        <a href="{% url 'index' %}"
+           class="hover:text-[#D4AF37] transition">
+
+            Boutique
+
+        </a>
+
+        <span>/</span>
+
+        <span class="text-[#D4AF37] font-semibold">
+
+            {{ product.title }}
+
+        </span>
+
+    </div>
+
+    <!-- Retour -->
+
+    <a href="{% url 'index' %}"
+       class="inline-flex items-center gap-3 mb-10 text-gray-700 hover:text-[#D4AF37] font-medium transition">
+
+        <i class="fas fa-arrow-left"></i>
+
+        Retour à la boutique
+
+    </a>
+
+    <!-- Carte principale -->
+
+    <div class="bg-white rounded-[35px] shadow-xl border border-gray-100 overflow-hidden">
+
+        <div class="grid lg:grid-cols-2 gap-12 p-8 lg:p-12">
+
+
+            <!-- ========================================= -->
+<!-- GALERIE PRODUIT -->
+<!-- ========================================= -->
+
+<div>
+
+    <!-- Image principale -->
+
+    <div class="bg-[#f8f8f8] rounded-3xl overflow-hidden border border-gray-100">
+
+        {% if product.image %}
+
+        <img src="{{ product.image.url }}"
+             alt="{{ product.title }}"
+             class="w-full h-[550px] object-contain hover:scale-105 transition duration-500">
+
+        {% else %}
+
+        <div class="w-full h-[550px] flex items-center justify-center text-gray-400">
+
+            Aucune image disponible
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+    <!-- Miniatures -->
+
+    <div class="flex gap-4 mt-5">
+
+        <!-- Miniature active -->
+
+        <button
+            class="w-20 h-20 rounded-2xl border-2 border-[#D4AF37] bg-white overflow-hidden shadow-sm">
+
+            {% if product.image %}
+
+            <img src="{{ product.image.url }}"
+                 alt="{{ product.title }}"
+                 class="w-full h-full object-cover">
+
+            {% else %}
+
+            <img src="{% static 'images/no-image.png' %}"
+                 class="w-full h-full object-cover">
+
+            {% endif %}
+
+        </button>
+
+        <!-- Les trois miniatures suivantes utilisent la même image
+             en attendant que tu ajoutes plusieurs images au produit -->
+
+        {% for i in "123" %}
+
+        <button
+            class="w-20 h-20 rounded-2xl border border-gray-200 hover:border-[#D4AF37] overflow-hidden transition">
+
+            {% if product.image %}
+
+            <img src="{{ product.image.url }}"
+                 alt="{{ product.title }}"
+                 class="w-full h-full object-cover">
+
+            {% else %}
+
+            <img src="{% static 'images/no-image.png' %}"
+                 class="w-full h-full object-cover">
+
+            {% endif %}
+
+        </button>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+<!-- ========================================= -->
+<!-- INFORMATIONS PRODUIT -->
+<!-- ========================================= -->
+
+<div class="flex flex-col justify-center">
+
+    <!-- Catégorie -->
+
+    {% if product.Category %}
+
+    <span class="inline-flex w-fit items-center px-4 py-2 rounded-full bg-[#D4AF37]/10 text-[#D4AF37] text-xs uppercase tracking-[3px] font-bold">
+
+        {{ product.Category.name }}
+
+    </span>
+
+    {% endif %}
+
+    <!-- Nom -->
+
+    <h1 class="text-5xl font-black text-gray-900 mt-5 leading-tight">
+
+        {{ product.title }}
+
+    </h1>
+
+    <!-- Étoiles -->
+
+    <div class="flex items-center gap-3 mt-5">
+
+        <div class="flex text-yellow-400 text-lg">
+
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star-half-alt"></i>
+
+        </div>
+
+        <span class="text-gray-500">
+
+            (4.9)
+
+        </span>
+
+        {% if product.stock > 0 %}
+
+        <span class="px-3 py-1 rounded-full bg-green-100 text-green-700 text-sm font-semibold">
+
+            En stock
+
+        </span>
+
+        {% else %}
+
+        <span class="px-3 py-1 rounded-full bg-red-100 text-red-600 text-sm font-semibold">
+
+            Rupture
+
+        </span>
+
+        {% endif %}
+
+    </div>
+
+    <!-- Prix -->
+
+    <div class="mt-8">
+
+        <div class="flex items-end gap-4">
+
+            <h2 class="text-5xl font-black text-[#D4AF37]">
+
+                {{ product.price }} FCFA
+
+            </h2>
+
+            <!-- Ancien prix (prévu pour plus tard) -->
+
+            <!--
+            <span class="text-2xl text-gray-400 line-through">
+
+                120 000 FCFA
+
+            </span>
+            -->
+
+        </div>
+
+    </div>
+
+    <!-- Description -->
+
+    <div class="mt-8">
+
+        <h3 class="font-bold text-lg text-gray-900 mb-3">
+
+            Description
+
+        </h3>
+
+        <p class="text-gray-600 leading-8">
+
+            {{ product.description }}
+
+        </p>
+
+    </div>
+
+    <!-- Stock -->
+
+    <div class="mt-8 p-5 rounded-2xl bg-gray-50 border border-gray-100">
+
+        {% if product.stock > 0 %}
+
+        <div class="flex items-center justify-between">
+
+            <span class="font-semibold text-gray-700">
+
+                Disponibilité
+
+            </span>
+
+            <span class="text-green-600 font-bold">
+
+                {{ product.stock }} article{{ product.stock|pluralize }} disponible{{ product.stock|pluralize }}
+
+            </span>
+
+        </div>
+
+        {% else %}
+
+        <div class="flex items-center justify-between">
+
+            <span class="font-semibold text-gray-700">
+
+                Disponibilité
+
+            </span>
+
+            <span class="text-red-600 font-bold">
+
+                Rupture de stock
+
+            </span>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+    <!-- ========================================= -->
+<!-- COULEURS -->
+<!-- ========================================= -->
+
+<div class="mt-8">
+
+    <h3 class="font-bold text-gray-900 mb-4">
+
+        Couleur
+
+    </h3>
+
+    <div class="flex items-center gap-4">
+
+        <button class="w-8 h-8 rounded-full bg-black ring-2 ring-[#D4AF37] ring-offset-2 transition"></button>
+
+        <button class="w-8 h-8 rounded-full bg-white border-2 border-gray-300 hover:ring-2 hover:ring-[#D4AF37] transition"></button>
+
+        <button class="w-8 h-8 rounded-full bg-[#8B5E3C] hover:ring-2 hover:ring-[#D4AF37] transition"></button>
+
+        <button class="w-8 h-8 rounded-full bg-[#D4AF37] hover:ring-2 hover:ring-[#D4AF37] transition"></button>
+
+    </div>
+
+</div>
+
+<!-- ========================================= -->
+<!-- QUANTITÉ -->
+<!-- ========================================= -->
+
+<div class="mt-8">
+
+    <h3 class="font-bold text-gray-900 mb-4">
+
+        Quantité
+
+    </h3>
+
+    <div class="flex items-center w-fit border border-gray-200 rounded-xl overflow-hidden">
+
+        <button
+            type="button"
+            class="w-12 h-12 bg-gray-50 hover:bg-gray-100 text-xl transition">
+
+            −
+
+        </button>
+
+        <span
+            class="w-14 text-center font-bold text-gray-900">
+
+            1
+
+        </span>
+
+        <button
+            type="button"
+            class="w-12 h-12 bg-gray-50 hover:bg-gray-100 text-xl transition">
+
+            +
+
+        </button>
+
+    </div>
+
+</div>
+
+<!-- ========================================= -->
+<!-- AVANTAGES -->
+<!-- ========================================= -->
+
+<div class="mt-10 space-y-4">
+
+    <div class="flex items-center gap-4">
+
+        <div class="w-12 h-12 rounded-xl bg-[#D4AF37]/10 flex items-center justify-center">
+
+            <i class="fas fa-truck text-[#D4AF37]"></i>
+
+        </div>
+
+        <div>
+
+            <h4 class="font-semibold text-gray-900">
+
+                Livraison rapide
+
+            </h4>
+
+            <p class="text-sm text-gray-500">
+
+                Livraison estimée entre 24h et 72h.
+
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="flex items-center gap-4">
+
+        <div class="w-12 h-12 rounded-xl bg-[#D4AF37]/10 flex items-center justify-center">
+
+            <i class="fas fa-shield-alt text-[#D4AF37]"></i>
+
+        </div>
+
+        <div>
+
+            <h4 class="font-semibold text-gray-900">
+
+                Paiement sécurisé
+
+            </h4>
+
+            <p class="text-sm text-gray-500">
+
+                Toutes vos transactions sont protégées.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ========================================= -->
+<!-- BOUTONS -->
+<!-- ========================================= -->
+
+<div class="mt-10">
+
+    {% if product.stock > 0 %}
+
+    <button
+
+        hx-post="{% url 'add_to_cart' product.id %}"
+        hx-trigger="click"
+        hx-swap="none"
+
+        class="w-full h-16 rounded-2xl bg-[#D4AF37] text-black text-lg font-bold hover:bg-[#c89d1c] transition-all duration-300 flex items-center justify-center gap-3 shadow-lg hover:shadow-xl">
+
+        <i class="fas fa-shopping-cart"></i>
+
+        Ajouter au panier
+
+    </button>
+
+    {% else %}
+
+    <button
+        disabled
+        class="w-full h-16 rounded-2xl bg-gray-300 text-gray-500 text-lg font-bold cursor-not-allowed">
+
+        Produit indisponible
+
+    </button>
+
+    {% endif %}
+
+</div>
+
+<!-- ========================================= -->
+<!-- ACTIONS SECONDAIRES -->
+<!-- ========================================= -->
+
+<div class="grid grid-cols-2 gap-4 mt-5">
+
+    <button
+        class="h-14 rounded-2xl border border-gray-200 bg-white hover:border-[#D4AF37] hover:text-[#D4AF37] transition flex items-center justify-center gap-2">
+
+        <i class="far fa-heart"></i>
+
+        Ajouter aux favoris
+
+    </button>
+
+    <button
+        class="h-14 rounded-2xl border border-gray-200 bg-white hover:border-[#D4AF37] hover:text-[#D4AF37] transition flex items-center justify-center gap-2">
+
+        <i class="fas fa-share-alt"></i>
+
+        Partager
+
+    </button>
+
+</div>
+
+<!-- ========================================= -->
+<!-- GARANTIES -->
+<!-- ========================================= -->
+
+<div class="mt-10 rounded-3xl bg-gray-50 border border-gray-100 p-6">
+
+    <div class="grid md:grid-cols-3 gap-6">
+
+        <div class="flex items-center gap-4">
+
+            <div class="w-12 h-12 rounded-xl bg-[#D4AF37]/10 flex items-center justify-center">
+
+                <i class="fas fa-award text-[#D4AF37]"></i>
+
+            </div>
+
+            <div>
+
+                <h4 class="font-bold text-gray-900">
+
+                    Qualité Premium
+
+                </h4>
+
+                <p class="text-sm text-gray-500">
+
+                    Produits soigneusement sélectionnés.
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="flex items-center gap-4">
+
+            <div class="w-12 h-12 rounded-xl bg-[#D4AF37]/10 flex items-center justify-center">
+
+                <i class="fas fa-sync-alt text-[#D4AF37]"></i>
+
+            </div>
+
+            <div>
+
+                <h4 class="font-bold text-gray-900">
+
+                    Retour facile
+
+                </h4>
+
+                <p class="text-sm text-gray-500">
+
+                    Retour possible sous 7 jours.
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="flex items-center gap-4">
+
+            <div class="w-12 h-12 rounded-xl bg-[#D4AF37]/10 flex items-center justify-center">
+
+                <i class="fas fa-headset text-[#D4AF37]"></i>
+
+            </div>
+
+            <div>
+
+                <h4 class="font-bold text-gray-900">
+
+                    Assistance
+
+                </h4>
+
+                <p class="text-sm text-gray-500">
+
+                    Notre équipe est disponible 7j/7.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+{% endblock %}

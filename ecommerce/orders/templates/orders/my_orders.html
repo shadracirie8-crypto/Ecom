@@ -1,0 +1,525 @@
+{% extends "shop/base.html" %}
+
+{% block content %}
+
+<div class="max-w-7xl mx-auto px-4 py-10">
+
+    <!-- HEADER -->
+    <div class="mb-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
+
+        <div>
+
+            <h1 class="text-5xl font-black text-gray-900">
+
+                Mes Commandes
+
+            </h1>
+
+            <p class="text-gray-500 mt-3 text-lg">
+
+                Suivez toutes vos commandes en temps réel.
+
+            </p>
+
+        </div>
+
+        <!-- STATS -->
+        <div class="flex items-center gap-4">
+
+            <div class="bg-white rounded-2xl border border-gray-100 px-6 py-4 shadow-sm">
+
+                <p class="text-sm text-gray-400 font-medium">
+
+                    Total commandes
+
+                </p>
+
+                <h3 class="text-3xl font-black text-yellow-600">
+
+                    {{ orders.count }}
+
+                </h3>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% if orders %}
+
+    <div class="space-y-8">
+
+        {% for order in orders %}
+
+        <div class="bg-white rounded-[32px] border border-gray-100 shadow-xl shadow-gray-100/40 overflow-hidden">
+
+            <!-- TOP -->
+            <div class="p-8 border-b border-gray-100">
+
+                <div class="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-6">
+
+                    <!-- LEFT -->
+                    <div>
+
+                        <div class="flex items-center gap-4 flex-wrap">
+
+                            <h2 class="text-3xl font-black text-gray-900">
+
+                                #CMD-{{ order.id }}
+
+                            </h2>
+
+                            <!-- STATUS -->
+                            {% if order.status == 'recu' %}
+
+                            <span class="px-5 py-2 rounded-full bg-yellow-100 text-yellow-700 text-sm font-bold">
+
+                                🟡 Commande reçue
+
+                            </span>
+
+                            {% elif order.status == 'valide' %}
+
+                            <span class="px-5 py-2 rounded-full bg-blue-100 text-blue-700 text-sm font-bold">
+
+                                🔵 Validée
+
+                            </span>
+
+                            {% elif order.status == 'livraison' %}
+
+                            <span class="px-5 py-2 rounded-full bg-yellow-100 text-yellow-700 text-sm font-bold">
+
+                                🟣 En livraison
+
+                            </span>
+
+                            {% elif order.status == 'livre' %}
+
+                            <span class="px-5 py-2 rounded-full bg-green-100 text-green-700 text-sm font-bold">
+
+                                🟢 Livrée
+
+                            </span>
+
+                            {% endif %}
+
+                        </div>
+
+                        <p class="text-gray-500 mt-3">
+
+                            Passée le {{ order.created_at }}
+
+                        </p>
+
+                    </div>
+
+                    <!-- PRICE -->
+                    <div class="text-left xl:text-right">
+
+                        <p class="text-sm uppercase tracking-wider text-gray-400 font-bold mb-2">
+
+                            Montant total
+
+                        </p>
+
+                        <h3 class="text-5xl font-black text-yellow-600">
+
+                            {{ order.total_price }} FCFA
+
+                        </h3>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- TRACKING -->
+            <div class="px-8 pt-8">
+
+                <div class="flex items-center justify-between relative">
+
+                    <!-- LINE -->
+                    <div class="absolute top-5 left-0 w-full h-1 bg-gray-200 rounded-full"></div>
+
+                    <div class="absolute top-5 left-0 h-1 bg-indigo-600 rounded-full
+                        {% if order.status == 'recu' %}
+                            w-[10%]
+                        {% elif order.status == 'valide' %}
+                            w-[40%]
+                        {% elif order.status == 'livraison' %}
+                            w-[75%]
+                        {% elif order.status == 'livre' %}
+                            w-full
+                        {% endif %}
+                    ">
+                    </div>
+
+                    <!-- STEP -->
+                    <div class="relative z-10 flex flex-col items-center">
+
+                        <div class="w-10 h-10 rounded-full bg-indigo-600 text-white flex items-center justify-center font-bold">
+
+                            ✓
+
+                        </div>
+
+                        <p class="text-sm font-semibold text-gray-700 mt-3">
+
+                            Reçue
+
+                        </p>
+
+                    </div>
+
+                    <!-- STEP -->
+                    <div class="relative z-10 flex flex-col items-center">
+
+                        <div class="w-10 h-10 rounded-full
+                            {% if order.status == 'valide' or order.status == 'livraison' or order.status == 'livre' %}
+                                bg-indigo-600 text-white
+                            {% else %}
+                                bg-gray-200 text-gray-500
+                            {% endif %}
+                            flex items-center justify-center font-bold">
+
+                            ✓
+
+                        </div>
+
+                        <p class="text-sm font-semibold text-gray-700 mt-3">
+
+                            Validation
+
+                        </p>
+
+                    </div>
+
+                    <!-- STEP -->
+                    <div class="relative z-10 flex flex-col items-center">
+
+                        <div class="w-10 h-10 rounded-full
+                            {% if order.status == 'livraison' or order.status == 'livre' %}
+                                bg-indigo-600 text-white
+                            {% else %}
+                                bg-gray-200 text-gray-500
+                            {% endif %}
+                            flex items-center justify-center font-bold">
+
+                            ✓
+
+                        </div>
+
+                        <p class="text-sm font-semibold text-gray-700 mt-3">
+
+                            Expédition
+
+                        </p>
+
+                    </div>
+
+                    <!-- STEP -->
+                    <div class="relative z-10 flex flex-col items-center">
+
+                        <div class="w-10 h-10 rounded-full
+                            {% if order.status == 'livre' %}
+                                bg-green-600 text-white
+                            {% else %}
+                                bg-gray-200 text-gray-500
+                            {% endif %}
+                            flex items-center justify-center font-bold">
+
+                            ✓
+
+                        </div>
+
+                        <p class="text-sm font-semibold text-gray-700 mt-3">
+
+                            Livrée
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- BODY -->
+            <div class="p-8 grid grid-cols-1 xl:grid-cols-3 gap-10">
+
+                <!-- LIVRAISON -->
+                <div>
+
+                    <h3 class="text-sm uppercase tracking-widest text-gray-400 font-black mb-6">
+
+                        Informations livraison
+
+                    </h3>
+
+                    <div class="space-y-4">
+
+                        <div class="bg-gray-50 rounded-2xl p-4">
+
+                            <p class="text-sm text-gray-400 mb-1">
+
+                                Nom du receveur
+
+                            </p>
+
+                            <p class="font-bold text-gray-800">
+
+                                {{ order.full_name }}
+
+                            </p>
+
+                        </div>
+
+                        <div class="bg-gray-50 rounded-2xl p-4">
+
+                            <p class="text-sm text-gray-400 mb-1">
+
+                                Téléphone
+
+                            </p>
+
+                            <p class="font-bold text-gray-800">
+
+                                {{ order.phone }}
+
+                            </p>
+
+                        </div>
+
+                        <div class="bg-gray-50 rounded-2xl p-4">
+
+                            <p class="text-sm text-gray-400 mb-1">
+
+                                Ville
+
+                            </p>
+
+                            <p class="font-bold text-gray-800">
+
+                                {{ order.city }}
+
+                            </p>
+
+                        </div>
+
+                        <div class="bg-gray-50 rounded-2xl p-4">
+
+                            <p class="text-sm text-gray-400 mb-1">
+
+                                Adresse
+
+                            </p>
+
+                            <p class="font-bold text-gray-800">
+
+                                {{ order.address }}
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- PRODUITS -->
+                <div>
+
+                    <h3 class="text-sm uppercase tracking-widest text-gray-400 font-black mb-6">
+
+                        Articles commandés
+
+                    </h3>
+
+                    <div class="space-y-4">
+
+                        {% for item in order.items.all %}
+
+                        <div class="flex items-center gap-4 bg-gray-50 rounded-2xl p-4">
+
+                            <img src="{{ item.product.image.url }}"
+                                 class="w-20 h-20 rounded-2xl object-cover">
+
+                            <div class="flex-1">
+
+                                <h4 class="font-bold text-gray-900">
+
+                                    {{ item.product.title }}
+
+                                </h4>
+
+                                <p class="text-gray-500 text-sm mt-1">
+
+                                    Quantité : {{ item.quantity }}
+
+                                </p>
+
+                            </div>
+
+                            <h3 class="font-black text-indigo-600">
+
+                                {{ item.price }} FCFA
+
+                            </h3>
+
+                        </div>
+
+                        {% endfor %}
+
+                    </div>
+
+                </div>
+
+                <!-- RESUME -->
+                <div>
+
+                    <h3 class="text-sm uppercase tracking-widest text-gray-400 font-black mb-6">
+
+                        Résumé paiement
+
+                    </h3>
+
+                    <div class="bg-[#f6f7fb] rounded-[28px] p-6 border border-gray-100">
+
+                        <div class="space-y-5">
+
+                            <div class="flex items-center justify-between">
+
+                                <span class="text-gray-500">
+
+                                    Sous-total
+
+                                </span>
+
+                                <span class="font-bold text-gray-900">
+
+                                    {{ order.total_price }} FCFA
+
+                                </span>
+
+                            </div>
+
+                            <div class="flex items-center justify-between">
+
+                                <span class="text-gray-500">
+
+                                    Livraison
+
+                                </span>
+
+                                <span class="font-bold text-green-600">
+
+                                    Selon votre zone
+
+                                </span>
+
+                            </div>
+
+                            <div class="border-t border-gray-200 pt-5 flex items-center justify-between">
+
+                                <span class="text-xl font-black text-gray-900">
+
+                                    Total
+
+                                </span>
+
+                                <span class="text-3xl font-black text-yellow-600">
+
+                                    {{ order.total_price }} FCFA
+
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <!-- BUTTONS -->
+<div class="mt-8 space-y-3">
+
+    <!-- TRACKING -->
+    <a href="{% url 'order_tracking' order.id %}"
+       class="w-full h-14 rounded-2xl bg-yellow-600 hover:bg-yellow-700 text-white font-bold transition-all duration-300 flex items-center justify-center shadow-lg shadow-indigo-600/20 hover:scale-[1.02]">
+
+        Suivre le colis
+
+    </a>
+
+    <!-- RECEIPT -->
+    <a href="{% url 'download_receipt' order.id %}"
+       class="w-full h-14 rounded-2xl border border-gray-200 hover:bg-gray-50 font-semibold text-gray-700 transition-all duration-300 flex items-center justify-center">
+
+        Télécharger le reçu
+
+    </a>
+
+</div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% else %}
+
+    <!-- EMPTY -->
+    <div class="bg-white rounded-[32px] border border-gray-100 shadow-xl shadow-gray-100/30 p-16 text-center">
+
+        <div class="w-28 h-28 rounded-full bg-yellow-50 flex items-center justify-center mx-auto mb-8">
+
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 class="h-14 w-14 text-yellow-600"
+                 fill="none"
+                 viewBox="0 0 24 24"
+                 stroke="currentColor">
+
+                <path stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2 9m12-9l2 9m-5-9v9" />
+
+            </svg>
+
+        </div>
+
+        <h2 class="text-4xl font-black text-gray-900 mb-4">
+
+            Aucune commande
+
+        </h2>
+
+        <p class="text-gray-500 text-lg max-w-lg mx-auto">
+
+            Vous n'avez encore passé aucune commande sur ECO-SHOP.
+
+        </p>
+
+        <a href="{% url 'index' %}"
+           class="inline-flex items-center justify-center mt-10 h-16 px-10 rounded-2xl bg-indigo-600 hover:bg-yellow-700 text-white font-bold text-lg shadow-xl shadow-indigo-600/20 transition-all duration-300 hover:scale-105">
+
+            Commencer mes achats
+
+        </a>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}

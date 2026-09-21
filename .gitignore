@@ -1,0 +1,36 @@
+# Environnement virtuel
+.venv/
+venv/
+env/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Django
+db.sqlite3
+*.sqlite3
+
+# Variables sensibles
+.env
+.env.*
+
+# Fichiers uploadés
+media/
+
+# Fichiers statiques générés
+staticfiles/
+
+# VS Code
+.vscode/
+
+# PyCharm
+.idea/
+
+# Logs
+*.log
+
+# Système
+.DS_Store
+Thumbs.db

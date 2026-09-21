@@ -1,0 +1,365 @@
+{% extends "dashboard/base.html" %}
+
+{% block content %}
+
+<div class="space-y-8">
+
+    <!-- HEADER -->
+    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+
+        <div>
+
+            <h1 class="text-4xl font-black text-gray-900">
+
+                Catégories
+
+            </h1>
+
+            <p class="text-gray-400 mt-2">
+
+                Gérez les catégories de la boutique.
+
+            </p>
+
+        </div>
+
+        <!-- BUTTON -->
+        <button onclick="openCategoryModal()"
+                class="h-14 px-8 rounded-2xl bg-yellow-600 hover:bg-yellow-700 text-white font-bold shadow-xl shadow-yellow-600/20 transition-all duration-300 hover:scale-[1.02]">
+
+            Ajouter Catégorie
+
+        </button>
+
+    </div>
+
+    <!-- TABLE -->
+    <div class="bg-white rounded-[32px] border border-gray-100 shadow-sm overflow-hidden">
+
+        <!-- TOP -->
+        <div class="p-8 border-b border-gray-100">
+
+            <h2 class="text-2xl font-black text-gray-900">
+
+                Liste des catégories
+
+            </h2>
+
+            <p class="text-gray-400 mt-1">
+
+                {{ categories.count }} catégories disponibles
+
+            </p>
+
+        </div>
+
+        <!-- TABLE -->
+        <div class="overflow-x-auto">
+
+            <table class="w-full">
+
+                <thead class="bg-gray-50">
+
+                    <tr>
+
+                        <th class="px-6 py-5 text-left text-xs font-black uppercase tracking-wider text-gray-400">
+
+                            Catégorie
+
+                        </th>
+
+                        <th class="px-6 py-5 text-left text-xs font-black uppercase tracking-wider text-gray-400">
+
+                            Produits
+
+                        </th>
+
+                        <th class="px-6 py-5 text-left text-xs font-black uppercase tracking-wider text-gray-400">
+
+                            Date
+
+                        </th>
+
+                        <th class="px-6 py-5 text-right text-xs font-black uppercase tracking-wider text-gray-400">
+
+                            Actions
+
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody class="divide-y divide-gray-100">
+
+                    {% for category in categories %}
+
+                    <tr class="hover:bg-gray-50 transition-all duration-300">
+
+                        <!-- CATEGORY -->
+                        <td class="px-6 py-5">
+
+                            <div class="flex items-center gap-4">
+
+                                <div class="w-14 h-14 rounded-2xl bg-yellow-50 flex items-center justify-center">
+
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                         class="h-6 w-6 text-yellow-600"
+                                         fill="none"
+                                         viewBox="0 0 24 24"
+                                         stroke="currentColor">
+
+                                        <path stroke-linecap="round"
+                                              stroke-linejoin="round"
+                                              stroke-width="2"
+                                              d="M3 7l9 4 9-4-9-4-9 4zm0 0v10l9 4 9-4V7" />
+
+                                    </svg>
+
+                                </div>
+
+                                <div>
+
+                                    <h3 class="font-black text-gray-900 text-lg">
+
+                                        {{ category.name }}
+
+                                    </h3>
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+                        <!-- PRODUCTS -->
+                        <td class="px-6 py-5">
+
+                            <span class="font-bold text-yellow-600">
+
+                                {{ category.categorie.count }} produits
+
+                            </span>
+
+                        </td>
+
+                        <!-- DATE -->
+                        <td class="px-6 py-5">
+
+                            <span class="text-gray-500">
+
+                                {{ category.date_added|date:"d M Y" }}
+
+                            </span>
+
+                        </td>
+
+                        <!-- ACTIONS -->
+                        <td class="px-6 py-5">
+
+                            <div class="flex items-center justify-end gap-3">
+
+                                <!-- EDIT -->
+                                <button class="w-11 h-11 rounded-2xl bg-yellow-50 hover:bg-yellow-100 flex items-center justify-center transition-all duration-300">
+
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                         class="h-5 w-5 text-yellow-600"
+                                         fill="none"
+                                         viewBox="0 0 24 24"
+                                         stroke="currentColor">
+
+                                        <path stroke-linecap="round"
+                                              stroke-linejoin="round"
+                                              stroke-width="2"
+                                              d="M11 5h2m-1-1v2m-7 9l-4 4m0 0l4-4m-4 4h18" />
+
+                                    </svg>
+
+                                </button>
+
+                                <!-- DELETE -->
+                                <button onclick="deleteCategory('{{ category.id }}')"
+                                        class="w-11 h-11 rounded-2xl bg-red-50 hover:bg-red-100 flex items-center justify-center transition-all duration-300">
+
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                         class="h-5 w-5 text-red-600"
+                                         fill="none"
+                                         viewBox="0 0 24 24"
+                                         stroke="currentColor">
+
+                                        <path stroke-linecap="round"
+                                              stroke-linejoin="round"
+                                              stroke-width="2"
+                                              d="M6 18L18 6M6 6l12 12" />
+
+                                    </svg>
+
+                                </button>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                    {% empty %}
+
+                    <tr>
+
+                        <td colspan="4"
+                            class="px-6 py-20 text-center">
+
+                            <div class="flex flex-col items-center">
+
+                                <div class="w-24 h-24 rounded-full bg-yellow-50 flex items-center justify-center mb-6">
+
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                         class="h-12 w-12 text-yellow-600"
+                                         fill="none"
+                                         viewBox="0 0 24 24"
+                                         stroke="currentColor">
+
+                                        <path stroke-linecap="round"
+                                              stroke-linejoin="round"
+                                              stroke-width="2"
+                                              d="M3 7l9 4 9-4-9-4-9 4zm0 0v10l9 4 9-4V7" />
+
+                                    </svg>
+
+                                </div>
+
+                                <h3 class="text-2xl font-black text-gray-900">
+
+                                    Aucune catégorie
+
+                                </h3>
+
+                                <p class="text-gray-400 mt-2">
+
+                                    Commencez par ajouter une catégorie.
+
+                                </p>
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- MODAL -->
+<div id="categoryModal"
+     class="fixed inset-0 bg-black/40 hidden items-center justify-center z-50">
+
+    <div class="bg-white rounded-[32px] p-8 w-full max-w-lg">
+
+        <div class="flex items-center justify-between mb-8">
+
+            <h2 class="text-2xl font-black text-gray-900">
+
+                Nouvelle Catégorie
+
+            </h2>
+
+            <button onclick="closeCategoryModal()"
+                    class="w-10 h-10 rounded-xl hover:bg-gray-100 flex items-center justify-center">
+
+                ✕
+
+            </button>
+
+        </div>
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <input type="text"
+                   placeholder="Nom de la catégorie"
+                   class="w-full h-14 rounded-2xl border border-gray-200 bg-gray-50 px-5 outline-none focus:border-indigo-500">
+
+            <button type="submit"
+                    class="w-full h-14 rounded-2xl bg-yellow-600 hover:bg-yellow-700 text-white font-bold mt-6 transition-all duration-300">
+
+                Ajouter Catégorie
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script>
+
+function openCategoryModal() {
+
+    document
+        .getElementById('categoryModal')
+        .classList
+        .remove('hidden')
+
+    document
+        .getElementById('categoryModal')
+        .classList
+        .add('flex')
+}
+
+function closeCategoryModal() {
+
+    document
+        .getElementById('categoryModal')
+        .classList
+        .add('hidden')
+
+    document
+        .getElementById('categoryModal')
+        .classList
+        .remove('flex')
+}
+
+function deleteCategory(id) {
+
+    Swal.fire({
+
+        title: 'Supprimer catégorie ?',
+
+        text: "Cette action est irréversible.",
+
+        icon: 'warning',
+
+        showCancelButton: true,
+
+        confirmButtonColor: '#4f46e5',
+
+        cancelButtonColor: '#ef4444',
+
+        confirmButtonText: 'Oui supprimer'
+
+    }).then((result) => {
+
+        if (result.isConfirmed) {
+
+            window.location.href =
+                `/dashboard/categories/delete/${id}/`
+        }
+
+    })
+
+}
+
+</script>
+
+{% endblock %}

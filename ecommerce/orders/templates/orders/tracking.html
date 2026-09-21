@@ -1,0 +1,183 @@
+{% extends "shop/base.html" %}
+
+{% block content %}
+
+<div class="max-w-4xl mx-auto px-4 py-12">
+
+    <div class="bg-white rounded-[32px] shadow-xl border border-gray-100 p-10">
+
+        <!-- HEADER -->
+        <div class="mb-10">
+
+            <h1 class="text-5xl font-black text-gray-900">
+
+                Suivi de commande
+
+            </h1>
+
+            <p class="text-gray-500 mt-3 text-lg">
+
+                Commande #CMD-{{ order.id }}
+
+            </p>
+
+        </div>
+
+        <!-- TRACK -->
+        <div class="relative">
+
+            <!-- LINE -->
+            <div class="absolute left-5 top-0 w-1 h-full bg-gray-200 rounded-full"></div>
+
+            <!-- ACTIVE -->
+            <div class="absolute left-5 top-0 w-1 rounded-full bg-yellow-600
+
+                {% if order.status == 'recu' %}
+                    h-[15%]
+                {% elif order.status == 'valide' %}
+                    h-[40%]
+                {% elif order.status == 'livraison' %}
+                    h-[75%]
+                {% elif order.status == 'livre' %}
+                    h-full
+                {% endif %}
+            ">
+            </div>
+
+            <div class="space-y-14 relative z-10">
+
+                <!-- STEP -->
+                <div class="flex gap-6">
+
+                    <div class="w-10 h-10 rounded-full bg-yellow-600 text-white flex items-center justify-center font-bold">
+
+                        ✓
+
+                    </div>
+
+                    <div>
+
+                        <h3 class="text-xl font-black text-gray-900">
+
+                            Commande reçue
+
+                        </h3>
+
+                        <p class="text-gray-500 mt-2">
+
+                            Votre commande a été enregistrée.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <!-- STEP -->
+                <div class="flex gap-6">
+
+                    <div class="w-10 h-10 rounded-full
+                        {% if order.status == 'valide' or order.status == 'livraison' or order.status == 'livre' %}
+                            bg-yellow-600 text-white
+                        {% else %}
+                            bg-gray-200 text-gray-500
+                        {% endif %}
+                        flex items-center justify-center font-bold">
+
+                        ✓
+
+                    </div>
+
+                    <div>
+
+                        <h3 class="text-xl font-black text-gray-900">
+
+                            Validation
+
+                        </h3>
+
+                        <p class="text-gray-500 mt-2">
+
+                            L'administrateur a validé votre commande.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <!-- STEP -->
+                <div class="flex gap-6">
+
+                    <div class="w-10 h-10 rounded-full
+                        {% if order.status == 'livraison' or order.status == 'livre' %}
+                            bg-yellow-600 text-white
+                        {% else %}
+                            bg-gray-200 text-gray-500
+                        {% endif %}
+                        flex items-center justify-center font-bold">
+
+                        ✓
+
+                    </div>
+
+                    <div>
+
+                        <h3 class="text-xl font-black text-gray-900">
+
+                            En livraison
+
+                        </h3>
+
+                        <p class="text-gray-500 mt-2">
+
+                            Votre colis est en cours de livraison.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <!-- STEP -->
+                <div class="flex gap-6">
+
+                    <div class="w-10 h-10 rounded-full
+                        {% if order.status == 'livre' %}
+                            bg-green-600 text-white
+                        {% else %}
+                            bg-gray-200 text-gray-500
+                        {% endif %}
+                        flex items-center justify-center font-bold">
+
+                        ✓
+
+                    </div>
+
+                    <div>
+
+                        <h3 class="text-xl font-black text-gray-900">
+
+                            Livrée
+
+                        </h3>
+
+                        <p class="text-gray-500 mt-2">
+
+                            Votre commande a été livrée avec succès.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

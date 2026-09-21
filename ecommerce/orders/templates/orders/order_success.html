@@ -1,0 +1,68 @@
+{% extends "shop/base.html" %}
+
+{% block content %}
+
+<div class="min-h-[70vh] flex items-center justify-center px-4">
+
+    <div class="max-w-2xl w-full bg-white rounded-[32px] shadow-sm border border-gray-100 p-10 text-center">
+
+        <!-- ICON -->
+        <div class="w-28 h-28 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-8">
+
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 class="h-14 w-14 text-green-600"
+                 fill="none"
+                 viewBox="0 0 24 24"
+                 stroke="currentColor">
+
+                <path stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M5 13l4 4L19 7" />
+
+            </svg>
+
+        </div>
+
+        <!-- TITLE -->
+        <h1 class="text-4xl font-black text-gray-900 mb-4">
+
+            Commande Validée
+
+        </h1>
+
+        <!-- TEXT -->
+        <p class="text-gray-500 text-lg leading-relaxed max-w-xl mx-auto">
+
+            Votre commande a été enregistrée avec succès.
+            Notre équipe vous contactera bientôt
+            pour confirmer la livraison.
+
+        </p>
+
+        <!-- BUTTONS -->
+        <div class="flex flex-col md:flex-row items-center justify-center gap-4 mt-10">
+
+            <!-- MY ORDERS -->
+            <a href="{% url 'my_orders' %}"
+               class="h-14 px-8 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold flex items-center justify-center transition-all duration-300 hover:scale-[1.02]">
+
+                Voir Mes Commandes
+
+            </a>
+
+            <!-- SHOP -->
+            <a href="{% url 'index' %}"
+               class="h-14 px-8 rounded-2xl border border-gray-200 hover:bg-gray-50 text-gray-700 font-bold flex items-center justify-center transition-all duration-300">
+
+                Retour Boutique
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,367 @@
+{% extends "dashboard/base.html" %}
+
+{% block content %}
+
+<!-- HEADER -->
+<div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-10">
+
+    <div>
+
+        <h1 class="text-4xl font-black text-gray-900 tracking-tight">
+
+            Produits
+
+        </h1>
+
+        <p class="text-gray-400 mt-2 text-sm">
+
+            Gérez tous les produits de votre boutique.
+
+        </p>
+
+    </div>
+
+    <!-- BUTTON -->
+    <a href="{% url 'add_product' %}"
+       class="inline-flex items-center justify-center gap-3 bg-yellow-600 hover:bg-yellow-700 text-white px-6 py-4 rounded-2xl font-semibold shadow-lg shadow-yellow-600/20 transition-all duration-300 hover:scale-105">
+
+        <svg xmlns="http://www.w3.org/2000/svg"
+             class="h-5 w-5"
+             fill="none"
+             viewBox="0 0 24 24"
+             stroke="currentColor">
+
+            <path stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 4v16m8-8H4" />
+
+        </svg>
+
+        Ajouter Produit
+
+    </a>
+
+</div>
+
+<!-- TABLE CARD -->
+<div class="bg-white rounded-[32px] border border-gray-100 shadow-sm overflow-hidden">
+
+    <!-- TOP -->
+    <div class="p-6 border-b border-gray-100 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+
+        <!-- SEARCH -->
+        <form method="GET"
+              class="flex items-center bg-[#f5f7fb] h-14 px-5 rounded-2xl border border-gray-200 w-full lg:w-[420px]">
+
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 class="h-5 w-5 text-gray-400"
+                 fill="none"
+                 viewBox="0 0 24 24"
+                 stroke="currentColor">
+
+                <path stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+
+            </svg>
+
+            <input type="text"
+                   name="search"
+                   value="{{ query }}"
+                   placeholder="Rechercher un produit..."
+                   class="bg-transparent outline-none px-4 text-sm w-full">
+
+            <button type="submit"
+                    class="text-yellow-600 font-semibold text-sm">
+
+                Rechercher
+
+            </button>
+
+        </form>
+
+        <!-- COUNT -->
+        <div class="text-sm text-gray-400 font-medium">
+
+            {{ products|length }} produit(s)
+
+        </div>
+
+    </div>
+
+    <!-- TABLE -->
+    <div class="overflow-x-auto">
+
+        <table class="w-full">
+
+            <!-- HEAD -->
+            <thead class="bg-[#f9fafb] border-b border-gray-100">
+
+                <tr>
+
+                    <th class="text-left px-6 py-5 text-xs font-bold uppercase tracking-widest text-gray-400">
+
+                        Produit
+
+                    </th>
+
+                    <th class="text-left px-6 py-5 text-xs font-bold uppercase tracking-widest text-gray-400">
+
+                        Prix
+
+                    </th>
+
+                    <th class="text-left px-6 py-5 text-xs font-bold uppercase tracking-widest text-gray-400">
+
+                        Stock
+
+                    </th>
+
+                    <th class="text-left px-6 py-5 text-xs font-bold uppercase tracking-widest text-gray-400">
+
+                        Catégorie
+
+                    </th>
+
+                    <th class="text-right px-6 py-5 text-xs font-bold uppercase tracking-widest text-gray-400">
+
+                        Actions
+
+                    </th>
+
+                </tr>
+
+            </thead>
+
+            <!-- BODY -->
+            <tbody>
+
+                {% for product in products %}
+
+                <tr class="border-b border-gray-50 hover:bg-[#fafafa] transition-all duration-300">
+
+                    <!-- PRODUCT -->
+                    <td class="px-6 py-5">
+
+                        <div class="flex items-center gap-4">
+
+                            {% if product.image %}
+
+                            <img src="{{ product.image.url }}"
+                                 alt="{{ product.title }}"
+                                 class="w-16 h-16 rounded-2xl object-cover border border-gray-100 shadow-sm">
+
+                            {% endif %}
+
+                            <div>
+
+                                <h3 class="font-bold text-gray-900 text-lg">
+
+                                    {{ product.title }}
+
+                                </h3>
+
+                                <p class="text-sm text-gray-400 mt-1 line-clamp-1 max-w-xs">
+
+                                    {{ product.description }}
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </td>
+
+                    <!-- PRICE -->
+                    <td class="px-6 py-5">
+
+                        <span class="font-black text-indigo-600 text-lg">
+
+                            {{ product.price }} FCFA
+
+                        </span>
+
+                    </td>
+
+                    <!-- STOCK -->
+                    <td class="px-6 py-5">
+
+                        {% if product.stock > 0 %}
+
+                        <span class="bg-green-100 text-green-600 px-4 py-2 rounded-full text-xs font-bold">
+
+                            {{ product.stock }} en stock
+
+                        </span>
+
+                        {% else %}
+
+                        <span class="bg-red-100 text-red-600 px-4 py-2 rounded-full text-xs font-bold">
+
+                            Rupture
+
+                        </span>
+
+                        {% endif %}
+
+                    </td>
+
+                    <!-- CATEGORY -->
+                    <td class="px-6 py-5">
+
+                        <span class="bg-yellow-50 text-yellow-600 px-4 py-2 rounded-full text-xs font-semibold">
+
+                            {{ product.Category.name }}
+
+                        </span>
+
+                    </td>
+
+                    <!-- ACTIONS -->
+                    <td class="px-6 py-5">
+
+                        <div class="flex items-center justify-end gap-3">
+
+                            <!-- EDIT -->
+                            <a href="{% url 'edit_product' product.id %}"
+                               class="w-11 h-11 rounded-2xl bg-yellow-50 hover:bg-yellow-100 flex items-center justify-center transition-all duration-300 hover:scale-105">
+
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     class="h-5 w-5 text-yellow-600"
+                                     fill="none"
+                                     viewBox="0 0 24 24"
+                                     stroke="currentColor">
+
+                                    <path stroke-linecap="round"
+                                          stroke-linejoin="round"
+                                          stroke-width="2"
+                                          d="M11 5h2m-1-1v2m-7 9l-4 4m0 0l4-4m-4 4h18" />
+
+                                </svg>
+
+                            </a>
+
+                            <!-- DELETE -->
+                            <button onclick="confirmDelete('{% url 'delete_product' product.id %}')"
+                                    class="w-11 h-11 rounded-2xl bg-red-50 hover:bg-red-100 flex items-center justify-center transition-all duration-300 hover:scale-105">
+
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     class="h-5 w-5 text-red-600"
+                                     fill="none"
+                                     viewBox="0 0 24 24"
+                                     stroke="currentColor">
+
+                                    <path stroke-linecap="round"
+                                          stroke-linejoin="round"
+                                          stroke-width="2"
+                                          d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6M9 7V4a1 1 0 011-1h4a1 1 0 011 1v3" />
+
+                                </svg>
+
+                            </button>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+                {% empty %}
+
+                <tr>
+
+                    <td colspan="5" class="text-center py-24">
+
+                        <div class="flex flex-col items-center">
+
+                            <!-- ICON -->
+                            <div class="w-24 h-24 rounded-full bg-yellow-50 flex items-center justify-center mb-6">
+
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     class="h-12 w-12 text-yellow-500"
+                                     fill="none"
+                                     viewBox="0 0 24 24"
+                                     stroke="currentColor">
+
+                                    <path stroke-linecap="round"
+                                          stroke-linejoin="round"
+                                          stroke-width="2"
+                                          d="M20 13V7a2 2 0 00-2-2h-3V3H9v2H6a2 2 0 00-2 2v6" />
+
+                                </svg>
+
+                            </div>
+
+                            <h3 class="text-2xl font-black text-gray-900">
+
+                                Aucun produit
+
+                            </h3>
+
+                            <p class="text-gray-400 mt-3">
+
+                                Ajoutez votre premier produit.
+
+                            </p>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+<!-- SWEET ALERT DELETE -->
+<script>
+
+    function confirmDelete(url) {
+
+        Swal.fire({
+
+            title: 'Supprimer ce produit ?',
+
+            text: "Cette action est irréversible.",
+
+            icon: 'warning',
+
+            showCancelButton: true,
+
+            confirmButtonColor: '#4f46e5',
+
+            cancelButtonColor: '#ef4444',
+
+            confirmButtonText: 'Oui, supprimer',
+
+            cancelButtonText: 'Annuler',
+
+            background: '#ffffff',
+
+            color: '#111827'
+
+        }).then((result) => {
+
+            if (result.isConfirmed) {
+
+                window.location.href = url
+
+            }
+
+        })
+
+    }
+
+</script>
+
+{% endblock %}

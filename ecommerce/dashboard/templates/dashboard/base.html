@@ -1,0 +1,413 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        ECO ADMIN
+    </title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Police -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
+          rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <style>
+
+        body{
+            font-family:'Inter',sans-serif;
+            background:#F6F4EF;
+        }
+
+        ::-webkit-scrollbar{
+            width:8px;
+        }
+
+        ::-webkit-scrollbar-thumb{
+            background:#d6d3d1;
+            border-radius:999px;
+        }
+
+        ::-webkit-scrollbar-track{
+            background:transparent;
+        }
+
+    </style>
+
+</head>
+
+<body class="min-h-screen overflow-x-hidden">
+
+    <!-- =============================== -->
+    <!-- LAYOUT -->
+    <!-- =============================== -->
+
+    <div class="flex min-h-screen">
+
+        <!-- =============================== -->
+        <!-- SIDEBAR -->
+        <!-- =============================== -->
+
+        <aside class="w-72 bg-[#111111] text-white flex flex-col shadow-2xl">
+
+
+                <!-- ========================================= -->
+    <!-- LOGO -->
+    <!-- ========================================= -->
+
+    <div class="h-24 flex items-center justify-center border-b border-white/10">
+
+        <a href="{% url 'dashboard' %}"
+           class="flex items-center gap-3">
+
+            <div class="w-12 h-12 rounded-xl bg-[#D4AF37] flex items-center justify-center">
+
+                <i class="fas fa-gem text-black text-xl"></i>
+
+            </div>
+
+            <div>
+
+                <h2 class="text-xl font-extrabold tracking-wide">
+
+                    ECO
+
+                </h2>
+
+                <p class="text-xs uppercase tracking-[4px] text-gray-400">
+
+                    ADMIN
+
+                </p>
+
+            </div>
+
+        </a>
+
+    </div>
+
+    <!-- ========================================= -->
+    <!-- MENU -->
+    <!-- ========================================= -->
+
+    <nav class="flex-1 px-5 py-8">
+
+        <p class="text-[11px] uppercase tracking-[3px] text-gray-500 mb-5">
+
+            Navigation
+
+        </p>
+
+        <div class="space-y-2">
+
+            <!-- Dashboard -->
+
+            <a href="{% url 'dashboard' %}"
+               class="flex items-center gap-4 px-4 py-3 rounded-xl bg-[#D4AF37] text-black font-semibold shadow-lg">
+
+                <i class="fas fa-house w-5 text-center"></i>
+
+                <span>
+
+                    Tableau de bord
+
+                </span>
+
+            </a>
+
+            <!-- Produits -->
+
+            <a href="{% url 'dashboard_products' %}"
+               class="flex items-center gap-4 px-4 py-3 rounded-xl text-gray-300 hover:bg-white/10 hover:text-white transition">
+
+                <i class="fas fa-box-open w-5 text-center"></i>
+
+                <span>
+
+                    Produits
+
+                </span>
+
+            </a>
+
+            <!-- Catégories -->
+
+            <a href="{% url 'dashboard_categories' %}"
+               class="flex items-center gap-4 px-4 py-3 rounded-xl text-gray-300 hover:bg-white/10 hover:text-white transition">
+
+                <i class="fas fa-layer-group w-5 text-center"></i>
+
+                <span>
+
+                    Catégories
+
+                </span>
+
+            </a>
+
+            <!-- Commandes -->
+
+            <a href="{% url 'dashboard_orders' %}"
+               class="flex items-center gap-4 px-4 py-3 rounded-xl text-gray-300 hover:bg-white/10 hover:text-white transition">
+
+                <i class="fas fa-cart-shopping w-5 text-center"></i>
+
+                <span>
+
+                    Commandes
+
+                </span>
+
+            </a>
+
+            <!-- Clients -->
+
+            <a href="{% url 'dashboard_users' %}"
+               class="flex items-center gap-4 px-4 py-3 rounded-xl text-gray-300 hover:bg-white/10 hover:text-white transition">
+
+                <i class="fas fa-users w-5 text-center"></i>
+
+                <span>
+
+                    Clients
+
+                </span>
+
+            </a>
+
+        </div>
+
+    </nav>
+
+    <!-- ========================================= -->
+    <!-- DÉCONNEXION -->
+    <!-- ========================================= -->
+
+    <div class="p-5 border-t border-white/10">
+
+        <a href="{% url 'logout' %}"
+           class="flex items-center justify-center gap-3 w-full py-3 rounded-xl bg-red-500/10 text-red-400 hover:bg-red-500 hover:text-white transition">
+
+            <i class="fas fa-right-from-bracket"></i>
+
+            <span>
+
+                Déconnexion
+
+            </span>
+
+        </a>
+
+    </div>
+
+</aside>
+
+<!-- ========================================= -->
+<!-- CONTENU PRINCIPAL -->
+<!-- ========================================= -->
+
+<main class="flex-1 flex flex-col overflow-hidden">
+
+    <!-- ========================================= -->
+<!-- TOPBAR -->
+<!-- ========================================= -->
+
+<header class="h-20 bg-white border-b border-gray-200 flex items-center justify-between px-8">
+
+    <!-- Titre -->
+
+    <div>
+
+        <h1 class="text-3xl font-bold text-gray-900">
+
+            Tableau de bord
+
+        </h1>
+
+        <p class="text-sm text-gray-500 mt-1">
+
+            Bienvenue dans votre espace d'administration.
+
+        </p>
+
+    </div>
+
+    <!-- Actions -->
+
+    <div class="flex items-center gap-5">
+
+        <!-- Recherche -->
+
+        <div class="hidden lg:flex items-center w-80 h-11 bg-gray-100 rounded-xl px-4">
+
+            <i class="fas fa-search text-gray-400 mr-3"></i>
+
+            <input
+                type="text"
+                placeholder="Rechercher..."
+                class="flex-1 bg-transparent outline-none text-sm">
+
+        </div>
+
+        <!-- Ajouter -->
+
+        <a href="{% url 'dashboard_products' %}"
+           class="flex items-center gap-2 bg-[#D4AF37] hover:bg-[#C59D2A] text-black font-semibold px-5 h-11 rounded-xl transition">
+
+            <i class="fas fa-plus"></i>
+
+            <span>
+
+                Ajouter un produit
+
+            </span>
+
+        </a>
+
+        <!-- Notifications -->
+
+        <button class="relative w-11 h-11 rounded-xl border border-gray-200 bg-white hover:bg-gray-50 transition">
+
+            <i class="far fa-bell text-gray-700"></i>
+
+            <span class="absolute top-1 right-1 w-2.5 h-2.5 rounded-full bg-red-500"></span>
+
+        </button>
+
+        <!-- Profil -->
+
+        <div class="flex items-center gap-3 pl-5 border-l border-gray-200">
+
+            <div class="w-11 h-11 rounded-full overflow-hidden border-2 border-[#D4AF37]">
+
+                <img
+                    src="{% static 'images/logo.png' %}"
+                    alt="Admin"
+                    class="w-full h-full object-cover">
+
+            </div>
+
+            <div>
+
+                <h3 class="font-semibold text-sm text-gray-900">
+
+                    Administrateur
+
+                </h3>
+
+                <p class="text-xs text-gray-500">
+
+                    Super Admin
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+<!-- ========================================= -->
+<!-- CONTENU -->
+<!-- ========================================= -->
+
+<div class="flex-1 overflow-y-auto p-8 bg-[#F6F4EF]">
+
+    <!-- Messages -->
+
+    {% if messages %}
+
+        {% for message in messages %}
+
+            <script>
+
+                Swal.fire({
+
+                    icon: "success",
+
+                    title: "{{ message }}",
+
+                    timer: 2200,
+
+                    showConfirmButton: false,
+
+                    background: "#ffffff",
+
+                    iconColor: "#D4AF37"
+
+                });
+
+            </script>
+
+        {% endfor %}
+
+    {% endif %}
+
+    {% block content %}
+
+    <!-- ========================================= -->
+<!-- CONTENU DE LA PAGE -->
+<!-- ========================================= -->
+
+<div class="flex-1 overflow-y-auto bg-[#F6F4EF] p-8">
+
+    <!-- Messages Django -->
+
+    {% if messages %}
+
+        {% for message in messages %}
+
+            <script>
+
+                Swal.fire({
+
+                    icon: "success",
+
+                    title: "{{ message }}",
+
+                    timer: 2200,
+
+                    showConfirmButton: false,
+
+                    background: "#ffffff",
+
+                    color: "#111827",
+
+                    iconColor: "#D4AF37"
+
+                });
+
+            </script>
+
+        {% endfor %}
+
+    {% endif %}
+
+    {% endblock %}
+
+</div>
+
+    </main>
+
+</div>
+
+</body>
+
+</html>
