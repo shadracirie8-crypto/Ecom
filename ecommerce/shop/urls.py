@@ -29,5 +29,9 @@ urlpatterns = [
     path('get-cart-count/',
          views.get_cart_count,
          name='get_cart_count'),
+    
+    path('a-propos/', views.apropos, name='apropos'),
+    
+    path('contact/', views.contact, name='contact'),
 
 ]

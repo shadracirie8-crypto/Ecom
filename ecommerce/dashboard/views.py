@@ -1,41 +1,31 @@
 from django.shortcuts import render, redirect, get_object_or_404
-
 from django.http import JsonResponse
-
 from django.contrib import messages
-
 from django.contrib.auth.models import User
+from django.contrib.admin.views.decorators import staff_member_required
 
 from shop.models import Product, Category
-
 from .forms import ProductForm
-
 from orders.models import Order
 
 
 # =========================
 # DASHBOARD
 # =========================
+@staff_member_required(login_url='login')
 def dashboard(request):
 
     products_count = Product.objects.count()
-
     users_count = User.objects.count()
-
     categories_count = Category.objects.count()
 
     products = Product.objects.all()[:5]
 
     context = {
-
         'products_count': products_count,
-
         'users_count': users_count,
-
         'categories_count': categories_count,
-
         'products': products,
-
     }
 
     return render(
@@ -48,25 +38,21 @@ def dashboard(request):
 # =========================
 # PRODUITS
 # =========================
+@staff_member_required(login_url='login')
 def products(request):
 
     query = request.GET.get('search', '')
 
     if query:
-
         products = Product.objects.filter(
             title__icontains=query
         )
-
     else:
-
         products = Product.objects.all()
 
     context = {
-
         'products': products,
         'query': query
-
     }
 
     return render(
@@ -79,6 +65,7 @@ def products(request):
 # =========================
 # AJOUT PRODUIT
 # =========================
+@staff_member_required(login_url='login')
 def add_product(request):
 
     form = ProductForm()
@@ -104,9 +91,7 @@ def add_product(request):
             )
 
     context = {
-
         'form': form
-
     }
 
     return render(
@@ -119,6 +104,7 @@ def add_product(request):
 # =========================
 # MODIFIER PRODUIT
 # =========================
+@staff_member_required(login_url='login')
 def edit_product(request, product_id):
 
     product = get_object_or_404(
@@ -152,10 +138,8 @@ def edit_product(request, product_id):
             )
 
     context = {
-
         'form': form,
         'product': product
-
     }
 
     return render(
@@ -168,19 +152,22 @@ def edit_product(request, product_id):
 # =========================
 # SUPPRIMER PRODUIT
 # =========================
+@staff_member_required(login_url='login')
 def delete_product(request, product_id):
 
-    product = get_object_or_404(
-        Product,
-        id=product_id
-    )
+    if request.method == 'POST':
 
-    product.delete()
+        product = get_object_or_404(
+            Product,
+            id=product_id
+        )
 
-    messages.success(
-        request,
-        "Produit supprimé avec succès !"
-    )
+        product.delete()
+
+        messages.success(
+            request,
+            "Produit supprimé avec succès !"
+        )
 
     return redirect(
         'dashboard_products'
@@ -190,14 +177,13 @@ def delete_product(request, product_id):
 # =========================
 # UTILISATEURS
 # =========================
+@staff_member_required(login_url='login')
 def users_list(request):
 
     users = User.objects.all()
 
     context = {
-
         'users': users
-
     }
 
     return render(
@@ -210,14 +196,13 @@ def users_list(request):
 # =========================
 # CATEGORIES
 # =========================
+@staff_member_required(login_url='login')
 def categories(request):
 
     categories = Category.objects.all()
 
     context = {
-
         'categories': categories
-
     }
 
     return render(
@@ -228,19 +213,9 @@ def categories(request):
 
 
 # =========================
-# COMMANDES
-# =========================
-def orders(request):
-
-    return render(
-        request,
-        'dashboard/orders.html'
-    )
-
-
-# =========================
 # AJOUT CATEGORY AJAX
 # =========================
+@staff_member_required(login_url='login')
 def add_category_ajax(request):
 
     if request.method == 'POST':
@@ -249,7 +224,6 @@ def add_category_ajax(request):
 
         if name:
 
-            # CHECK EXIST
             existing = Category.objects.filter(
                 name__iexact=name
             ).first()
@@ -257,116 +231,102 @@ def add_category_ajax(request):
             if existing:
 
                 return JsonResponse({
-
                     'success': True,
-
                     'id': existing.id,
-
                     'name': existing.name
-
                 })
 
-            # CREATE
             category = Category.objects.create(
                 name=name
             )
 
             return JsonResponse({
-
                 'success': True,
-
                 'id': category.id,
-
                 'name': category.name
-
             })
 
     return JsonResponse({
-
         'success': False
-
     })
-    
-    
-
 
 
 # =========================
 # COMMANDES
 # =========================
+@staff_member_required(login_url='login')
 def orders(request):
 
     status = request.GET.get('status')
-
     search = request.GET.get('search')
 
-    orders = Order.objects.all().order_by('-created_at')
+    orders = Order.objects.all().order_by(
+        '-created_at'
+    )
 
-    # FILTER STATUS
     if status:
-
         orders = orders.filter(
             status=status
         )
 
-    # SEARCH
     if search:
-
         orders = orders.filter(
             full_name__icontains=search
         )
 
     return render(
-
         request,
-
         'dashboard/orders.html',
-
         {
-
             'orders': orders
-
         }
-
     )
 
 
 # =========================
 # DETAIL COMMANDE
 # =========================
+@staff_member_required(login_url='login')
 def order_detail(request, order_id):
 
-    order = Order.objects.get(
+    order = get_object_or_404(
+        Order,
         id=order_id
     )
 
     return render(
-
         request,
-
         'dashboard/order_detail.html',
-
         {
-
             'order': order
-
         }
-
     )
 
 
 # =========================
 # CHANGE STATUS
 # =========================
-def change_order_status(request, order_id, status):
+@staff_member_required(login_url='login')
+def change_order_status(
+    request,
+    order_id,
+    status
+):
 
-    order = Order.objects.get(
-        id=order_id
-    )
+    if request.method == 'POST':
 
-    order.status = status
+        order = get_object_or_404(
+            Order,
+            id=order_id
+        )
 
-    order.save()
+        order.status = status
+        order.save()
+
+        messages.success(
+            request,
+            "Statut de la commande modifié avec succès !"
+        )
 
     return redirect(
         'dashboard_orders'

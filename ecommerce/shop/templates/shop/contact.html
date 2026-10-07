@@ -1,0 +1,891 @@
+{% extends "shop/base.html" %}
+
+{% load static %}
+
+
+{% block title %}
+Contact | LE COIN DES ACCESSOIRES
+{% endblock %}
+
+
+{% block extra_head %}
+
+<link rel="stylesheet" href="{% static 'shop/css/contact.css' %}">
+
+{% endblock %}
+
+
+{% block content %}
+
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="contact-hero">
+
+    <div class="hero-overlay"></div>
+
+    <div class="hero-container">
+
+        <div class="hero-content">
+
+            <div class="hero-badge">
+                NOUS CONTACTER
+            </div>
+
+            <h1>
+                PARLONS<br>
+                <span>
+                    ENSEMBLE.
+                </span>
+            </h1>
+
+            <p>
+                Une question concernant un produit,
+                une commande ou notre boutique ?
+                Notre équipe est à votre écoute.
+            </p>
+
+            <div class="breadcrumb">
+
+                <a href="{% url 'index' %}">
+                    Accueil
+                </a>
+
+                <span>/</span>
+
+                <strong>
+                    Contact
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     SECTION CONTACT
+===================================================== -->
+
+<section class="contact-section">
+
+    <div class="section-container contact-grid">
+
+
+        <!-- =================================================
+             INFORMATIONS
+        ================================================== -->
+
+        <div class="contact-info">
+
+            <span class="section-label">
+                CONTACTEZ-NOUS
+            </span>
+
+            <h2>
+                NOUS SOMMES<br>
+                <span>
+                    À VOTRE ÉCOUTE.
+                </span>
+            </h2>
+
+            <p class="contact-intro">
+                Besoin d'informations sur un produit ?
+                Une question concernant votre commande ?
+                N'hésitez pas à nous écrire.
+                Notre équipe vous répondra dans les meilleurs délais.
+            </p>
+
+
+            <!-- ADRESSE -->
+
+            <div class="info-item">
+
+                <div class="info-icon">
+
+                    <i class="fa-solid fa-location-dot"></i>
+
+                </div>
+
+                <div>
+
+                    <span>
+                        NOTRE ADRESSE
+                    </span>
+
+                    <strong>
+                        Abidjan, Côte d'Ivoire
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- TELEPHONE -->
+
+            <div class="info-item">
+
+                <div class="info-icon">
+
+                    <i class="fa-solid fa-phone"></i>
+
+                </div>
+
+                <div>
+
+                    <span>
+                        TÉLÉPHONE
+                    </span>
+
+                    <strong>
+                        +225 05 75 77 32 45
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- EMAIL -->
+
+            <div class="info-item">
+
+                <div class="info-icon">
+
+                    <i class="fa-solid fa-envelope"></i>
+
+                </div>
+
+                <div>
+
+                    <span>
+                        EMAIL
+                    </span>
+
+                    <strong>
+                        contact@lecoindesaccessoires.com
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- HORAIRES -->
+
+            <div class="info-item">
+
+                <div class="info-icon">
+
+                    <i class="fa-solid fa-clock"></i>
+
+                </div>
+
+                <div>
+
+                    <span>
+                        HORAIRES
+                    </span>
+
+                    <strong>
+                        Lundi — Samedi : 08h00 — 19h00
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- RESEAUX SOCIAUX -->
+
+            <div class="contact-social">
+
+                <span>
+                    SUIVEZ-NOUS
+                </span>
+
+                <div class="social-links">
+
+                    <a
+                        href="https://www.instagram.com/lecoindesaccesoires"
+                        aria-label="Instagram"
+                    >
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+
+                    <a
+                        href="https://www.tiktok.com/@lecoinsdesaccessoires?_r=1&_t=ZS-9AJ2ov5w6P0"
+                        aria-label="TikTok"
+                    >
+                        <i class="fa-brands fa-tiktok"></i>
+                    </a>
+
+                    <a
+                        href="#"
+                        aria-label="Facebook"
+                    >
+                        <i class="fa-brands fa-facebook-f"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             FORMULAIRE WHATSAPP
+        ================================================== -->
+
+        <div class="contact-form-card">
+
+
+            <div class="form-header">
+
+                <span class="section-label">
+                    MESSAGE
+                </span>
+
+                <h3>
+                    ENVOYEZ-NOUS<br>
+                    <span>
+                        UN MESSAGE.
+                    </span>
+                </h3>
+
+                <p>
+                    Remplissez le formulaire ci-dessous.
+                    Votre message sera préparé automatiquement
+                    dans WhatsApp.
+                </p>
+
+            </div>
+
+
+            <!-- FORMULAIRE -->
+
+            <form id="whatsappForm">
+
+
+                <!-- NOM -->
+
+                <div class="form-group">
+
+                    <label for="name">
+                        NOM COMPLET
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <i class="fa-regular fa-user"></i>
+
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            placeholder="Votre nom complet"
+                            autocomplete="name"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <div class="form-group">
+
+                    <label for="email">
+                        ADRESSE E-MAIL
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <i class="fa-regular fa-envelope"></i>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="votre@email.com"
+                            autocomplete="email"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- TELEPHONE -->
+
+                <div class="form-group">
+
+                    <label for="phone">
+                        TÉLÉPHONE
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <i class="fa-solid fa-phone"></i>
+
+                        <input
+                            type="tel"
+                            id="phone"
+                            name="phone"
+                            placeholder="+225 XX XX XX XX XX"
+                            autocomplete="tel"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- SUJET -->
+
+                <div class="form-group">
+
+                    <label for="subject">
+                        SUJET
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <i class="fa-regular fa-comment"></i>
+
+                        <select
+                            id="subject"
+                            name="subject"
+                            required
+                        >
+
+                            <option value="">
+                                Choisissez un sujet
+                            </option>
+
+                            <option value="Ma commande">
+                                Ma commande
+                            </option>
+
+                            <option value="Question sur un produit">
+                                Question sur un produit
+                            </option>
+
+                            <option value="Livraison">
+                                Livraison
+                            </option>
+
+                            <option value="Retour / Échange">
+                                Retour / Échange
+                            </option>
+
+                            <option value="Autre demande">
+                                Autre demande
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <!-- MESSAGE -->
+
+                <div class="form-group">
+
+                    <label for="message">
+                        VOTRE MESSAGE
+                    </label>
+
+                    <div class="textarea-wrapper">
+
+                        <i class="fa-regular fa-message"></i>
+
+                        <textarea
+                            id="message"
+                            name="message"
+                            rows="6"
+                            placeholder="Écrivez votre message..."
+                            required
+                        ></textarea>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     BOUTON WHATSAPP
+                ================================================== -->
+
+                <button
+                    type="submit"
+                    class="submit-button"
+                >
+
+                    <span>
+                        ENVOYER LE MESSAGE
+                    </span>
+
+                    <i class="fa-brands fa-whatsapp"></i>
+
+                </button>
+
+
+                <div class="whatsapp-notice">
+
+                    <i class="fa-brands fa-whatsapp"></i>
+
+                    <span>
+                        Votre message sera préparé
+                        automatiquement dans WhatsApp.
+                    </span>
+
+                </div>
+
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     BANNER
+===================================================== -->
+
+<section class="contact-banner">
+
+    <div class="banner-container">
+
+        <div class="banner-content">
+
+            <span class="section-label">
+                LE COIN DES ACCESSOIRES
+            </span>
+
+            <h2>
+                VOTRE STYLE.<br>
+                <span>
+                    NOTRE PASSION.
+                </span>
+            </h2>
+
+            <p>
+                Une question ? Une envie ?
+                Nous sommes là pour vous accompagner.
+            </p>
+
+        </div>
+
+        <div class="banner-decoration">
+
+            <span>
+                LCDA
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     FAQ
+===================================================== -->
+
+<section class="faq-section">
+
+    <div class="section-container">
+
+
+        <div class="section-heading">
+
+            <span class="section-label">
+                QUESTIONS FRÉQUENTES
+            </span>
+
+            <h2>
+                BESOIN DE<br>
+                <span>
+                    RÉPONSES ?
+                </span>
+            </h2>
+
+            <p>
+                Retrouvez rapidement les réponses aux questions
+                les plus fréquentes de nos clients.
+            </p>
+
+        </div>
+
+
+        <div class="faq-grid">
+
+
+            <!-- FAQ 01 -->
+
+            <article class="faq-card">
+
+                <div class="faq-number">
+                    01
+                </div>
+
+                <div class="faq-icon">
+
+                    <i class="fa-solid fa-truck-fast"></i>
+
+                </div>
+
+                <h3>
+                    Quels sont vos délais de livraison ?
+                </h3>
+
+                <p>
+                    Les délais peuvent varier selon votre
+                    localisation et le produit commandé.
+                    Contactez-nous pour plus d'informations.
+                </p>
+
+                <button
+                    class="faq-link"
+                    type="button"
+                >
+                    EN SAVOIR PLUS
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </button>
+
+            </article>
+
+
+            <!-- FAQ 02 -->
+
+            <article class="faq-card">
+
+                <div class="faq-number">
+                    02
+                </div>
+
+                <div class="faq-icon">
+
+                    <i class="fa-solid fa-cart-shopping"></i>
+
+                </div>
+
+                <h3>
+                    Comment passer une commande ?
+                </h3>
+
+                <p>
+                    Sélectionnez votre produit,
+                    ajoutez-le au panier puis suivez
+                    les étapes de commande.
+                </p>
+
+                <button
+                    class="faq-link"
+                    type="button"
+                >
+                    EN SAVOIR PLUS
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </button>
+
+            </article>
+
+
+            <!-- FAQ 03 -->
+
+            <article class="faq-card">
+
+                <div class="faq-number">
+                    03
+                </div>
+
+                <div class="faq-icon">
+
+                    <i class="fa-solid fa-rotate-left"></i>
+
+                </div>
+
+                <h3>
+                    Puis-je retourner un produit ?
+                </h3>
+
+                <p>
+                    Pour connaître les conditions de retour
+                    ou d'échange, contactez notre équipe.
+                </p>
+
+                <button
+                    class="faq-link"
+                    type="button"
+                >
+                    EN SAVOIR PLUS
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </button>
+
+            </article>
+
+
+            <!-- FAQ 04 -->
+
+            <article class="faq-card">
+
+                <div class="faq-number">
+                    04
+                </div>
+
+                <div class="faq-icon">
+
+                    <i class="fa-solid fa-headset"></i>
+
+                </div>
+
+                <h3>
+                    Comment vous contacter rapidement ?
+                </h3>
+
+                <p>
+                    Vous pouvez utiliser le formulaire ci-dessus
+                    ou nous contacter directement par téléphone.
+                </p>
+
+                <button
+                    class="faq-link"
+                    type="button"
+                >
+                    CONTACTER
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </button>
+
+            </article>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     JAVASCRIPT WHATSAPP
+===================================================== -->
+
+{% endblock %}
+
+
+{% block extra_js %}
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const whatsappForm =
+        document.getElementById("whatsappForm");
+
+
+    if (!whatsappForm) {
+
+        console.error(
+            "Le formulaire WhatsApp est introuvable."
+        );
+
+        return;
+    }
+
+
+    whatsappForm.addEventListener(
+        "submit",
+        function (event) {
+
+            event.preventDefault();
+
+
+            /*
+            =====================================================
+            NUMÉRO WHATSAPP DU PROPRIÉTAIRE
+
+            Numéro fourni :
+            +225 05 75 77 32 45
+
+            Format WhatsApp :
+            2250575773245
+
+            PAS DE +
+            PAS D'ESPACE
+            PAS DE TIRET
+            =====================================================
+            */
+
+            const whatsappNumber =
+                "2250575773245";
+
+
+            // =================================================
+            // RÉCUPÉRATION DES CHAMPS
+            // =================================================
+
+            const name =
+                document
+                    .getElementById("name")
+                    .value
+                    .trim();
+
+
+            const email =
+                document
+                    .getElementById("email")
+                    .value
+                    .trim();
+
+
+            const phone =
+                document
+                    .getElementById("phone")
+                    .value
+                    .trim();
+
+
+            const subject =
+                document
+                    .getElementById("subject")
+                    .value
+                    .trim();
+
+
+            const message =
+                document
+                    .getElementById("message")
+                    .value
+                    .trim();
+
+
+            // =================================================
+            // VALIDATION
+            // =================================================
+
+            if (
+                !name ||
+                !email ||
+                !subject ||
+                !message
+            ) {
+
+                alert(
+                    "Veuillez remplir tous les champs obligatoires."
+                );
+
+                return;
+            }
+
+
+            // =================================================
+            // MESSAGE WHATSAPP
+            // =================================================
+
+            const whatsappMessage =
+`Bonjour LE COIN DES ACCESSOIRES 👋
+
+Je vous contacte depuis votre boutique en ligne.
+
+━━━━━━━━━━━━━━━━━━
+
+ Nom : ${name}
+
+ Email : ${email}
+
+ Téléphone : ${phone || "Non renseigné"}
+
+ Sujet : ${subject}
+
+━━━━━━━━━━━━━━━━━━
+
+ Message :
+
+${message}
+
+━━━━━━━━━━━━━━━━━━
+
+Merci.`;
+
+
+            // =================================================
+            // ENCODAGE DU MESSAGE
+            // =================================================
+
+            const encodedMessage =
+                encodeURIComponent(
+                    whatsappMessage
+                );
+
+
+            // =================================================
+            // CONSTRUCTION DU LIEN
+            // =================================================
+
+            const whatsappURL =
+                "https://wa.me/" +
+                whatsappNumber +
+                "?text=" +
+                encodedMessage;
+
+
+            // =================================================
+            // DEBUG
+            // =================================================
+
+            console.log(
+                "Numéro WhatsApp :",
+                whatsappNumber
+            );
+
+            console.log(
+                "Message WhatsApp :",
+                whatsappMessage
+            );
+
+            console.log(
+                "URL WhatsApp :",
+                whatsappURL
+            );
+
+
+            // =================================================
+            // REDIRECTION WHATSAPP
+            // =================================================
+
+            window.location.href =
+                whatsappURL;
+
+        }
+    );
+
+});
+
+</script>
+
+{% endblock %}

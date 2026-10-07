@@ -333,30 +333,37 @@
 
     <div class="flex items-center w-fit border border-gray-200 rounded-xl overflow-hidden">
 
-        <button
-            type="button"
-            class="w-12 h-12 bg-gray-50 hover:bg-gray-100 text-xl transition">
+    <!-- MOINS -->
+    <button
+    type="button"
+    id="decreaseQty"
+    hx-post="{% url 'decrease_quantity' product.id %}"
+    hx-swap="none"
+    class="w-12 h-12 bg-gray-50 hover:bg-gray-100 text-xl transition">
 
-            −
+    −
 
-        </button>
+</button>
+    <!-- QUANTITÉ -->
+    <span
+    id="productQty"
+    class="w-14 text-center font-bold text-gray-900">
+    {{ current_quantity }}
+</span>
 
-        <span
-            class="w-14 text-center font-bold text-gray-900">
+    <!-- PLUS -->
+    <button
+    type="button"
+    id="increaseQty"
+    hx-post="{% url 'add_to_cart' product.id %}"
+    hx-swap="none"
+    class="w-12 h-12 bg-gray-50 hover:bg-gray-100 text-xl transition">
 
-            1
+    +
 
-        </span>
+</button>
 
-        <button
-            type="button"
-            class="w-12 h-12 bg-gray-50 hover:bg-gray-100 text-xl transition">
-
-            +
-
-        </button>
-
-    </div>
+</div>
 
 </div>
 
@@ -457,30 +464,54 @@
 
 </div>
 
-<!-- ========================================= -->
+<<!-- ========================================= -->
 <!-- ACTIONS SECONDAIRES -->
 <!-- ========================================= -->
 
-<div class="grid grid-cols-2 gap-4 mt-5">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mt-5">
 
+    <!-- FAVORIS -->
     <button
-        class="h-14 rounded-2xl border border-gray-200 bg-white hover:border-[#D4AF37] hover:text-[#D4AF37] transition flex items-center justify-center gap-2">
+        type="button"
+        class="w-full min-w-0 h-14 px-4 rounded-2xl
+               border border-gray-200
+               bg-white
+               hover:border-[#D4AF37]
+               hover:text-[#D4AF37]
+               transition
+               flex items-center justify-center
+               gap-2">
 
-        <i class="far fa-heart"></i>
+        <i class="far fa-heart flex-shrink-0"></i>
 
-        Ajouter aux favoris
+        <span class="truncate">
+            Ajouter aux favoris
+        </span>
 
     </button>
 
-    <button
-        class="h-14 rounded-2xl border border-gray-200 bg-white hover:border-[#D4AF37] hover:text-[#D4AF37] transition flex items-center justify-center gap-2">
 
-        <i class="fas fa-share-alt"></i>
+    <!-- PARTAGER SUR WHATSAPP -->
+<a
+    href="https://wa.me/?text={{ '🛍️ Découvrez ce produit sur Le Coin des Accessoires !'|urlencode }}%0A%0A{{ product.title|urlencode }}%0A💰 {{ product.price|urlencode }} FCFA%0A%0A🔗 {{ request.scheme }}://{{ request.get_host }}{% url 'detail' product.id %}"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="w-full min-w-0 h-14 px-4 rounded-2xl
+           border border-gray-200
+           bg-white
+           hover:border-[#D4AF37]
+           hover:text-[#D4AF37]
+           transition
+           flex items-center justify-center
+           gap-2">
 
-        Partager
+    <i class="fab fa-whatsapp flex-shrink-0 text-green-500"></i>
 
-    </button>
+    <span class="truncate">
+        Partager sur WhatsApp
+    </span>
 
+</a>
 </div>
 
 <!-- ========================================= -->
@@ -580,5 +611,59 @@
 </div>
 
 </section>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const decreaseBtn = document.getElementById("decreaseQty");
+    const increaseBtn = document.getElementById("increaseQty");
+    const quantityDisplay = document.getElementById("productQty");
+
+    if (!decreaseBtn || !increaseBtn || !quantityDisplay) {
+        return;
+    }
+
+    // Quantité réelle du panier
+    let quantity = {{ current_quantity|default:0 }};
+
+    // Stock maximum
+    const maxStock = {{ product.stock|default:0 }};
+
+    // =========================================
+    // DIMINUER
+    // =========================================
+
+    decreaseBtn.addEventListener("click", function () {
+
+        if (quantity > 0) {
+
+            quantity--;
+
+            quantityDisplay.textContent = quantity;
+
+        }
+
+    });
+
+
+    // =========================================
+    // AUGMENTER
+    // =========================================
+
+    increaseBtn.addEventListener("click", function () {
+
+        if (quantity < maxStock) {
+
+            quantity++;
+
+            quantityDisplay.textContent = quantity;
+
+        }
+
+    });
+
+});
+</script>
 
 {% endblock %}

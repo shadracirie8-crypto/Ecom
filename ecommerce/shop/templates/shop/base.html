@@ -145,14 +145,14 @@
 
                 </a>
 
-                <a href="#"
+                <a href="{% url 'apropos' %}"
                    class="text-white hover:text-[#D4AF37] font-medium transition duration-300">
 
                     À propos
 
                 </a>
 
-                <a href="#"
+                <a href="{% url 'contact' %}"
                    class="text-white hover:text-[#D4AF37] font-medium transition duration-300">
 
                     Contact
@@ -279,14 +279,35 @@
 
             </div>
 
-            <!-- BOUTON MENU MOBILE -->
+            <!-- ACTIONS MOBILE -->
+<div class="lg:hidden flex items-center gap-4">
 
-            <button id="mobileMenuBtn"
-                    class="lg:hidden text-white text-3xl">
+    <!-- PANIER MOBILE -->
+    <a href="{% url 'cart_detail' %}"
+       class="relative text-white hover:text-[#D4AF37] transition">
 
-                <i class="fas fa-bars"></i>
+        <i class="fas fa-shopping-bag text-2xl"></i>
 
-            </button>
+        <span id="cart-count-mobile"
+              class="absolute -top-2 -right-3 bg-[#D4AF37] text-black text-[10px] font-bold rounded-full w-5 h-5 flex items-center justify-center"
+              hx-get="{% url 'get_cart_count' %}"
+              hx-trigger="load, cartUpdated from:body"
+              hx-swap="innerHTML">
+            0
+        </span>
+
+    </a>
+
+    <!-- MENU MOBILE -->
+    <button id="mobileMenuBtn"
+            type="button"
+            class="text-white text-3xl">
+
+        <i class="fas fa-bars"></i>
+
+    </button>
+
+</div>
 
         </div>
 
@@ -313,14 +334,14 @@
 
             </a>
 
-            <a href="#"
+            <a href="{% url 'apropos' %}"
                class="text-white hover:text-[#D4AF37]">
 
                 À propos
 
             </a>
 
-            <a href="#"
+            <a href="{% url 'contact' %}"
                class="text-white hover:text-[#D4AF37]">
 
                 Contact
@@ -503,7 +524,7 @@
 
                     <li>
 
-                        <a href="#">
+                        <a href="{% url 'apropos' %}">
 
                             À propos
 
@@ -513,7 +534,7 @@
 
                     <li>
 
-                        <a href="#">
+                        <a href="{% url 'contact' %}">
 
                             Contact
 

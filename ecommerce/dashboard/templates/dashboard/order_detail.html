@@ -2,20 +2,24 @@
 
 {% block content %}
 
-<div class="space-y-8">
+<div class="space-y-6 sm:space-y-8">
 
+
+    <!-- ========================================================= -->
     <!-- HEADER -->
-    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+    <!-- ========================================================= -->
 
-        <div>
+    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5 lg:gap-6">
 
-            <h1 class="text-4xl font-black text-gray-900">
+        <div class="min-w-0">
+
+            <h1 class="text-2xl sm:text-4xl font-black text-gray-900 break-words">
 
                 Commande #{{ order.id }}
 
             </h1>
 
-            <p class="text-gray-400 mt-2">
+            <p class="text-gray-400 mt-2 text-sm sm:text-base">
 
                 Détails complets de la commande client.
 
@@ -23,12 +27,14 @@
 
         </div>
 
+
         <!-- STATUS -->
-        <div>
+
+        <div class="flex-shrink-0">
 
             {% if order.status == 'RECU' %}
 
-            <span class="px-6 py-3 rounded-2xl bg-yellow-100 text-yellow-700 font-black uppercase">
+            <span class="inline-flex items-center px-5 sm:px-6 py-3 rounded-2xl bg-yellow-100 text-yellow-700 font-black uppercase text-xs sm:text-sm">
 
                 Reçue
 
@@ -36,7 +42,7 @@
 
             {% elif order.status == 'VALIDE' %}
 
-            <span class="px-6 py-3 rounded-2xl bg-blue-100 text-blue-700 font-black uppercase">
+            <span class="inline-flex items-center px-5 sm:px-6 py-3 rounded-2xl bg-blue-100 text-blue-700 font-black uppercase text-xs sm:text-sm">
 
                 Validée
 
@@ -44,7 +50,7 @@
 
             {% elif order.status == 'EN_COURS' %}
 
-            <span class="px-6 py-3 rounded-2xl bg-yellow-100 text-yellow-700 font-black uppercase">
+            <span class="inline-flex items-center px-5 sm:px-6 py-3 rounded-2xl bg-yellow-100 text-yellow-700 font-black uppercase text-xs sm:text-sm">
 
                 En Livraison
 
@@ -52,7 +58,7 @@
 
             {% elif order.status == 'LIVRE' %}
 
-            <span class="px-6 py-3 rounded-2xl bg-green-100 text-green-700 font-black uppercase">
+            <span class="inline-flex items-center px-5 sm:px-6 py-3 rounded-2xl bg-green-100 text-green-700 font-black uppercase text-xs sm:text-sm">
 
                 Livrée
 
@@ -60,7 +66,7 @@
 
             {% elif order.status == 'ANNULE' %}
 
-            <span class="px-6 py-3 rounded-2xl bg-red-100 text-red-700 font-black uppercase">
+            <span class="inline-flex items-center px-5 sm:px-6 py-3 rounded-2xl bg-red-100 text-red-700 font-black uppercase text-xs sm:text-sm">
 
                 Annulée
 
@@ -72,32 +78,47 @@
 
     </div>
 
-    <!-- GRID -->
-    <div class="grid grid-cols-1 xl:grid-cols-3 gap-8">
 
+
+    <!-- ========================================================= -->
+    <!-- GRID PRINCIPAL -->
+    <!-- ========================================================= -->
+
+    <div class="grid grid-cols-1 xl:grid-cols-3 gap-5 lg:gap-8">
+
+
+        <!-- ===================================================== -->
         <!-- LEFT -->
-        <div class="xl:col-span-2 space-y-8">
+        <!-- ===================================================== -->
 
+        <div class="xl:col-span-2 space-y-5 lg:space-y-8">
+
+
+            <!-- ================================================= -->
             <!-- CLIENT -->
-            <div class="bg-white rounded-[32px] border border-gray-100 shadow-sm p-8">
+            <!-- ================================================= -->
 
-                <h2 class="text-2xl font-black text-gray-900 mb-8">
+            <div class="bg-white rounded-[28px] sm:rounded-[32px] border border-gray-100 shadow-sm p-5 sm:p-8">
+
+                <h2 class="text-xl sm:text-2xl font-black text-gray-900 mb-6 sm:mb-8">
 
                     Informations Client
 
                 </h2>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-                    <div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6">
 
-                        <p class="text-sm text-gray-400 mb-2">
 
+                    <!-- NOM -->
+
+                    <div class="min-w-0">
+
+                        <p class="text-xs sm:text-sm text-gray-400 mb-2">
                             Nom complet
-
                         </p>
 
-                        <h3 class="font-bold text-gray-900 text-lg">
+                        <h3 class="font-bold text-gray-900 text-base sm:text-lg break-words">
 
                             {{ order.full_name }}
 
@@ -105,15 +126,16 @@
 
                     </div>
 
-                    <div>
 
-                        <p class="text-sm text-gray-400 mb-2">
+                    <!-- TELEPHONE -->
 
+                    <div class="min-w-0">
+
+                        <p class="text-xs sm:text-sm text-gray-400 mb-2">
                             Téléphone
-
                         </p>
 
-                        <h3 class="font-bold text-gray-900 text-lg">
+                        <h3 class="font-bold text-gray-900 text-base sm:text-lg break-words">
 
                             {{ order.phone }}
 
@@ -121,15 +143,16 @@
 
                     </div>
 
-                    <div>
 
-                        <p class="text-sm text-gray-400 mb-2">
+                    <!-- VILLE -->
 
+                    <div class="min-w-0">
+
+                        <p class="text-xs sm:text-sm text-gray-400 mb-2">
                             Ville
-
                         </p>
 
-                        <h3 class="font-bold text-gray-900 text-lg">
+                        <h3 class="font-bold text-gray-900 text-base sm:text-lg break-words">
 
                             {{ order.city }}
 
@@ -137,15 +160,16 @@
 
                     </div>
 
-                    <div>
 
-                        <p class="text-sm text-gray-400 mb-2">
+                    <!-- ADRESSE -->
 
+                    <div class="min-w-0">
+
+                        <p class="text-xs sm:text-sm text-gray-400 mb-2">
                             Adresse de livraison
-
                         </p>
 
-                        <h3 class="font-bold text-gray-900 text-lg">
+                        <h3 class="font-bold text-gray-900 text-base sm:text-lg break-words">
 
                             {{ order.address }}
 
@@ -157,12 +181,20 @@
 
             </div>
 
+
+
+            <!-- ================================================= -->
             <!-- ARTICLES -->
-            <div class="bg-white rounded-[32px] border border-gray-100 shadow-sm overflow-hidden">
+            <!-- ================================================= -->
 
-                <div class="p-8 border-b border-gray-100">
+            <div class="bg-white rounded-[28px] sm:rounded-[32px] border border-gray-100 shadow-sm overflow-hidden">
 
-                    <h2 class="text-2xl font-black text-gray-900">
+
+                <!-- HEADER -->
+
+                <div class="p-5 sm:p-8 border-b border-gray-100">
+
+                    <h2 class="text-xl sm:text-2xl font-black text-gray-900">
 
                         Produits Commandés
 
@@ -170,28 +202,40 @@
 
                 </div>
 
+
+                <!-- ITEMS -->
+
                 <div class="divide-y divide-gray-100">
 
                     {% for item in order.items.all %}
 
-                    <div class="p-6 flex items-center justify-between gap-6">
 
-                        <div class="flex items-center gap-5">
+                    <div class="p-4 sm:p-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 sm:gap-6">
+
+
+                        <!-- PRODUCT -->
+
+                        <div class="flex items-center gap-3 sm:gap-5 min-w-0">
+
 
                             {% if item.product.image %}
+
                             <img src="{{ item.product.image.url }}"
-                                 class="w-20 h-20 rounded-2xl object-cover">
+                                 alt="{{ item.product.title }}"
+                                 class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl object-cover flex-shrink-0">
+
                             {% endif %}
 
-                            <div>
 
-                                <h3 class="font-black text-gray-900 text-lg">
+                            <div class="min-w-0">
+
+                                <h3 class="font-black text-gray-900 text-base sm:text-lg break-words">
 
                                     {{ item.product.title }}
 
                                 </h3>
 
-                                <p class="text-gray-400 mt-1">
+                                <p class="text-gray-400 mt-1 text-sm">
 
                                     Quantité : {{ item.quantity }}
 
@@ -201,9 +245,16 @@
 
                         </div>
 
-                        <div>
 
-                            <h3 class="text-2xl font-black text-indigo-600">
+                        <!-- PRICE -->
+
+                        <div class="sm:text-right pl-[76px] sm:pl-0">
+
+                            <p class="text-xs text-gray-400 mb-1 sm:hidden">
+                                Prix
+                            </p>
+
+                            <h3 class="text-xl sm:text-2xl font-black text-indigo-600">
 
                                 {{ item.price }} FCFA
 
@@ -213,6 +264,7 @@
 
                     </div>
 
+
                     {% endfor %}
 
                 </div>
@@ -221,19 +273,28 @@
 
         </div>
 
+
+
+        <!-- ===================================================== -->
         <!-- RIGHT -->
-        <div class="space-y-8">
+        <!-- ===================================================== -->
 
+        <div class="space-y-5 lg:space-y-8">
+
+
+            <!-- ================================================= -->
             <!-- TOTAL -->
-            <div class="bg-gradient-to-br from-yellow-600 to-indigo-700 rounded-[32px] p-8 text-white shadow-xl shadow-indigo-600/20">
+            <!-- ================================================= -->
 
-                <p class="uppercase tracking-widest text-sm opacity-70">
+            <div class="bg-gradient-to-br from-yellow-600 to-indigo-700 rounded-[28px] sm:rounded-[32px] p-6 sm:p-8 text-white shadow-xl shadow-indigo-600/20">
+
+                <p class="uppercase tracking-widest text-xs sm:text-sm opacity-70">
 
                     Total Commande
 
                 </p>
 
-                <h2 class="text-5xl font-black mt-4">
+                <h2 class="text-4xl sm:text-5xl font-black mt-3 sm:mt-4 break-words">
 
                     {{ order.total_price }} FCFA
 
@@ -241,40 +302,66 @@
 
             </div>
 
-            <!-- ACTIONS -->
-            <div class="bg-white rounded-[32px] border border-gray-100 shadow-sm p-8">
 
-                <h2 class="text-2xl font-black text-gray-900 mb-6">
+
+            <!-- ================================================= -->
+            <!-- ACTIONS -->
+            <!-- ================================================= -->
+
+            <div class="bg-white rounded-[28px] sm:rounded-[32px] border border-gray-100 shadow-sm p-5 sm:p-8">
+
+                <h2 class="text-xl sm:text-2xl font-black text-gray-900 mb-5 sm:mb-6">
 
                     Actions
 
                 </h2>
 
-                <div class="space-y-4">
+
+                <div class="space-y-3 sm:space-y-4">
+
+
+                    <!-- VALIDER -->
 
                     <a href="{% url 'change_order_status' order.id 'VALIDE' %}"
-                       class="w-full h-14 rounded-2xl bg-blue-600 hover:bg-blue-700 text-white font-bold flex items-center justify-center transition-all duration-300">
+                       class="w-full min-h-[52px] sm:h-14 rounded-2xl bg-blue-600 hover:bg-blue-700 text-white font-bold flex items-center justify-center transition-all duration-300 text-sm sm:text-base px-4 text-center">
+
+                        <i class="fas fa-check mr-2"></i>
 
                         Valider Commande
 
                     </a>
 
+
+                    <!-- LIVRAISON -->
+
                     <a href="{% url 'change_order_status' order.id 'EN_COURS' %}"
-                       class="w-full h-14 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold flex items-center justify-center transition-all duration-300">
+                       class="w-full min-h-[52px] sm:h-14 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold flex items-center justify-center transition-all duration-300 text-sm sm:text-base px-4 text-center">
+
+                        <i class="fas fa-truck mr-2"></i>
 
                         Mettre en Livraison
 
                     </a>
 
+
+                    <!-- LIVREE -->
+
                     <a href="{% url 'change_order_status' order.id 'LIVRE' %}"
-                       class="w-full h-14 rounded-2xl bg-green-600 hover:bg-green-700 text-white font-bold flex items-center justify-center transition-all duration-300">
+                       class="w-full min-h-[52px] sm:h-14 rounded-2xl bg-green-600 hover:bg-green-700 text-white font-bold flex items-center justify-center transition-all duration-300 text-sm sm:text-base px-4 text-center">
+
+                        <i class="fas fa-check-double mr-2"></i>
 
                         Marquer Livrée
 
                     </a>
 
+
+                    <!-- ANNULER -->
+
                     <a href="{% url 'change_order_status' order.id 'ANNULE' %}"
-                       class="w-full h-14 rounded-2xl bg-red-600 hover:bg-red-700 text-white font-bold flex items-center justify-center transition-all duration-300">
+                       class="w-full min-h-[52px] sm:h-14 rounded-2xl bg-red-600 hover:bg-red-700 text-white font-bold flex items-center justify-center transition-all duration-300 text-sm sm:text-base px-4 text-center">
+
+                        <i class="fas fa-xmark mr-2"></i>
 
                         Annuler Commande
 

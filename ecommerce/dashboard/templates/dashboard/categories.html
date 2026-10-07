@@ -2,30 +2,38 @@
 
 {% block content %}
 
-<div class="space-y-8">
+<!-- ========================================================= -->
+<!-- CONTAINER -->
+<!-- ========================================================= -->
 
+<div class="space-y-6 sm:space-y-8">
+
+
+    <!-- ===================================================== -->
     <!-- HEADER -->
-    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+    <!-- ===================================================== -->
 
-        <div>
+    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5 lg:gap-6">
 
-            <h1 class="text-4xl font-black text-gray-900">
+        <div class="min-w-0">
 
+            <h1 class="text-3xl sm:text-4xl font-black text-gray-900">
                 Catégories
-
             </h1>
 
-            <p class="text-gray-400 mt-2">
-
+            <p class="text-gray-400 mt-2 text-sm sm:text-base">
                 Gérez les catégories de la boutique.
-
             </p>
 
         </div>
 
+
         <!-- BUTTON -->
+
         <button onclick="openCategoryModal()"
-                class="h-14 px-8 rounded-2xl bg-yellow-600 hover:bg-yellow-700 text-white font-bold shadow-xl shadow-yellow-600/20 transition-all duration-300 hover:scale-[1.02]">
+                class="w-full sm:w-auto h-12 sm:h-14 px-6 sm:px-8 rounded-2xl bg-yellow-600 hover:bg-yellow-700 text-white font-bold shadow-xl shadow-yellow-600/20 transition-all duration-300 hover:scale-[1.02]">
+
+            <i class="fas fa-plus mr-2"></i>
 
             Ajouter Catégorie
 
@@ -33,28 +41,38 @@
 
     </div>
 
-    <!-- TABLE -->
-    <div class="bg-white rounded-[32px] border border-gray-100 shadow-sm overflow-hidden">
 
+
+    <!-- ===================================================== -->
+    <!-- CARD -->
+    <!-- ===================================================== -->
+
+    <div class="bg-white rounded-[28px] sm:rounded-[32px] border border-gray-100 shadow-sm overflow-hidden">
+
+
+        <!-- ================================================= -->
         <!-- TOP -->
-        <div class="p-8 border-b border-gray-100">
+        <!-- ================================================= -->
 
-            <h2 class="text-2xl font-black text-gray-900">
+        <div class="p-5 sm:p-8 border-b border-gray-100">
 
+            <h2 class="text-xl sm:text-2xl font-black text-gray-900">
                 Liste des catégories
-
             </h2>
 
-            <p class="text-gray-400 mt-1">
-
+            <p class="text-gray-400 mt-1 text-sm">
                 {{ categories.count }} catégories disponibles
-
             </p>
 
         </div>
 
-        <!-- TABLE -->
-        <div class="overflow-x-auto">
+
+
+        <!-- ================================================= -->
+        <!-- DESKTOP TABLE -->
+        <!-- ================================================= -->
+
+        <div class="hidden md:block overflow-x-auto">
 
             <table class="w-full">
 
@@ -63,32 +81,25 @@
                     <tr>
 
                         <th class="px-6 py-5 text-left text-xs font-black uppercase tracking-wider text-gray-400">
-
                             Catégorie
-
                         </th>
 
                         <th class="px-6 py-5 text-left text-xs font-black uppercase tracking-wider text-gray-400">
-
                             Produits
-
                         </th>
 
                         <th class="px-6 py-5 text-left text-xs font-black uppercase tracking-wider text-gray-400">
-
                             Date
-
                         </th>
 
                         <th class="px-6 py-5 text-right text-xs font-black uppercase tracking-wider text-gray-400">
-
                             Actions
-
                         </th>
 
                     </tr>
 
                 </thead>
+
 
                 <tbody class="divide-y divide-gray-100">
 
@@ -96,12 +107,14 @@
 
                     <tr class="hover:bg-gray-50 transition-all duration-300">
 
+
                         <!-- CATEGORY -->
+
                         <td class="px-6 py-5">
 
                             <div class="flex items-center gap-4">
 
-                                <div class="w-14 h-14 rounded-2xl bg-yellow-50 flex items-center justify-center">
+                                <div class="w-14 h-14 rounded-2xl bg-yellow-50 flex items-center justify-center flex-shrink-0">
 
                                     <svg xmlns="http://www.w3.org/2000/svg"
                                          class="h-6 w-6 text-yellow-600"
@@ -118,9 +131,10 @@
 
                                 </div>
 
-                                <div>
 
-                                    <h3 class="font-black text-gray-900 text-lg">
+                                <div class="min-w-0">
+
+                                    <h3 class="font-black text-gray-900 text-lg truncate">
 
                                         {{ category.name }}
 
@@ -132,7 +146,10 @@
 
                         </td>
 
+
+
                         <!-- PRODUCTS -->
+
                         <td class="px-6 py-5">
 
                             <span class="font-bold text-yellow-600">
@@ -143,7 +160,10 @@
 
                         </td>
 
+
+
                         <!-- DATE -->
+
                         <td class="px-6 py-5">
 
                             <span class="text-gray-500">
@@ -154,13 +174,18 @@
 
                         </td>
 
+
+
                         <!-- ACTIONS -->
+
                         <td class="px-6 py-5">
 
                             <div class="flex items-center justify-end gap-3">
 
                                 <!-- EDIT -->
-                                <button class="w-11 h-11 rounded-2xl bg-yellow-50 hover:bg-yellow-100 flex items-center justify-center transition-all duration-300">
+
+                                <button type="button"
+                                        class="w-11 h-11 rounded-2xl bg-yellow-50 hover:bg-yellow-100 flex items-center justify-center transition-all duration-300">
 
                                     <svg xmlns="http://www.w3.org/2000/svg"
                                          class="h-5 w-5 text-yellow-600"
@@ -177,8 +202,11 @@
 
                                 </button>
 
+
                                 <!-- DELETE -->
-                                <button onclick="deleteCategory('{{ category.id }}')"
+
+                                <button type="button"
+                                        onclick="deleteCategory('{{ category.id }}')"
                                         class="w-11 h-11 rounded-2xl bg-red-50 hover:bg-red-100 flex items-center justify-center transition-all duration-300">
 
                                     <svg xmlns="http://www.w3.org/2000/svg"
@@ -201,6 +229,7 @@
                         </td>
 
                     </tr>
+
 
                     {% empty %}
 
@@ -229,15 +258,11 @@
                                 </div>
 
                                 <h3 class="text-2xl font-black text-gray-900">
-
                                     Aucune catégorie
-
                                 </h3>
 
                                 <p class="text-gray-400 mt-2">
-
                                     Commencez par ajouter une catégorie.
-
                                 </p>
 
                             </div>
@@ -254,43 +279,256 @@
 
         </div>
 
+
+
+        <!-- ================================================= -->
+        <!-- MOBILE CARDS -->
+        <!-- ================================================= -->
+
+        <div class="md:hidden p-4 sm:p-5 space-y-4">
+
+            {% for category in categories %}
+
+            <div class="border border-gray-100 rounded-2xl p-4 bg-white shadow-sm">
+
+
+                <!-- TOP -->
+
+                <div class="flex items-center gap-3">
+
+
+                    <!-- ICON -->
+
+                    <div class="w-12 h-12 rounded-xl bg-yellow-50 flex items-center justify-center flex-shrink-0">
+
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             class="h-5 w-5 text-yellow-600"
+                             fill="none"
+                             viewBox="0 0 24 24"
+                             stroke="currentColor">
+
+                            <path stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke-width="2"
+                                  d="M3 7l9 4 9-4-9-4-9 4zm0 0v10l9 4 9-4V7" />
+
+                        </svg>
+
+                    </div>
+
+
+                    <!-- NAME -->
+
+                    <div class="min-w-0 flex-1">
+
+                        <h3 class="font-black text-gray-900 text-base sm:text-lg truncate">
+
+                            {{ category.name }}
+
+                        </h3>
+
+                        <p class="text-xs text-gray-400 mt-1">
+
+                            Catégorie
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- INFOS -->
+
+                <div class="grid grid-cols-2 gap-3 mt-4">
+
+
+                    <!-- PRODUCTS -->
+
+                    <div class="bg-gray-50 rounded-xl p-3">
+
+                        <p class="text-[10px] uppercase tracking-wider font-bold text-gray-400">
+                            Produits
+                        </p>
+
+                        <p class="text-sm font-black text-yellow-600 mt-1">
+
+                            {{ category.categorie.count }}
+
+                        </p>
+
+                    </div>
+
+
+                    <!-- DATE -->
+
+                    <div class="bg-gray-50 rounded-xl p-3">
+
+                        <p class="text-[10px] uppercase tracking-wider font-bold text-gray-400">
+                            Date
+                        </p>
+
+                        <p class="text-sm font-semibold text-gray-700 mt-1">
+
+                            {{ category.date_added|date:"d M Y" }}
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- ACTIONS -->
+
+                <div class="flex items-center gap-3 mt-4 pt-4 border-t border-gray-100">
+
+
+                    <!-- EDIT -->
+
+                    <button type="button"
+                            class="flex-1 h-11 rounded-xl bg-yellow-50 hover:bg-yellow-100 text-yellow-600 font-bold flex items-center justify-center gap-2 transition">
+
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             class="h-5 w-5"
+                             fill="none"
+                             viewBox="0 0 24 24"
+                             stroke="currentColor">
+
+                            <path stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke-width="2"
+                                  d="M11 5h2m-1-1v2m-7 9l-4 4m0 0l4-4m-4 4h18" />
+
+                        </svg>
+
+                        Modifier
+
+                    </button>
+
+
+                    <!-- DELETE -->
+
+                    <button type="button"
+                            onclick="deleteCategory('{{ category.id }}')"
+                            class="flex-1 h-11 rounded-xl bg-red-50 hover:bg-red-100 text-red-600 font-bold flex items-center justify-center gap-2 transition">
+
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                             class="h-5 w-5"
+                             fill="none"
+                             viewBox="0 0 24 24"
+                             stroke="currentColor">
+
+                            <path stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke-width="2"
+                                  d="M6 18L18 6M6 6l12 12" />
+
+                        </svg>
+
+                        Supprimer
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            {% empty %}
+
+            <div class="py-14 text-center">
+
+                <div class="w-20 h-20 mx-auto rounded-full bg-yellow-50 flex items-center justify-center mb-5">
+
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         class="h-10 w-10 text-yellow-600"
+                         fill="none"
+                         viewBox="0 0 24 24"
+                         stroke="currentColor">
+
+                        <path stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M3 7l9 4 9-4-9-4-9 4zm0 0v10l9 4 9-4V7" />
+
+                    </svg>
+
+                </div>
+
+                <h3 class="text-xl font-black text-gray-900">
+                    Aucune catégorie
+                </h3>
+
+                <p class="text-sm text-gray-400 mt-2">
+                    Commencez par ajouter une catégorie.
+                </p>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
     </div>
 
 </div>
 
+
+
+<!-- ========================================================= -->
 <!-- MODAL -->
+<!-- ========================================================= -->
+
 <div id="categoryModal"
-     class="fixed inset-0 bg-black/40 hidden items-center justify-center z-50">
+     class="fixed inset-0 bg-black/40 hidden items-center justify-center z-50 p-4">
 
-    <div class="bg-white rounded-[32px] p-8 w-full max-w-lg">
 
-        <div class="flex items-center justify-between mb-8">
+    <div class="bg-white rounded-[28px] sm:rounded-[32px] p-5 sm:p-8 w-full max-w-lg max-h-[90vh] overflow-y-auto">
 
-            <h2 class="text-2xl font-black text-gray-900">
+
+        <!-- HEADER -->
+
+        <div class="flex items-center justify-between gap-4 mb-6 sm:mb-8">
+
+            <h2 class="text-xl sm:text-2xl font-black text-gray-900">
 
                 Nouvelle Catégorie
 
             </h2>
 
-            <button onclick="closeCategoryModal()"
-                    class="w-10 h-10 rounded-xl hover:bg-gray-100 flex items-center justify-center">
 
-                ✕
+            <button onclick="closeCategoryModal()"
+                    type="button"
+                    aria-label="Fermer"
+                    class="flex-shrink-0 w-10 h-10 rounded-xl hover:bg-gray-100 flex items-center justify-center text-gray-600">
+
+                <i class="fas fa-xmark"></i>
 
             </button>
 
         </div>
 
+
+
+        <!-- FORM -->
+
         <form method="POST">
 
             {% csrf_token %}
 
+
             <input type="text"
+                   name="name"
                    placeholder="Nom de la catégorie"
-                   class="w-full h-14 rounded-2xl border border-gray-200 bg-gray-50 px-5 outline-none focus:border-indigo-500">
+                   required
+                   class="w-full h-12 sm:h-14 rounded-2xl border border-gray-200 bg-gray-50 px-4 sm:px-5 outline-none focus:border-yellow-500 focus:ring-2 focus:ring-yellow-500/10">
+
 
             <button type="submit"
-                    class="w-full h-14 rounded-2xl bg-yellow-600 hover:bg-yellow-700 text-white font-bold mt-6 transition-all duration-300">
+                    class="w-full h-12 sm:h-14 rounded-2xl bg-yellow-600 hover:bg-yellow-700 text-white font-bold mt-5 sm:mt-6 transition-all duration-300">
 
                 Ajouter Catégorie
 
@@ -302,33 +540,79 @@
 
 </div>
 
+
+
+<!-- ========================================================= -->
+<!-- SCRIPT -->
+<!-- ========================================================= -->
+
 <script>
 
 function openCategoryModal() {
 
-    document
-        .getElementById('categoryModal')
-        .classList
-        .remove('hidden')
+    const modal = document.getElementById('categoryModal');
 
-    document
-        .getElementById('categoryModal')
-        .classList
-        .add('flex')
+    modal.classList.remove('hidden');
+
+    modal.classList.add('flex');
+
+    document.body.classList.add('overflow-hidden');
+
 }
+
 
 function closeCategoryModal() {
 
-    document
-        .getElementById('categoryModal')
-        .classList
-        .add('hidden')
+    const modal = document.getElementById('categoryModal');
 
-    document
-        .getElementById('categoryModal')
-        .classList
-        .remove('flex')
+    modal.classList.add('hidden');
+
+    modal.classList.remove('flex');
+
+    document.body.classList.remove('overflow-hidden');
+
 }
+
+
+/*
+==============================================================
+Fermer avec la touche ESC
+==============================================================
+*/
+
+document.addEventListener('keydown', function(event) {
+
+    if (event.key === 'Escape') {
+
+        closeCategoryModal();
+
+    }
+
+});
+
+
+/*
+==============================================================
+Fermer en cliquant sur l'overlay
+==============================================================
+*/
+
+document.getElementById('categoryModal').addEventListener('click', function(event) {
+
+    if (event.target === this) {
+
+        closeCategoryModal();
+
+    }
+
+});
+
+
+/*
+==============================================================
+SUPPRESSION
+==============================================================
+*/
 
 function deleteCategory(id) {
 
@@ -346,17 +630,28 @@ function deleteCategory(id) {
 
         cancelButtonColor: '#ef4444',
 
-        confirmButtonText: 'Oui supprimer'
+        confirmButtonText: 'Oui supprimer',
+
+        cancelButtonText: 'Annuler',
+
+        background: '#ffffff',
+
+        color: '#111827',
+
+        reverseButtons: true,
+
+        buttonsStyling: true
 
     }).then((result) => {
 
         if (result.isConfirmed) {
 
             window.location.href =
-                `/dashboard/categories/delete/${id}/`
+                `/dashboard/categories/delete/${id}/`;
+
         }
 
-    })
+    });
 
 }
 

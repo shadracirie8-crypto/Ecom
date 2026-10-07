@@ -2,18 +2,18 @@
 
 {% block content %}
 
-<div class="space-y-8">
+<div class="space-y-6 sm:space-y-8">
 
     <!-- HEADER -->
-    <div class="flex items-center justify-between">
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
 
         <div>
 
-            <h1 class="text-4xl font-black text-gray-900">
+            <h1 class="text-3xl sm:text-4xl font-black text-gray-900">
                 Utilisateurs
             </h1>
 
-            <p class="text-gray-400 mt-2">
+            <p class="text-gray-400 mt-2 text-sm sm:text-base">
                 Gérez les utilisateurs de la boutique.
             </p>
 
@@ -21,8 +21,13 @@
 
     </div>
 
-    <!-- TABLE -->
-    <div class="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
+
+    <!-- ========================================================= -->
+    <!-- DESKTOP / TABLET : TABLE -->
+    <!-- ========================================================= -->
+
+    <div class="hidden md:block bg-white rounded-3xl shadow-sm
+                border border-gray-100 overflow-hidden">
 
         <div class="overflow-x-auto">
 
@@ -32,25 +37,30 @@
 
                     <tr>
 
-                        <th class="px-6 py-5 text-left text-xs font-bold uppercase tracking-wider text-gray-500">
+                        <th class="px-6 py-5 text-left text-xs font-bold
+                                   uppercase tracking-wider text-gray-500">
                             ID
                         </th>
 
-                        <th class="px-6 py-5 text-left text-xs font-bold uppercase tracking-wider text-gray-500">
+                        <th class="px-6 py-5 text-left text-xs font-bold
+                                   uppercase tracking-wider text-gray-500">
                             Username
                         </th>
 
-                        <th class="px-6 py-5 text-left text-xs font-bold uppercase tracking-wider text-gray-500">
+                        <th class="px-6 py-5 text-left text-xs font-bold
+                                   uppercase tracking-wider text-gray-500">
                             Email
                         </th>
 
-                        <th class="px-6 py-5 text-left text-xs font-bold uppercase tracking-wider text-gray-500">
+                        <th class="px-6 py-5 text-left text-xs font-bold
+                                   uppercase tracking-wider text-gray-500">
                             Date inscription
                         </th>
 
                     </tr>
 
                 </thead>
+
 
                 <tbody class="divide-y divide-gray-100">
 
@@ -63,23 +73,26 @@
                             #{{ user.id }}
                         </td>
 
+
                         <!-- USERNAME -->
                         <td class="px-6 py-5">
 
                             <div class="flex items-center gap-3">
 
-                                <div class="w-11 h-11 rounded-2xl bg-indigo-100 flex items-center justify-center text-indigo-700 font-bold">
+                                <div class="w-11 h-11 rounded-2xl
+                                            bg-indigo-100
+                                            flex items-center justify-center
+                                            text-indigo-700 font-bold
+                                            flex-shrink-0">
 
                                     {{ user.username|first|upper }}
 
                                 </div>
 
-                                <div>
+                                <div class="min-w-0">
 
-                                    <p class="font-bold text-gray-900">
-
+                                    <p class="font-bold text-gray-900 truncate">
                                         {{ user.username }}
-
                                     </p>
 
                                 </div>
@@ -88,12 +101,14 @@
 
                         </td>
 
+
                         <!-- EMAIL -->
                         <td class="px-6 py-5 text-gray-600">
 
                             {{ user.email }}
 
                         </td>
+
 
                         <!-- DATE -->
                         <td class="px-6 py-5 text-gray-500">
@@ -103,6 +118,7 @@
                         </td>
 
                     </tr>
+
 
                     {% empty %}
 
@@ -124,6 +140,138 @@
             </table>
 
         </div>
+
+    </div>
+
+
+    <!-- ========================================================= -->
+    <!-- MOBILE : USER CARDS -->
+    <!-- ========================================================= -->
+
+    <div class="md:hidden bg-white rounded-2xl
+                shadow-sm border border-gray-100 overflow-hidden">
+
+        {% for user in users %}
+
+        <div class="p-4 sm:p-5 border-b border-gray-100 last:border-b-0">
+
+            <!-- USER HEADER -->
+            <div class="flex items-center gap-3">
+
+                <div class="w-12 h-12 rounded-2xl
+                            bg-indigo-100
+                            flex items-center justify-center
+                            text-indigo-700 font-bold
+                            flex-shrink-0">
+
+                    {{ user.username|first|upper }}
+
+                </div>
+
+
+                <div class="min-w-0 flex-1">
+
+                    <p class="font-bold text-gray-900 text-base
+                              truncate">
+
+                        {{ user.username }}
+
+                    </p>
+
+                    <p class="text-xs text-gray-400 mt-0.5
+                              truncate">
+
+                        ID #{{ user.id }}
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- USER INFORMATION -->
+            <div class="mt-4 space-y-3">
+
+                <!-- EMAIL -->
+                <div class="bg-gray-50 rounded-2xl p-3">
+
+                    <p class="text-[10px] uppercase tracking-wider
+                              font-bold text-gray-400 mb-1">
+
+                        Email
+
+                    </p>
+
+                    <p class="text-sm text-gray-700 break-all">
+
+                        {{ user.email }}
+
+                    </p>
+
+                </div>
+
+
+                <!-- DATE -->
+                <div class="flex items-center justify-between
+                            bg-gray-50 rounded-2xl p-3">
+
+                    <p class="text-[10px] uppercase tracking-wider
+                              font-bold text-gray-400">
+
+                        Date inscription
+
+                    </p>
+
+                    <p class="text-sm text-gray-600 font-medium">
+
+                        {{ user.date_joined|date:"d M Y" }}
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        {% empty %}
+
+        <!-- MOBILE EMPTY STATE -->
+        <div class="px-6 py-16 text-center">
+
+            <div class="w-20 h-20 rounded-full
+                        bg-indigo-50
+                        flex items-center justify-center
+                        mx-auto mb-5">
+
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     class="h-10 w-10 text-indigo-500"
+                     fill="none"
+                     viewBox="0 0 24 24"
+                     stroke="currentColor">
+
+                    <path stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2m14-11a4 4 0 10-8 0 4 4 0 008 0zm6 11v-2a4 4 0 00-3-3.87m-1-9a4 4 0 110 7.75" />
+
+                </svg>
+
+            </div>
+
+            <h3 class="text-lg font-black text-gray-900">
+                Aucun utilisateur
+            </h3>
+
+            <p class="text-gray-400 text-sm mt-2">
+                Aucun utilisateur trouvé.
+            </p>
+
+        </div>
+
+        {% endfor %}
 
     </div>
 

@@ -1,4 +1,5 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -9,9 +10,7 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>
-        ECO ADMIN
-    </title>
+    <title>ECO ADMIN</title>
 
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -29,384 +28,721 @@
 
     <style>
 
-        body{
-            font-family:'Inter',sans-serif;
-            background:#F6F4EF;
+        /* =========================================
+           BASE
+        ========================================= */
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #F6F4EF;
         }
 
-        ::-webkit-scrollbar{
-            width:8px;
+        ::-webkit-scrollbar {
+            width: 8px;
         }
 
-        ::-webkit-scrollbar-thumb{
-            background:#d6d3d1;
-            border-radius:999px;
+        ::-webkit-scrollbar-thumb {
+            background: #d6d3d1;
+            border-radius: 999px;
         }
 
-        ::-webkit-scrollbar-track{
-            background:transparent;
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+
+        /* =========================================
+           SIDEBAR MOBILE
+        ========================================= */
+
+        #adminSidebar {
+            transition: transform 0.3s ease;
+        }
+
+        #sidebarOverlay {
+            transition: opacity 0.3s ease;
+        }
+
+
+        /* =========================================
+           MOBILE
+        ========================================= */
+
+        @media (max-width: 1023px) {
+
+            /*
+             * Sidebar cachée par défaut
+             */
+            #adminSidebar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                width: 288px;
+                z-index: 50;
+
+                transform: translateX(-100%);
+
+                box-shadow: 10px 0 30px rgba(0, 0, 0, 0.25);
+            }
+
+            /*
+             * Sidebar ouverte
+             */
+            #adminSidebar.sidebar-open {
+                transform: translateX(0);
+            }
+
+            /*
+             * Overlay
+             */
+            #sidebarOverlay {
+                position: fixed;
+                inset: 0;
+
+                background: rgba(0, 0, 0, 0.5);
+
+                z-index: 40;
+
+                opacity: 0;
+                pointer-events: none;
+            }
+
+            #sidebarOverlay.overlay-visible {
+                opacity: 1;
+                pointer-events: auto;
+            }
+
+            /*
+             * Main prend toute la largeur
+             */
+            #adminMain {
+                width: 100%;
+                min-width: 0;
+            }
+
+        }
+
+
+        /* =========================================
+           PETITS TELEPHONES
+        ========================================= */
+
+        @media (max-width: 640px) {
+
+            /*
+             * Topbar
+             */
+            #adminTopbar {
+                height: auto;
+                min-height: 72px;
+                padding: 12px 16px;
+            }
+
+            /*
+             * Titre
+             */
+            #pageTitle {
+                font-size: 20px;
+                line-height: 1.2;
+            }
+
+            #pageSubtitle {
+                display: none;
+            }
+
+            /*
+             * Actions
+             */
+            #topbarActions {
+                gap: 8px;
+            }
+
+            /*
+             * Bouton ajouter
+             */
+            #addProductButton {
+                width: 42px;
+                height: 42px;
+                padding: 0;
+                justify-content: center;
+            }
+
+            #addProductButton span {
+                display: none;
+            }
+
+            /*
+             * Notifications
+             */
+            #notificationButton {
+                width: 42px;
+                height: 42px;
+            }
+
+            /*
+             * Profil
+             */
+            #adminProfile {
+                padding-left: 8px;
+                border-left: 0;
+            }
+
+            #adminProfileInfo {
+                display: none;
+            }
+
+            #adminProfileImage {
+                width: 40px;
+                height: 40px;
+            }
+
+            /*
+             * Contenu
+             */
+            #adminContent {
+                padding: 16px;
+            }
+
+            /*
+             * Bouton menu
+             */
+            #mobileMenuButton {
+                width: 42px;
+                height: 42px;
+            }
+
+        }
+
+
+        /* =========================================
+           TRES PETITS TELEPHONES
+        ========================================= */
+
+        @media (max-width: 380px) {
+
+            #pageTitle {
+                font-size: 18px;
+            }
+
+            #adminTopbar {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+
+            #topbarActions {
+                gap: 5px;
+            }
+
+            #addProductButton,
+            #notificationButton,
+            #mobileMenuButton {
+                width: 38px;
+                height: 38px;
+            }
+
+            #adminProfileImage {
+                width: 36px;
+                height: 36px;
+            }
+
+            #adminContent {
+                padding: 12px;
+            }
+
         }
 
     </style>
 
 </head>
 
+
 <body class="min-h-screen overflow-x-hidden">
 
-    <!-- =============================== -->
-    <!-- LAYOUT -->
-    <!-- =============================== -->
 
-    <div class="flex min-h-screen">
+<!-- ========================================================= -->
+<!-- OVERLAY MOBILE -->
+<!-- ========================================================= -->
 
-        <!-- =============================== -->
-        <!-- SIDEBAR -->
-        <!-- =============================== -->
-
-        <aside class="w-72 bg-[#111111] text-white flex flex-col shadow-2xl">
+<div id="sidebarOverlay"></div>
 
 
-                <!-- ========================================= -->
-    <!-- LOGO -->
-    <!-- ========================================= -->
+<!-- ========================================================= -->
+<!-- LAYOUT -->
+<!-- ========================================================= -->
 
-    <div class="h-24 flex items-center justify-center border-b border-white/10">
+<div class="flex min-h-screen">
 
-        <a href="{% url 'dashboard' %}"
-           class="flex items-center gap-3">
 
-            <div class="w-12 h-12 rounded-xl bg-[#D4AF37] flex items-center justify-center">
+    <!-- ===================================================== -->
+    <!-- SIDEBAR -->
+    <!-- ===================================================== -->
 
-                <i class="fas fa-gem text-black text-xl"></i>
+    <aside id="adminSidebar"
+           class="w-72 bg-[#111111] text-white flex flex-col shadow-2xl">
+
+
+        <!-- ========================================= -->
+        <!-- LOGO -->
+        <!-- ========================================= -->
+
+        <div class="h-24 flex items-center justify-center border-b border-white/10">
+
+            <div class="flex items-center justify-between w-full px-6">
+
+                <a href="{% url 'dashboard' %}"
+                   class="flex items-center gap-3">
+
+                    <div class="w-12 h-12 rounded-xl bg-[#D4AF37] flex items-center justify-center">
+
+                        <i class="fas fa-gem text-black text-xl"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h2 class="text-xl font-extrabold tracking-wide">
+                            ECO
+                        </h2>
+
+                        <p class="text-xs uppercase tracking-[4px] text-gray-400">
+                            ADMIN
+                        </p>
+
+                    </div>
+
+                </a>
+
+
+                <!-- Fermer sidebar mobile -->
+
+                <button id="closeSidebarButton"
+                        class="lg:hidden w-10 h-10 rounded-xl bg-white/10 hover:bg-white/20 transition">
+
+                    <i class="fas fa-xmark"></i>
+
+                </button>
 
             </div>
 
-            <div>
+        </div>
 
-                <h2 class="text-xl font-extrabold tracking-wide">
 
-                    ECO
+        <!-- ========================================= -->
+        <!-- MENU -->
+        <!-- ========================================= -->
 
-                </h2>
+        <nav class="flex-1 px-5 py-8 overflow-y-auto">
 
-                <p class="text-xs uppercase tracking-[4px] text-gray-400">
+            <p class="text-[11px] uppercase tracking-[3px] text-gray-500 mb-5">
+                Navigation
+            </p>
 
-                    ADMIN
 
-                </p>
+            <div class="space-y-2">
+
+
+                <!-- Dashboard -->
+
+                <a href="{% url 'dashboard' %}"
+                   class="flex items-center gap-4 px-4 py-3 rounded-xl bg-[#D4AF37] text-black font-semibold shadow-lg">
+
+                    <i class="fas fa-house w-5 text-center"></i>
+
+                    <span>
+                        Tableau de bord
+                    </span>
+
+                </a>
+
+
+                <!-- Produits -->
+
+                <a href="{% url 'dashboard_products' %}"
+                   class="flex items-center gap-4 px-4 py-3 rounded-xl text-gray-300 hover:bg-white/10 hover:text-white transition">
+
+                    <i class="fas fa-box-open w-5 text-center"></i>
+
+                    <span>
+                        Produits
+                    </span>
+
+                </a>
+
+
+                <!-- Catégories -->
+
+                <a href="{% url 'dashboard_categories' %}"
+                   class="flex items-center gap-4 px-4 py-3 rounded-xl text-gray-300 hover:bg-white/10 hover:text-white transition">
+
+                    <i class="fas fa-layer-group w-5 text-center"></i>
+
+                    <span>
+                        Catégories
+                    </span>
+
+                </a>
+
+
+                <!-- Commandes -->
+
+                <a href="{% url 'dashboard_orders' %}"
+                   class="flex items-center gap-4 px-4 py-3 rounded-xl text-gray-300 hover:bg-white/10 hover:text-white transition">
+
+                    <i class="fas fa-cart-shopping w-5 text-center"></i>
+
+                    <span>
+                        Commandes
+                    </span>
+
+                </a>
+
+
+                <!-- Clients -->
+
+                <a href="{% url 'dashboard_users' %}"
+                   class="flex items-center gap-4 px-4 py-3 rounded-xl text-gray-300 hover:bg-white/10 hover:text-white transition">
+
+                    <i class="fas fa-users w-5 text-center"></i>
+
+                    <span>
+                        Clients
+                    </span>
+
+                </a>
 
             </div>
 
-        </a>
+        </nav>
 
-    </div>
 
-    <!-- ========================================= -->
-    <!-- MENU -->
-    <!-- ========================================= -->
+        <!-- ========================================= -->
+        <!-- DECONNEXION -->
+        <!-- ========================================= -->
 
-    <nav class="flex-1 px-5 py-8">
+        <div class="p-5 border-t border-white/10">
 
-        <p class="text-[11px] uppercase tracking-[3px] text-gray-500 mb-5">
+            <a href="{% url 'logout' %}"
+               class="flex items-center justify-center gap-3 w-full py-3 rounded-xl bg-red-500/10 text-red-400 hover:bg-red-500 hover:text-white transition">
 
-            Navigation
-
-        </p>
-
-        <div class="space-y-2">
-
-            <!-- Dashboard -->
-
-            <a href="{% url 'dashboard' %}"
-               class="flex items-center gap-4 px-4 py-3 rounded-xl bg-[#D4AF37] text-black font-semibold shadow-lg">
-
-                <i class="fas fa-house w-5 text-center"></i>
+                <i class="fas fa-right-from-bracket"></i>
 
                 <span>
-
-                    Tableau de bord
-
-                </span>
-
-            </a>
-
-            <!-- Produits -->
-
-            <a href="{% url 'dashboard_products' %}"
-               class="flex items-center gap-4 px-4 py-3 rounded-xl text-gray-300 hover:bg-white/10 hover:text-white transition">
-
-                <i class="fas fa-box-open w-5 text-center"></i>
-
-                <span>
-
-                    Produits
-
-                </span>
-
-            </a>
-
-            <!-- Catégories -->
-
-            <a href="{% url 'dashboard_categories' %}"
-               class="flex items-center gap-4 px-4 py-3 rounded-xl text-gray-300 hover:bg-white/10 hover:text-white transition">
-
-                <i class="fas fa-layer-group w-5 text-center"></i>
-
-                <span>
-
-                    Catégories
-
-                </span>
-
-            </a>
-
-            <!-- Commandes -->
-
-            <a href="{% url 'dashboard_orders' %}"
-               class="flex items-center gap-4 px-4 py-3 rounded-xl text-gray-300 hover:bg-white/10 hover:text-white transition">
-
-                <i class="fas fa-cart-shopping w-5 text-center"></i>
-
-                <span>
-
-                    Commandes
-
-                </span>
-
-            </a>
-
-            <!-- Clients -->
-
-            <a href="{% url 'dashboard_users' %}"
-               class="flex items-center gap-4 px-4 py-3 rounded-xl text-gray-300 hover:bg-white/10 hover:text-white transition">
-
-                <i class="fas fa-users w-5 text-center"></i>
-
-                <span>
-
-                    Clients
-
+                    Déconnexion
                 </span>
 
             </a>
 
         </div>
 
-    </nav>
+    </aside>
 
-    <!-- ========================================= -->
-    <!-- DÉCONNEXION -->
-    <!-- ========================================= -->
 
-    <div class="p-5 border-t border-white/10">
 
-        <a href="{% url 'logout' %}"
-           class="flex items-center justify-center gap-3 w-full py-3 rounded-xl bg-red-500/10 text-red-400 hover:bg-red-500 hover:text-white transition">
+    <!-- ===================================================== -->
+    <!-- CONTENU PRINCIPAL -->
+    <!-- ===================================================== -->
 
-            <i class="fas fa-right-from-bracket"></i>
+    <main id="adminMain"
+          class="flex-1 flex flex-col overflow-hidden">
 
-            <span>
 
-                Déconnexion
+        <!-- ================================================= -->
+        <!-- TOPBAR -->
+        <!-- ================================================= -->
 
-            </span>
+        <header id="adminTopbar"
+                class="h-20 bg-white border-b border-gray-200 flex items-center justify-between px-8">
 
-        </a>
 
-    </div>
+            <!-- ============================================= -->
+            <!-- GAUCHE -->
+            <!-- ============================================= -->
 
-</aside>
+            <div class="flex items-center gap-3 min-w-0">
 
-<!-- ========================================= -->
-<!-- CONTENU PRINCIPAL -->
-<!-- ========================================= -->
 
-<main class="flex-1 flex flex-col overflow-hidden">
+                <!-- Menu mobile -->
 
-    <!-- ========================================= -->
-<!-- TOPBAR -->
-<!-- ========================================= -->
+                <button id="mobileMenuButton"
+                        class="lg:hidden flex-shrink-0 rounded-xl bg-gray-100 hover:bg-gray-200 transition flex items-center justify-center">
 
-<header class="h-20 bg-white border-b border-gray-200 flex items-center justify-between px-8">
+                    <i class="fas fa-bars text-gray-700"></i>
 
-    <!-- Titre -->
+                </button>
 
-    <div>
 
-        <h1 class="text-3xl font-bold text-gray-900">
+                <!-- Titre -->
 
-            Tableau de bord
+                <div class="min-w-0">
 
-        </h1>
+                    <h1 id="pageTitle"
+                        class="text-3xl font-bold text-gray-900 truncate">
 
-        <p class="text-sm text-gray-500 mt-1">
+                        Tableau de bord
 
-            Bienvenue dans votre espace d'administration.
+                    </h1>
 
-        </p>
+                    <p id="pageSubtitle"
+                       class="text-sm text-gray-500 mt-1">
 
-    </div>
+                        Bienvenue dans votre espace d'administration.
 
-    <!-- Actions -->
+                    </p>
 
-    <div class="flex items-center gap-5">
-
-        <!-- Recherche -->
-
-        <div class="hidden lg:flex items-center w-80 h-11 bg-gray-100 rounded-xl px-4">
-
-            <i class="fas fa-search text-gray-400 mr-3"></i>
-
-            <input
-                type="text"
-                placeholder="Rechercher..."
-                class="flex-1 bg-transparent outline-none text-sm">
-
-        </div>
-
-        <!-- Ajouter -->
-
-        <a href="{% url 'dashboard_products' %}"
-           class="flex items-center gap-2 bg-[#D4AF37] hover:bg-[#C59D2A] text-black font-semibold px-5 h-11 rounded-xl transition">
-
-            <i class="fas fa-plus"></i>
-
-            <span>
-
-                Ajouter un produit
-
-            </span>
-
-        </a>
-
-        <!-- Notifications -->
-
-        <button class="relative w-11 h-11 rounded-xl border border-gray-200 bg-white hover:bg-gray-50 transition">
-
-            <i class="far fa-bell text-gray-700"></i>
-
-            <span class="absolute top-1 right-1 w-2.5 h-2.5 rounded-full bg-red-500"></span>
-
-        </button>
-
-        <!-- Profil -->
-
-        <div class="flex items-center gap-3 pl-5 border-l border-gray-200">
-
-            <div class="w-11 h-11 rounded-full overflow-hidden border-2 border-[#D4AF37]">
-
-                <img
-                    src="{% static 'images/logo.png' %}"
-                    alt="Admin"
-                    class="w-full h-full object-cover">
+                </div>
 
             </div>
 
-            <div>
 
-                <h3 class="font-semibold text-sm text-gray-900">
 
-                    Administrateur
+            <!-- ============================================= -->
+            <!-- ACTIONS -->
+            <!-- ============================================= -->
 
-                </h3>
+            <div id="topbarActions"
+                 class="flex items-center gap-5 flex-shrink-0">
 
-                <p class="text-xs text-gray-500">
 
-                    Super Admin
+                <!-- Recherche -->
 
-                </p>
+                <div class="hidden lg:flex items-center w-80 h-11 bg-gray-100 rounded-xl px-4">
+
+                    <i class="fas fa-search text-gray-400 mr-3"></i>
+
+                    <input
+                        type="text"
+                        placeholder="Rechercher..."
+                        class="flex-1 bg-transparent outline-none text-sm">
+
+                </div>
+
+
+                <!-- Ajouter -->
+
+                <a id="addProductButton"
+                   href="{% url 'add_product' %}"
+                   class="flex items-center gap-2 bg-[#D4AF37] hover:bg-[#C59D2A] text-black font-semibold px-5 h-11 rounded-xl transition">
+
+                    <i class="fas fa-plus"></i>
+
+                    <span>
+                        Ajouter un produit
+                    </span>
+
+                </a>
+
+
+                <!-- Notifications -->
+
+                <button id="notificationButton"
+                        class="relative w-11 h-11 rounded-xl border border-gray-200 bg-white hover:bg-gray-50 transition">
+
+                    <i class="far fa-bell text-gray-700"></i>
+
+                    <span class="absolute top-1 right-1 w-2.5 h-2.5 rounded-full bg-red-500"></span>
+
+                </button>
+
+
+                <!-- Profil -->
+
+                <div id="adminProfile"
+                     class="flex items-center gap-3 pl-5 border-l border-gray-200">
+
+
+                    <div id="adminProfileImage"
+                         class="w-11 h-11 rounded-full overflow-hidden border-2 border-[#D4AF37]">
+
+                        <img
+                            src="{% static 'images/logo.png' %}"
+                            alt="Admin"
+                            class="w-full h-full object-cover">
+
+                    </div>
+
+
+                    <div id="adminProfileInfo">
+
+                        <h3 class="font-semibold text-sm text-gray-900">
+                            Administrateur
+                        </h3>
+
+                        <p class="text-xs text-gray-500">
+                            Super Admin
+                        </p>
+
+                    </div>
+
+                </div>
 
             </div>
 
+        </header>
+
+
+
+        <!-- ================================================= -->
+        <!-- CONTENU -->
+        <!-- ================================================= -->
+
+        <div id="adminContent"
+             class="flex-1 overflow-y-auto p-8 bg-[#F6F4EF]">
+
+
+            <!-- ============================================= -->
+            <!-- MESSAGES -->
+            <!-- ============================================= -->
+
+            {% if messages %}
+
+                {% for message in messages %}
+
+                    <script>
+
+                        Swal.fire({
+
+                            icon: "success",
+
+                            title: "{{ message }}",
+
+                            timer: 2200,
+
+                            showConfirmButton: false,
+
+                            background: "#ffffff",
+
+                            iconColor: "#D4AF37"
+
+                        });
+
+                    </script>
+
+                {% endfor %}
+
+            {% endif %}
+
+
+
+            <!-- ================================================= -->
+            <!-- CONTENU DE LA PAGE -->
+            <!-- ================================================= -->
+
+            {% block content %}
+
+            {% endblock %}
+
+
         </div>
 
-    </div>
-
-</header>
-
-<!-- ========================================= -->
-<!-- CONTENU -->
-<!-- ========================================= -->
-
-<div class="flex-1 overflow-y-auto p-8 bg-[#F6F4EF]">
-
-    <!-- Messages -->
-
-    {% if messages %}
-
-        {% for message in messages %}
-
-            <script>
-
-                Swal.fire({
-
-                    icon: "success",
-
-                    title: "{{ message }}",
-
-                    timer: 2200,
-
-                    showConfirmButton: false,
-
-                    background: "#ffffff",
-
-                    iconColor: "#D4AF37"
-
-                });
-
-            </script>
-
-        {% endfor %}
-
-    {% endif %}
-
-    {% block content %}
-
-    <!-- ========================================= -->
-<!-- CONTENU DE LA PAGE -->
-<!-- ========================================= -->
-
-<div class="flex-1 overflow-y-auto bg-[#F6F4EF] p-8">
-
-    <!-- Messages Django -->
-
-    {% if messages %}
-
-        {% for message in messages %}
-
-            <script>
-
-                Swal.fire({
-
-                    icon: "success",
-
-                    title: "{{ message }}",
-
-                    timer: 2200,
-
-                    showConfirmButton: false,
-
-                    background: "#ffffff",
-
-                    color: "#111827",
-
-                    iconColor: "#D4AF37"
-
-                });
-
-            </script>
-
-        {% endfor %}
-
-    {% endif %}
-
-    {% endblock %}
-
-</div>
 
     </main>
 
 </div>
+
+
+
+<!-- ========================================================= -->
+<!-- JAVASCRIPT MOBILE SIDEBAR -->
+<!-- ========================================================= -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const sidebar = document.getElementById("adminSidebar");
+
+    const overlay = document.getElementById("sidebarOverlay");
+
+    const openButton = document.getElementById("mobileMenuButton");
+
+    const closeButton = document.getElementById("closeSidebarButton");
+
+    const sidebarLinks = sidebar.querySelectorAll("a");
+
+
+    function openSidebar() {
+
+        sidebar.classList.add("sidebar-open");
+
+        overlay.classList.add("overlay-visible");
+
+        document.body.classList.add("overflow-hidden");
+
+    }
+
+
+    function closeSidebar() {
+
+        sidebar.classList.remove("sidebar-open");
+
+        overlay.classList.remove("overlay-visible");
+
+        document.body.classList.remove("overflow-hidden");
+
+    }
+
+
+    if (openButton) {
+
+        openButton.addEventListener("click", openSidebar);
+
+    }
+
+
+    if (closeButton) {
+
+        closeButton.addEventListener("click", closeSidebar);
+
+    }
+
+
+    if (overlay) {
+
+        overlay.addEventListener("click", closeSidebar);
+
+    }
+
+
+    /*
+     * Fermer automatiquement le menu
+     * après avoir choisi une page.
+     */
+
+    sidebarLinks.forEach(function (link) {
+
+        link.addEventListener("click", function () {
+
+            if (window.innerWidth < 1024) {
+
+                closeSidebar();
+
+            }
+
+        });
+
+    });
+
+
+    /*
+     * Si on repasse en desktop,
+     * on nettoie l'état mobile.
+     */
+
+    window.addEventListener("resize", function () {
+
+        if (window.innerWidth >= 1024) {
+
+            closeSidebar();
+
+        }
+
+    });
+
+});
+
+</script>
+
 
 </body>
 

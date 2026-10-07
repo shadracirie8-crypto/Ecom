@@ -2,65 +2,74 @@
 
 {% block content %}
 
+<!-- ========================================================= -->
 <!-- HEADER -->
-<div class="flex items-center justify-between mb-10">
+<!-- ========================================================= -->
 
-    <div>
+<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5 mb-8 lg:mb-10">
 
-        <h1 class="text-4xl font-black text-gray-900 tracking-tight">
+    <div class="min-w-0">
 
+        <h1 class="text-3xl sm:text-4xl font-black text-gray-900 tracking-tight">
             Dashboard
-
         </h1>
 
         <p class="text-gray-400 mt-2 text-sm">
-
             Vue globale de votre boutique ECO-SHOP.
-
         </p>
 
     </div>
 
-    <!-- BUTTON -->
-    <a href="{% url 'add_product' %}"
-       class="bg-yellow-600 hover:bg-yellow-700 text-white px-6 py-4 rounded-2xl font-semibold shadow-lg shadow-yellow-600/20 transition-all duration-300 hover:scale-105 inline-flex items-center justify-center">
 
-    Ajouter Produit
+    <!-- BUTTON -->
+
+    <a href="{% url 'add_product' %}"
+       class="w-full sm:w-auto bg-yellow-600 hover:bg-yellow-700 text-white px-6 py-4 rounded-2xl font-semibold shadow-lg shadow-yellow-600/20 transition-all duration-300 hover:scale-105 inline-flex items-center justify-center">
+
+        <i class="fas fa-plus mr-2"></i>
+
+        Ajouter Produit
 
     </a>
 
 </div>
 
-<!-- STATS -->
-<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8 mb-10">
 
+
+<!-- ========================================================= -->
+<!-- STATS -->
+<!-- ========================================================= -->
+
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 lg:gap-8 mb-8 lg:mb-10">
+
+
+    <!-- ===================================================== -->
     <!-- REVENUS -->
-    <div class="bg-gradient-to-br from-yellow-600 to-yellow-700 rounded-3xl p-8 text-white shadow-2xl shadow-yellow-600/20 relative overflow-hidden">
+    <!-- ===================================================== -->
+
+    <div class="bg-gradient-to-br from-yellow-600 to-yellow-700 rounded-3xl p-6 sm:p-8 text-white shadow-2xl shadow-yellow-600/20 relative overflow-hidden">
 
         <div class="absolute right-0 top-0 w-32 h-32 bg-white/10 rounded-full blur-3xl"></div>
 
-        <div class="flex items-center justify-between mb-10">
+        <div class="flex items-center justify-between mb-8 sm:mb-10">
 
-            <div>
+            <div class="min-w-0">
 
-                <p class="uppercase text-sm font-semibold tracking-widest text-yellow-100">
-
+                <p class="uppercase text-xs sm:text-sm font-semibold tracking-widest text-yellow-100">
                     Revenus
-
                 </p>
 
-                <h2 class="text-5xl font-black mt-4">
-
+                <h2 class="text-4xl sm:text-5xl font-black mt-3 sm:mt-4">
                     628K
-
                 </h2>
 
             </div>
 
-            <div class="w-16 h-16 rounded-2xl bg-white/10 flex items-center justify-center backdrop-blur-lg">
+
+            <div class="w-12 h-12 sm:w-16 sm:h-16 flex-shrink-0 rounded-2xl bg-white/10 flex items-center justify-center backdrop-blur-lg">
 
                 <svg xmlns="http://www.w3.org/2000/svg"
-                     class="h-8 w-8"
+                     class="h-6 w-6 sm:h-8 sm:w-8"
                      fill="none"
                      viewBox="0 0 24 24"
                      stroke="currentColor">
@@ -76,39 +85,40 @@
 
         </div>
 
+
         <p class="text-sm text-yellow-100">
-
             +12% ce mois-ci
-
         </p>
 
     </div>
 
+
+
+    <!-- ===================================================== -->
     <!-- PRODUITS -->
-    <div class="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+    <!-- ===================================================== -->
 
-        <div class="flex items-center justify-between mb-8">
+    <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
 
-            <div>
+        <div class="flex items-center justify-between mb-7 sm:mb-8">
 
-                <p class="uppercase text-sm text-gray-400 font-semibold tracking-widest">
+            <div class="min-w-0">
 
+                <p class="uppercase text-xs sm:text-sm text-gray-400 font-semibold tracking-widest">
                     Produits
-
                 </p>
 
-                <h2 class="text-5xl font-black text-gray-900 mt-4">
-
+                <h2 class="text-4xl sm:text-5xl font-black text-gray-900 mt-3 sm:mt-4">
                     {{ products_count }}
-
                 </h2>
 
             </div>
 
-            <div class="w-14 h-14 rounded-2xl bg-yellow-50 flex items-center justify-center">
+
+            <div class="w-12 h-12 sm:w-14 sm:h-14 flex-shrink-0 rounded-2xl bg-yellow-50 flex items-center justify-center">
 
                 <svg xmlns="http://www.w3.org/2000/svg"
-                     class="h-7 w-7 text-yellow-600"
+                     class="h-6 w-6 sm:h-7 sm:w-7 text-yellow-600"
                      fill="none"
                      viewBox="0 0 24 24"
                      stroke="currentColor">
@@ -124,39 +134,40 @@
 
         </div>
 
+
         <p class="text-sm text-green-500 font-semibold">
-
             Produits actifs
-
         </p>
 
     </div>
 
+
+
+    <!-- ===================================================== -->
     <!-- USERS -->
-    <div class="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+    <!-- ===================================================== -->
 
-        <div class="flex items-center justify-between mb-8">
+    <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
 
-            <div>
+        <div class="flex items-center justify-between mb-7 sm:mb-8">
 
-                <p class="uppercase text-sm text-gray-400 font-semibold tracking-widest">
+            <div class="min-w-0">
 
+                <p class="uppercase text-xs sm:text-sm text-gray-400 font-semibold tracking-widest">
                     Utilisateurs
-
                 </p>
 
-                <h2 class="text-5xl font-black text-gray-900 mt-4">
-
+                <h2 class="text-4xl sm:text-5xl font-black text-gray-900 mt-3 sm:mt-4">
                     {{ users_count }}
-
                 </h2>
 
             </div>
 
-            <div class="w-14 h-14 rounded-2xl bg-yellow-50 flex items-center justify-center">
+
+            <div class="w-12 h-12 sm:w-14 sm:h-14 flex-shrink-0 rounded-2xl bg-yellow-50 flex items-center justify-center">
 
                 <svg xmlns="http://www.w3.org/2000/svg"
-                     class="h-7 w-7 text-yellow-600"
+                     class="h-6 w-6 sm:h-7 sm:w-7 text-yellow-600"
                      fill="none"
                      viewBox="0 0 24 24"
                      stroke="currentColor">
@@ -172,39 +183,40 @@
 
         </div>
 
+
         <p class="text-sm text-green-500 font-semibold">
-
             Nouveaux clients
-
         </p>
 
     </div>
 
+
+
+    <!-- ===================================================== -->
     <!-- CATEGORIES -->
-    <div class="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+    <!-- ===================================================== -->
 
-        <div class="flex items-center justify-between mb-8">
+    <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
 
-            <div>
+        <div class="flex items-center justify-between mb-7 sm:mb-8">
 
-                <p class="uppercase text-sm text-gray-400 font-semibold tracking-widest">
+            <div class="min-w-0">
 
+                <p class="uppercase text-xs sm:text-sm text-gray-400 font-semibold tracking-widest">
                     Catégories
-
                 </p>
 
-                <h2 class="text-5xl font-black text-gray-900 mt-4">
-
+                <h2 class="text-4xl sm:text-5xl font-black text-gray-900 mt-3 sm:mt-4">
                     {{ categories_count }}
-
                 </h2>
 
             </div>
 
-            <div class="w-14 h-14 rounded-2xl bg-yellow-50 flex items-center justify-center">
+
+            <div class="w-12 h-12 sm:w-14 sm:h-14 flex-shrink-0 rounded-2xl bg-yellow-50 flex items-center justify-center">
 
                 <svg xmlns="http://www.w3.org/2000/svg"
-                     class="h-7 w-7 text-yellow-600"
+                     class="h-6 w-6 sm:h-7 sm:w-7 text-yellow-600"
                      fill="none"
                      viewBox="0 0 24 24"
                      stroke="currentColor">
@@ -220,42 +232,49 @@
 
         </div>
 
+
         <p class="text-sm text-green-500 font-semibold">
-
             Organisation active
-
         </p>
 
     </div>
 
 </div>
 
-<!-- ANALYTICS -->
-<div class="grid grid-cols-1 xl:grid-cols-3 gap-8">
 
+
+<!-- ========================================================= -->
+<!-- ANALYTICS -->
+<!-- ========================================================= -->
+
+<div class="grid grid-cols-1 xl:grid-cols-3 gap-5 lg:gap-8">
+
+
+    <!-- ===================================================== -->
     <!-- GRAPH -->
-    <div class="xl:col-span-2 bg-white rounded-3xl border border-gray-100 shadow-sm p-8">
+    <!-- ===================================================== -->
+
+    <div class="xl:col-span-2 bg-white rounded-3xl border border-gray-100 shadow-sm p-5 sm:p-8">
+
 
         <!-- TOP -->
-        <div class="flex items-center justify-between mb-10">
 
-            <div>
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-7 sm:mb-10">
 
-                <h3 class="text-2xl font-black text-gray-900">
+            <div class="min-w-0">
 
+                <h3 class="text-xl sm:text-2xl font-black text-gray-900">
                     Analyse des ventes
-
                 </h3>
 
                 <p class="text-sm text-gray-400 mt-2">
-
                     Statistiques des revenus de la boutique.
-
                 </p>
 
             </div>
 
-            <button class="bg-yellow-600 hover:bg-yellow-700 text-white px-5 py-3 rounded-2xl font-semibold transition-all duration-300">
+
+            <button class="w-full sm:w-auto bg-yellow-600 hover:bg-yellow-700 text-white px-5 py-3 rounded-2xl font-semibold transition-all duration-300">
 
                 Voir détails
 
@@ -263,25 +282,31 @@
 
         </div>
 
+
+
+        <!-- ================================================= -->
         <!-- GRAPH -->
-        <div class="h-80 rounded-3xl bg-[#f8faff] border border-gray-100 relative overflow-hidden p-10">
+        <!-- ================================================= -->
 
-            <!-- LINE -->
-            <div class="absolute inset-0 flex items-end px-10 pb-10 gap-5">
+        <div class="h-64 sm:h-80 rounded-3xl bg-[#f8faff] border border-gray-100 relative overflow-hidden p-5 sm:p-10">
 
-                <div class="flex-1 bg-yellow-200 rounded-t-2xl h-24"></div>
+            <!-- BARRES -->
 
-                <div class="flex-1 bg-yellow-400 rounded-t-2xl h-40"></div>
+            <div class="absolute inset-0 flex items-end px-4 sm:px-10 pb-6 sm:pb-10 gap-2 sm:gap-5">
 
-                <div class="flex-1 bg-yellow-300 rounded-t-2xl h-32"></div>
+                <div class="flex-1 min-w-0 bg-yellow-200 rounded-t-xl sm:rounded-t-2xl h-20 sm:h-24"></div>
 
-                <div class="flex-1 bg-yellow-600 rounded-t-2xl h-56"></div>
+                <div class="flex-1 min-w-0 bg-yellow-400 rounded-t-xl sm:rounded-t-2xl h-32 sm:h-40"></div>
 
-                <div class="flex-1 bg-yellow-400 rounded-t-2xl h-44"></div>
+                <div class="flex-1 min-w-0 bg-yellow-300 rounded-t-xl sm:rounded-t-2xl h-28 sm:h-32"></div>
 
-                <div class="flex-1 bg-yellow-500 rounded-t-2xl h-64"></div>
+                <div class="flex-1 min-w-0 bg-yellow-600 rounded-t-xl sm:rounded-t-2xl h-44 sm:h-56"></div>
 
-                <div class="flex-1 bg-yellow-700 rounded-t-2xl h-52"></div>
+                <div class="flex-1 min-w-0 bg-yellow-400 rounded-t-xl sm:rounded-t-2xl h-36 sm:h-44"></div>
+
+                <div class="flex-1 min-w-0 bg-yellow-500 rounded-t-xl sm:rounded-t-2xl h-52 sm:h-64"></div>
+
+                <div class="flex-1 min-w-0 bg-yellow-700 rounded-t-xl sm:rounded-t-2xl h-40 sm:h-52"></div>
 
             </div>
 
@@ -289,38 +314,43 @@
 
     </div>
 
+
+
+    <!-- ===================================================== -->
     <!-- OBJECTIF -->
-    <div class="bg-[#111827] rounded-3xl p-8 text-white shadow-2xl flex flex-col justify-between relative overflow-hidden">
+    <!-- ===================================================== -->
+
+    <div class="bg-[#111827] rounded-3xl p-6 sm:p-8 text-white shadow-2xl flex flex-col justify-between relative overflow-hidden">
 
         <div class="absolute right-0 top-0 w-40 h-40 bg-yellow-600/20 rounded-full blur-3xl"></div>
 
+
         <div>
 
-            <h3 class="text-2xl font-black">
-
+            <h3 class="text-xl sm:text-2xl font-black">
                 Objectif
-
             </h3>
 
             <p class="text-gray-400 mt-2 text-sm">
-
                 Progression mensuelle des ventes.
-
             </p>
 
         </div>
 
+
+
+        <!-- ================================================= -->
         <!-- CIRCLE -->
-        <div class="flex justify-center py-10">
+        <!-- ================================================= -->
 
-            <div class="relative w-52 h-52 rounded-full bg-gradient-to-r from-yellow-500 to-yellow-700 flex items-center justify-center shadow-2xl">
+        <div class="flex justify-center py-8 sm:py-10">
 
-                <div class="w-36 h-36 rounded-full bg-[#111827] flex items-center justify-center">
+            <div class="relative w-44 h-44 sm:w-52 sm:h-52 rounded-full bg-gradient-to-r from-yellow-500 to-yellow-700 flex items-center justify-center shadow-2xl">
 
-                    <span class="text-5xl font-black">
+                <div class="w-32 h-32 sm:w-36 sm:h-36 rounded-full bg-[#111827] flex items-center justify-center">
 
+                    <span class="text-4xl sm:text-5xl font-black">
                         45%
-
                     </span>
 
                 </div>
@@ -329,7 +359,10 @@
 
         </div>
 
+
+
         <!-- BUTTON -->
+
         <button class="w-full bg-yellow-600 hover:bg-yellow-700 py-4 rounded-2xl font-bold transition-all duration-300">
 
             Voir Statistiques
@@ -339,5 +372,6 @@
     </div>
 
 </div>
+
 
 {% endblock %}

@@ -1,0 +1,447 @@
+{% extends "shop/base.html" %}
+
+{% load static %}
+
+
+{% block title %}
+À propos | LE COIN DES ACCESSOIRES
+{% endblock %}
+
+
+{% block extra_head %}
+
+<link rel="stylesheet" href="{% static 'shop/css/apropos.css' %}">
+
+{% endblock %}
+
+
+{% block content %}
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="about-hero">
+
+    <div class="hero-overlay"></div>
+
+    <div class="hero-container">
+
+        <div class="hero-content">
+
+            <div class="hero-badge">
+                NOTRE HISTOIRE
+            </div>
+
+            <h1>
+                PLUS QU'UNE<br>
+                <span>BOUTIQUE.</span><br>
+                UN STYLE.
+            </h1>
+
+            <p>
+                Découvrez l'univers de LE COIN DES ACCESSOIRES,
+                une boutique pensée pour celles et ceux qui veulent
+                affirmer leur personnalité à travers leur style.
+            </p>
+
+            <div class="breadcrumb">
+
+                <a href="{% url 'index' %}">
+                    Accueil
+                </a>
+
+                <span>/</span>
+
+                <strong>
+                    À propos
+                </strong>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     INTRODUCTION
+===================================================== -->
+
+<section class="about-intro">
+
+    <div class="section-container">
+
+        <div class="intro-image">
+
+            <div class="image-card">
+
+                <div class="image-placeholder">
+                    <span>LCDA</span>
+                </div>
+
+                <div class="image-label">
+
+                    <span>EST.</span>
+
+                    <strong>2026</strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="intro-content">
+
+            <span class="section-label">
+                QUI SOMMES-NOUS ?
+            </span>
+
+            <h2>
+                VOTRE STYLE.<br>
+                <span>VOTRE SIGNATURE.</span>
+            </h2>
+
+            <p class="intro-lead">
+                LE COIN DES ACCESSOIRES est une boutique dédiée
+                aux accessoires modernes, élégants et tendance.
+            </p>
+
+            <p>
+                Nous croyons qu'un accessoire peut complètement
+                transformer une tenue. Une montre, une paire de
+                lunettes, une chaîne, un bracelet ou encore une
+                casquette peut devenir la pièce qui définit votre style.
+            </p>
+
+            <p>
+                Notre mission est de proposer une sélection
+                d'accessoires soigneusement choisis afin de permettre
+                à chacun d'exprimer sa personnalité avec confiance.
+            </p>
+
+            <a href="{% url 'index' %}" class="gold-button">
+
+                DÉCOUVRIR LA BOUTIQUE
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     VALEURS
+===================================================== -->
+
+<section class="values-section">
+
+    <div class="section-container">
+
+        <div class="section-heading">
+
+            <span class="section-label">
+                NOS VALEURS
+            </span>
+
+            <h2>
+                CE QUI NOUS<br>
+                <span>DEFINIT.</span>
+            </h2>
+
+            <p>
+                Chaque détail compte. Chaque produit est sélectionné
+                avec une exigence particulière.
+            </p>
+
+        </div>
+
+
+        <div class="values-grid">
+
+            <!-- CARD 1 -->
+
+            <article class="value-card">
+
+                <span class="value-number">
+                    01
+                </span>
+
+                <div class="value-icon">
+
+                    <i class="fa-solid fa-gem"></i>
+
+                </div>
+
+                <h3>
+                    QUALITÉ
+                </h3>
+
+                <p>
+                    Nous privilégions des accessoires sélectionnés
+                    pour leur qualité, leur design et leur finition.
+                </p>
+
+            </article>
+
+
+            <!-- CARD 2 -->
+
+            <article class="value-card">
+
+                <span class="value-number">
+                    02
+                </span>
+
+                <div class="value-icon">
+
+                    <i class="fa-solid fa-shirt"></i>
+
+                </div>
+
+                <h3>
+                    STYLE
+                </h3>
+
+                <p>
+                    Des pièces modernes et tendance pour accompagner
+                    votre style au quotidien.
+                </p>
+
+            </article>
+
+
+            <!-- CARD 3 -->
+
+            <article class="value-card">
+
+                <span class="value-number">
+                    03
+                </span>
+
+                <div class="value-icon">
+
+                    <i class="fa-solid fa-heart"></i>
+
+                </div>
+
+                <h3>
+                    CONFIANCE
+                </h3>
+
+                <p>
+                    Nous souhaitons créer une expérience simple,
+                    transparente et agréable pour chaque client.
+                </p>
+
+            </article>
+
+
+            <!-- CARD 4 -->
+
+            <article class="value-card">
+
+                <span class="value-number">
+                    04
+                </span>
+
+                <div class="value-icon">
+
+                    <i class="fa-solid fa-star"></i>
+
+                </div>
+
+                <h3>
+                    SATISFACTION
+                </h3>
+
+                <p>
+                    Votre satisfaction est au centre de notre
+                    démarche et de notre évolution.
+                </p>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     CHIFFRES
+===================================================== -->
+
+<section class="stats-section">
+
+    <div class="section-container stats-container">
+
+
+        <div class="stat">
+
+            <strong>
+                500+
+            </strong>
+
+            <span>
+                CLIENTS
+            </span>
+
+        </div>
+
+
+        <div class="stat">
+
+            <strong>
+                50+
+            </strong>
+
+            <span>
+                PRODUITS
+            </span>
+
+        </div>
+
+
+        <div class="stat">
+
+            <strong>
+                98%
+            </strong>
+
+            <span>
+                SATISFACTION
+            </span>
+
+        </div>
+
+
+        <div class="stat">
+
+            <strong>
+                24/7
+            </strong>
+
+            <span>
+                SERVICE
+            </span>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     PHILOSOPHIE
+===================================================== -->
+
+<section class="philosophy-section">
+
+    <div class="section-container philosophy-container">
+
+
+        <div class="philosophy-content">
+
+            <span class="section-label">
+                NOTRE PHILOSOPHIE
+            </span>
+
+            <h2>
+                L'ÉLÉGANCE<br>
+                <span>COMMENCE</span><br>
+                ICI.
+            </h2>
+
+            <p>
+                Nous ne vendons pas simplement des accessoires.
+                Nous proposons des éléments qui vous permettent
+                de construire votre propre identité.
+            </p>
+
+            <p>
+                Parce que le style n'est pas une question de prix,
+                mais une question d'attitude.
+            </p>
+
+        </div>
+
+
+        <div class="philosophy-visual">
+
+            <div class="circle circle-one"></div>
+
+            <div class="circle circle-two"></div>
+
+            <div class="visual-content">
+
+                <span>
+                    LCDA
+                </span>
+
+                <strong>
+                    STYLE
+                </strong>
+
+                <small>
+                    YOUR SIGNATURE
+                </small>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     CTA
+===================================================== -->
+
+<section class="about-cta">
+
+    <div class="cta-container">
+
+        <span class="section-label">
+            COLLECTION 2026
+        </span>
+
+        <h2>
+            PRÊT À AFFIRMER<br>
+            <span>VOTRE STYLE ?</span>
+        </h2>
+
+        <p>
+            Découvrez notre sélection d'accessoires
+            et trouvez la pièce qui vous ressemble.
+        </p>
+
+        <a href="{% url 'index' %}" class="gold-button">
+
+            DÉCOUVRIR LA BOUTIQUE
+
+            <i class="fa-solid fa-arrow-right"></i>
+
+        </a>
+
+    </div>
+
+</section>
+
+
+{% endblock %}

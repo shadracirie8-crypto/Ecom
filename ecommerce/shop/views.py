@@ -59,6 +59,9 @@ def index(request):
 # =========================================
 # DETAIL PRODUIT
 # =========================================
+# =========================================
+# DETAIL PRODUIT
+# =========================================
 def detail(request, product_id):
 
     product = get_object_or_404(
@@ -66,11 +69,19 @@ def detail(request, product_id):
         id=product_id
     )
 
+    cart = request.session.get('cart', {})
+
+    current_quantity = cart.get(
+        str(product_id),
+        0
+    )
+
     return render(
         request,
         'shop/details.html',
         {
-            'product': product
+            'product': product,
+            'current_quantity': current_quantity,
         }
     )
 
@@ -232,3 +243,9 @@ def get_cart_count(request):
     total_items = sum(cart.values())
 
     return HttpResponse(total_items)
+
+def apropos(request):
+    return render(request, 'shop/apropos.html')
+
+def contact(request):
+    return render(request, 'shop/contact.html')
